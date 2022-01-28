@@ -22,4 +22,5 @@ public final class Constants {
   public static final int leftBackMotorPort = 5;
   public static final int rightBackMotorPort = 12;
   public static final int intakeMotorPort = 69420; // TODO: Update this
+  public static final int conveyorMotorPort = 69420; // TODO: Update this as well
 }
