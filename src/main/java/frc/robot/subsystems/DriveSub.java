@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.structures.TalonMotorController;
+import frc.robot.structures.TalonSRXMotorController;
 
 /**
  * Drive Subsystem
@@ -12,12 +12,12 @@ import frc.robot.structures.TalonMotorController;
  */
 public class DriveSub extends SubsystemBase {
   private final MotorControllerGroup leftMotors = new MotorControllerGroup(
-      new TalonMotorController(Constants.leftFrontMotorPort),
-      new TalonMotorController(Constants.leftBackMotorPort));
+      new TalonSRXMotorController(Constants.leftFrontMotorPort),
+      new TalonSRXMotorController(Constants.leftBackMotorPort));
 
   private final MotorControllerGroup rightMotors = new MotorControllerGroup(
-      new TalonMotorController(Constants.rightFrontMotorPort),
-      new TalonMotorController(Constants.rightBackMotorPort));
+      new TalonSRXMotorController(Constants.rightFrontMotorPort),
+      new TalonSRXMotorController(Constants.rightBackMotorPort));
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 

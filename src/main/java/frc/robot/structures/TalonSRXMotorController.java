@@ -7,15 +7,15 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 /**
  * MotorController implementation for TalonSRX.
  */
-public class TalonMotorController implements MotorController {
+public class TalonSRXMotorController implements MotorController {
   private TalonSRX motor;
 
   /**
-   * TalonMotorController constructor.
+   * TalonSRXMotorController constructor.
    * 
    * @param port The TalonSRX motor port.
    */
-  public TalonMotorController(int port) {
+  public TalonSRXMotorController(int port) {
     motor = new TalonSRX(port);
   }
 
