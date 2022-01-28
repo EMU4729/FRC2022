@@ -7,7 +7,7 @@ import frc.robot.Constants;
 import frc.robot.structures.TalonSRXMotorController;
 
 /**
- * Storage Subsystem
+ * Storage Subsystem.
  * Handles the ball conveyor belt and scoring into the low goal.
  */
 public class StorageSub extends SubsystemBase {

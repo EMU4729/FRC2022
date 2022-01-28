@@ -4,6 +4,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.structures.TalonSRXMotorController;
 
+/**
+ * Intake Subsystem.
+ * Handles all intake functionality.
+ */
 public class IntakeSub extends SubsystemBase {
   private final TalonSRXMotorController motor = new TalonSRXMotorController(Constants.intakeMotorPort);
 
