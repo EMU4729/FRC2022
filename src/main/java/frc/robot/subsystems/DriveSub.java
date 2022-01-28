@@ -26,13 +26,24 @@ public class DriveSub extends SubsystemBase {
   }
 
   /**
-   * Sets the speed of all 4 motors.
+   * Starts tank drive.
+   * Similar to MoveTank from ev3dev2.
    * 
    * @param leftSpeed  The speed of the left motors, between -1 and 1.
    * @param rightSpeed The speed of the right motors, between -1 and 1.
    */
-  public void setSpeed(double leftSpeed, double rightSpeed) {
-    leftMotors.set(leftSpeed);
-    rightMotors.set(rightSpeed);
+  public void tank(double leftSpeed, double rightSpeed) {
+    drive.tankDrive(leftSpeed, rightSpeed);
+  }
+
+  /**
+   * Starts arcade drave.
+   * Similar to MoveSteering from ev3dev2.
+   * 
+   * @param speed    Speed between -1 and 1.
+   * @param steering Steering value between -1 and 1.
+   */
+  public void arcade(double speed, double steering) {
+    drive.arcadeDrive(speed, steering);
   }
 }
