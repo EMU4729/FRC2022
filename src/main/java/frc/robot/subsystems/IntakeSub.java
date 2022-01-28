@@ -6,17 +6,17 @@ import frc.robot.structures.TalonSRXMotorController;
 
 public class IntakeSub extends SubsystemBase {
   private final TalonSRXMotorController motor = new TalonSRXMotorController(Constants.intakeMotorPort);
-  private final double MOTOR_SPEED = 0.5; // TODO: Adjust this
 
   @Override
   public void periodic() {
   }
 
-  public void startSpin() {
-    motor.set(MOTOR_SPEED);
-  }
-
-  public void stopSpin() {
-    motor.stopMotor();
+  /**
+   * Sets the speed of the intake spinner.
+   * 
+   * @param speed Speed between -1 and 1
+   */
+  public void setSpinSpeed(double speed) {
+    motor.set(speed);
   }
 }
