@@ -16,7 +16,6 @@ import frc.robot.commands.Drive;
 import frc.robot.commands.DriveReverseDirection;
 import frc.robot.commands.IntakeRun;
 import frc.robot.commands.NavigationUpdate;
-// import frc.robot.commands.Shoot;
 import frc.robot.commands.StorageRunForward;
 
 import frc.robot.subsystems.BallStopSub;
@@ -56,7 +55,6 @@ public class RobotContainer {
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection(driveSub);
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
-  // private final Shoot shootCommand = new Shoot();
   private final StorageRunForward storageRunForwardCommand = new StorageRunForward(storageSub);
 
   /**
