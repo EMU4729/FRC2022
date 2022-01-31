@@ -17,10 +17,19 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  // Drive Ports
   public static final int leftFrontMotorPort = 6;
   public static final int rightFrontMotorPort = 11;
   public static final int leftBackMotorPort = 5;
   public static final int rightBackMotorPort = 12;
+  public static final int leftEncoderPortA = 69420; // TODO: Update this
+  public static final int leftEncoderPortB = 69420; // TODO: Update this
+  public static final int rightEncoderPortA = 69420; // TODO: Update this
+  public static final int rightEncoderPortB = 69420; // TODO: Update this
+
+  // Other Motors
   public static final int intakeMotorPort = 69420; // TODO: Update this
-  public static final int conveyorMotorPort = 69420; // TODO: Update this as well
+  public static final int conveyorMotorPort = 69420; // TODO: Update this
+  public static final int climberMotorPort = 69420; // TODO: Update this
+  public static final int ballStopMotorPort = 69420; // TODO: Update this
 }
