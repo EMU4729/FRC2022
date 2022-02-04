@@ -5,9 +5,13 @@ import frc.robot.subsystems.DriveSub;
 
 public class Drive extends CommandBase {
   private final DriveSub drive;
+  private final double speed;
+  private final double steering;
 
-  public Drive(DriveSub driveSub) {
+  public Drive(DriveSub driveSub, double leftJoystickY, double rightJoystickX) {
     drive = driveSub;
+    speed = leftJoystickY;
+    steering = rightJoystickX;
     addRequirements(driveSub);
   }
 
@@ -18,7 +22,7 @@ public class Drive extends CommandBase {
 
   @Override
   public void execute() {
-    // TODO: Drive tank using input values
+    drive.arcade(speed, steering);
   }
 
   @Override

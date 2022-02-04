@@ -16,4 +16,9 @@ public class IntakeRun extends CommandBase {
     // TODO: Implement this properly
     intake.setSpinSpeed(0.5);
   }
+
+  @Override
+  public void end(boolean interrupted) {
+    intake.setSpinSpeed(0);
+  }
 }

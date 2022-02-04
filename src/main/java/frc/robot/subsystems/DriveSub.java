@@ -19,6 +19,9 @@ public class DriveSub extends SubsystemBase {
   public DriveSub() {
     leftSlave.follow(leftMaster);
     rightSlave.follow(rightMaster);
+
+    // change this if needed
+    leftMaster.setInverted(true);
   }
 
   /**
@@ -30,6 +33,26 @@ public class DriveSub extends SubsystemBase {
   public void tank(double leftSpeed, double rightSpeed) {
     leftMaster.set(leftSpeed);
     rightMaster.set(rightSpeed);
+  }
+
+  /**
+   * Activates arcade drive. Similar to MoveSteering from ev3dev.
+   * 
+   * @param speed    The speed
+   * @param steering The steering
+   */
+  public void arcade(double speed, double steering) {
+    // TODO: Improve values
+    double leftSpeed = (speed + steering) / 2;
+    double rightSpeed = (speed - steering) / 2;
+    tank(leftSpeed, rightSpeed);
+  }
+
+  /**
+   * Stop all motors.
+   */
+  public void off() {
+    tank(0, 0);
   }
 
 }

@@ -32,4 +32,10 @@ public final class Constants {
   public static final int conveyorMotorPort = 69420; // TODO: Update this
   public static final int climberMotorPort = 69420; // TODO: Update this
   public static final int ballStopMotorPort = 69420; // TODO: Update this
+
+  // Motor Options
+  public static final boolean invertSteering = false;
+
+  // Controller
+  public static final int controllerPort = 69420; // TODO: Update this
 }
