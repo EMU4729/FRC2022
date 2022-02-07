@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.I2C;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -38,4 +40,7 @@ public final class Constants {
 
   // Controller
   public static final int controllerPort = 69420; // TODO: Update this
+
+  // Storage Color Sensor
+  public static final I2C.Port colorSensorPort = I2C.Port.kMXP; // TODO: Update this
 }

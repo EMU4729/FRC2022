@@ -23,7 +23,6 @@ import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.NavigationSub;
 import frc.robot.subsystems.StorageSub;
-import frc.robot.subsystems.VisionSub;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -41,7 +40,6 @@ public class RobotContainer {
   private final DriveSub driveSub = new DriveSub();
   private final ClimberSub climberSub = new ClimberSub();
   private final IntakeSub intakeSub = new IntakeSub();
-  private final VisionSub visionSub = new VisionSub();
   private final NavigationSub navigationSub = new NavigationSub();
   private final StorageSub storageSub = new StorageSub();
   private final BallStopSub ballStopSub = new BallStopSub();
