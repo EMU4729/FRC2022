@@ -55,6 +55,8 @@ public class RobotContainer {
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
   private final StorageRun storageRunForwardCommand = new StorageRun(storageSub);
 
+  private final XboxController controller = new XboxController(Constants.controllerPort);
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -72,8 +74,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    XboxController controller = new XboxController(Constants.controllerPort);
-
     // Toggle Ball Stop
     new JoystickButton(controller, XboxController.Button.kX.value)
         .whenPressed(ballStopToggleCommand);
