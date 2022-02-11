@@ -42,7 +42,8 @@ public final class Constants {
   public static final int controllerPort = 69420; // TODO: Update this
 
   // Storage Color Sensor
-  public static final I2C.Port colorSensorPort = I2C.Port.kMXP; // TODO: Update this
+  public static final I2C.Port topColorSensorPort = I2C.Port.kMXP; // TODO: Update this
+  public static final I2C.Port bottomColorSensorPort = I2C.Port.kMXP; // TODO: Update this
 
   // Auto Commands Text File Path
   public static final String autoCommandsPath = "u/autoCommands.txt"; // TODO: Update this?

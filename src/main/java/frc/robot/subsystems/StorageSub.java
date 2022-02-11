@@ -13,7 +13,8 @@ import frc.robot.Constants;
  */
 public class StorageSub extends SubsystemBase {
   private final WPI_TalonSRX motor = new WPI_TalonSRX(Constants.conveyorMotorPort);
-  private final ColorSensorV3 colorSensor = new ColorSensorV3(Constants.colorSensorPort); // TODO: Do stuff with this
+  private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(Constants.bottomColorSensorPort); // TODO: Do stuff
+  private final ColorSensorV3 topColorSensor = new ColorSensorV3(Constants.topColorSensorPort);
 
   @Override
   public void periodic() {
@@ -29,11 +30,25 @@ public class StorageSub extends SubsystemBase {
   }
 
   /**
-   * Gets the current color detected by the color sensor.
+   * Gets the current color detected by the top color sensor.
    * 
    * @return The color detected by the color sensor.
    */
-  public Color getColor() {
-    return colorSensor.getColor();
+  public Color getTopColor() {
+    return topColorSensor.getColor();
   }
+
+  /**
+   * Gets the current color detected by the bottom color sensor.
+   * 
+   * @return The color detected by the color sensor.
+   */
+  public Color getBottomColor() {
+    return bottomColorSensor.getColor();
+  }
+}
+
+enum StorageColorSensor {
+  Top,
+  Bottom
 }

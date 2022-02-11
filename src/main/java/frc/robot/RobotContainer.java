@@ -37,6 +37,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  private final XboxController controller = new XboxController(Constants.controllerPort);
+
   private final DriveSub driveSub = new DriveSub();
   private final ClimberSub climberSub = new ClimberSub();
   private final IntakeSub intakeSub = new IntakeSub();
@@ -53,9 +55,7 @@ public class RobotContainer {
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection(driveSub);
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
-  private final StorageRun storageRunForwardCommand = new StorageRun(storageSub);
-
-  private final XboxController controller = new XboxController(Constants.controllerPort);
+  private final StorageRun storageRunCommand = new StorageRun(storageSub, ballStopSub, controller);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -84,7 +84,7 @@ public class RobotContainer {
 
     // Run Storage
     new JoystickButton(controller, XboxController.Button.kRightBumper.value)
-        .whileHeld(storageRunForwardCommand);
+        .whileHeld(storageRunCommand);
 
     // TODO: Climber and Movement Controller Bindings
   }
