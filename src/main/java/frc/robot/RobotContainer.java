@@ -51,7 +51,7 @@ public class RobotContainer {
   private final BallStopToggle ballStopToggleCommand = new BallStopToggle(ballStopSub);
   private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
-  private final Drive driveCommand = new Drive(driveSub, 69420, 69420); // TODO: Fix this
+  private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection(driveSub);
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
