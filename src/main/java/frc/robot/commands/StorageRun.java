@@ -1,5 +1,8 @@
 package frc.robot.commands;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -15,10 +18,14 @@ public class StorageRun extends CommandBase {
   private final XboxController controller;
   private final Color teamColor;
   private final Color oppColor;
+  private boolean vibrate;
+  private boolean isFinished;
+  private Instant vibrateTimer;
 
   public StorageRun(StorageSub storage, BallStopSub ballStop, XboxController controller) {
     this.storage = storage;
     this.ballStop = ballStop;
+    this.controller = controller;
 
     Alliance alliance = DriverStation.getAlliance();
     if (alliance == Alliance.Red) {
@@ -29,30 +36,69 @@ public class StorageRun extends CommandBase {
       oppColor = Color.kRed;
     }
 
-    this.controller = controller;
     addRequirements(storage);
+  }
+
+  public long getVibrateTimerDuration() {
+    return Duration.between(vibrateTimer, Instant.now()).toMillis();
+  }
+
+  public void startVibrate() {
+    vibrate = true;
+    vibrateTimer = Instant.now();
+    controller.setRumble(RumbleType.kLeftRumble, 1);
   }
 
   @Override
   public void initialize() {
-    storage.setConveyorSpeed(0.5);
+    vibrateTimer = Instant.now();
+    vibrate = false;
+    isFinished = false;
   }
 
   @Override
   public void execute() {
-    if (storage.getTopColor() == oppColor) {
-      controller.setRumble(RumbleType.kLeftRumble, 1);
+    if (vibrate && getVibrateTimerDuration() >= 200) {
+      vibrate = false;
+      isFinished = true;
+      // Stopping vibration not required - handled in end()
+      return;
+    } else if (vibrate) {
       return;
     }
-    controller.setRumble(RumbleType.kLeftRumble, 0);
-    // Open ball stop
+
+    if (storage.getTopColor() == oppColor) {
+      startVibrate();
+      return;
+    }
+    // TODO: Open ball stop here
     storage.setConveyorSpeed(0.5);
+    if (storage.getTopColor() != teamColor) {
+      // nvm
+      storage.setConveyorSpeed(0);
+      // TODO: Close ball stop here
+      startVibrate();
+      return;
+    }
+
+    storage.setConveyorSpeed(0);
+    // TODO: close ball stop here
+    startVibrate();
 
     // TODO: Finish this later
   }
 
   @Override
+  public boolean isFinished() {
+    return isFinished;
+  }
+
+  @Override
   public void end(boolean interrupted) {
+    vibrate = false;
     storage.setConveyorSpeed(0);
+    // TODO: close ball stop
+    controller.setRumble(RumbleType.kLeftRumble, 0);
+    // idk
   }
 }
