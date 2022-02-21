@@ -12,9 +12,10 @@ import frc.robot.Constants;
  * Handles the ball conveyor belt and scoring into the low goal.
  */
 public class StorageSub extends SubsystemBase {
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(Constants.conveyorMotorPort);
-  private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(Constants.bottomColorSensorPort); // TODO: Do stuff
-  private final ColorSensorV3 topColorSensor = new ColorSensorV3(Constants.topColorSensorPort);
+  private static final Constants constants = Constants.getInstance();
+  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.conveyorMotorPort);
+  private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(constants.bottomColorSensorPort); // TODO: Do stuff
+  private final ColorSensorV3 topColorSensor = new ColorSensorV3(constants.topColorSensorPort);
 
   @Override
   public void periodic() {

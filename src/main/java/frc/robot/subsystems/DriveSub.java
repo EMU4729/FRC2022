@@ -9,10 +9,11 @@ import frc.robot.Constants;
  * Handles all drive functionality.
  */
 public class DriveSub extends SubsystemBase {
-  private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.leftFrontMotorPort);
-  private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.leftBackMotorPort);
-  private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.rightFrontMotorPort);
-  private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.rightBackMotorPort);
+  private static final Constants constants = Constants.getInstance();
+  private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(constants.leftFrontMotorPort);
+  private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(constants.leftBackMotorPort);
+  private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(constants.rightFrontMotorPort);
+  private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(constants.rightBackMotorPort);
 
   // TODO: Add gyro and odometry here
 

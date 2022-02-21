@@ -10,7 +10,8 @@ import frc.robot.Constants;
  * Handles all climber functionality.
  */
 public class ClimberSub extends SubsystemBase {
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(Constants.climberMotorPort);
+  private static final Constants constants = Constants.getInstance();
+  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.climberMotorPort);
 
   @Override
   public void periodic() {

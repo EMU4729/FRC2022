@@ -6,9 +6,9 @@ import frc.robot.subsystems.IntakeSub;
 public class IntakeRun extends CommandBase {
   private final IntakeSub intake;
 
-  public IntakeRun(IntakeSub intakeSub) {
-    intake = intakeSub;
-    addRequirements(intakeSub);
+  public IntakeRun(IntakeSub intake) {
+    this.intake = intake;
+    addRequirements(intake);
   }
 
   @Override

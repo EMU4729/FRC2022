@@ -6,9 +6,9 @@ import frc.robot.subsystems.NavigationSub;
 public class NavigationUpdate extends CommandBase {
   private final NavigationSub navigation;
 
-  public NavigationUpdate(NavigationSub navigationSub) {
-    navigation = navigationSub;
-    addRequirements(navigationSub);
+  public NavigationUpdate(NavigationSub navigation) {
+    this.navigation = navigation;
+    addRequirements(navigation);
   }
 
   @Override

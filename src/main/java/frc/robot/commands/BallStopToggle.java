@@ -11,9 +11,9 @@ public class BallStopToggle extends CommandBase {
   private boolean isOpen = false;
   private Instant timer;
 
-  public BallStopToggle(BallStopSub ballStopSub) {
-    ballStop = ballStopSub;
-    addRequirements(ballStopSub);
+  public BallStopToggle(BallStopSub ballStop) {
+    this.ballStop = ballStop;
+    addRequirements(ballStop);
   }
 
   @Override

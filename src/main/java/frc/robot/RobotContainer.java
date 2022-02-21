@@ -37,7 +37,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  private final XboxController controller = new XboxController(Constants.controllerPort);
+  private static final Constants constants = Constants.getInstance();
+
+  private final XboxController controller = new XboxController(constants.controllerPort);
 
   private final DriveSub driveSub = new DriveSub();
   private final ClimberSub climberSub = new ClimberSub();
@@ -47,7 +49,6 @@ public class RobotContainer {
   private final BallStopSub ballStopSub = new BallStopSub();
 
   private final Auto autoCommand = new Auto(driveSub, ballStopSub, intakeSub, navigationSub);
-  private final BallStopToggle ballStopCloseCommand = new BallStopToggle(ballStopSub);
   private final BallStopToggle ballStopToggleCommand = new BallStopToggle(ballStopSub);
   private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);

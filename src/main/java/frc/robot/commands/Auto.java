@@ -16,6 +16,7 @@ import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.NavigationSub;
 
 public class Auto extends CommandBase {
+  private static final Constants constants = Constants.getInstance();
   private final DriveSub drive;
   private final BallStopSub ballStop;
   private final IntakeSub intake;
@@ -23,17 +24,17 @@ public class Auto extends CommandBase {
 
   private List<AutoCommand> commands = new ArrayList<>();
 
-  public Auto(DriveSub driveSub, BallStopSub ballStopSub, IntakeSub intakeSub, NavigationSub navigationSub) {
-    drive = driveSub;
-    ballStop = ballStopSub;
-    intake = intakeSub;
-    navigation = navigationSub;
-    addRequirements(driveSub, ballStopSub, intakeSub, navigationSub);
+  public Auto(DriveSub drive, BallStopSub ballStop, IntakeSub intake, NavigationSub navigation) {
+    this.drive = drive;
+    this.ballStop = ballStop;
+    this.intake = intake;
+    this.navigation = navigation;
+    addRequirements(drive, ballStop, intake, navigation);
   }
 
   @Override
   public void initialize() {
-    try (BufferedReader br = new BufferedReader(new FileReader(Constants.autoCommandsPath))) {
+    try (BufferedReader br = new BufferedReader(new FileReader(constants.autoCommandsPath))) {
       String line;
 
       while ((line = br.readLine()) != null) {

@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class BallStopSub extends SubsystemBase {
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(Constants.ballStopMotorPort);
+  private static final Constants constants = Constants.getInstance();
+  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.ballStopMotorPort);
   private boolean isOpen = false;
   private Instant timer = Instant.now();
   private boolean isToggling = false;
