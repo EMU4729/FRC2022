@@ -49,5 +49,6 @@ public final class Constants {
   public final I2C.Port bottomColorSensorPort = I2C.Port.kMXP; // TODO: Update this
 
   // Auto Commands Text File Path
-  public final String autoCommandsPath = "u/autoCommands.txt"; // TODO: Update this?
+  public final String FilePath = "u//";
+  public final String autoCommandsPath = FilePath + "autoCommands.txt"; // TODO: Update this?
 }
