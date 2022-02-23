@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    Logger.info("Disabled -----------------------------------------------------------------------------------");
+    Logger.header("Disabled ----------------------------------------------------------------------------------------");
   }
 
   @Override
@@ -84,7 +84,7 @@ public class Robot extends TimedRobot {
     if (autoCommand != null) {
       autoCommand.schedule();
     }
-    Logger.info("Auto Start ---------------------------------------------------------------------------------");
+    Logger.header("Auto Start --------------------------------------------------------------------------------------");
   }
 
   /** This function is called periodically during autonomous. */
@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
     if (autoCommand != null) {
       autoCommand.cancel();
     }
-    Logger.info("Teleop Start -------------------------------------------------------------------------------");
+    Logger.header("Teleop Start ------------------------------------------------------------------------------------");
   }
 
   /** This function is called periodically during operator control. */
@@ -113,7 +113,7 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    Logger.info("Test Start ---------------------------------------------------------------------------------");
+    Logger.header("Test Start --------------------------------------------------------------------------------------");
   }
 
   /** This function is called periodically during test mode. */

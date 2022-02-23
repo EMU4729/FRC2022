@@ -50,6 +50,11 @@ public class Logger {
     return instance.get();
   }
 
+  public static void header(String content) {
+    Logger logger = getInstance();
+    logger.logCache.add(new LogLine(content, LogLevel.HEADER));
+  }
+  
   public static void info(String content) {
     Logger logger = getInstance();
     logger.logCache.add(new LogLine(content, LogLevel.INFO));
