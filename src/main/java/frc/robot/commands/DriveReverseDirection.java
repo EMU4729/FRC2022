@@ -22,7 +22,8 @@ public class DriveReverseDirection extends CommandBase {
 
   @Override
   public void end(boolean interupted){
-    System.out.println("drive direction reversed : drive forward = "+vars.invertDriveDirection);
+    System.out.println("drive direction reversed : drive forward = "+
+        (vars.invertDriveDirection ? "normal" : "reversed"));
   }
 
 }
