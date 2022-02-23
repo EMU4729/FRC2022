@@ -39,11 +39,11 @@ public class StorageRun extends CommandBase {
     addRequirements(storage);
   }
 
-  public long getVibrateTimerDuration() {
+  private long getVibrateTimerDuration() {
     return Duration.between(vibrateTimer, Instant.now()).toMillis();
   }
 
-  public void startVibrate() {
+  private void startVibrate() {
     vibrate = true;
     vibrateTimer = Instant.now();
     controller.setRumble(RumbleType.kLeftRumble, 1);
