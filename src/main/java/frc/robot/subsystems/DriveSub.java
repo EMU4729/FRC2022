@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Variables;
 
 /**
  * Drive Subsystem.
@@ -14,6 +15,7 @@ public class DriveSub extends SubsystemBase {
   private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(constants.leftBackMotorPort);
   private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(constants.rightFrontMotorPort);
   private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(constants.rightBackMotorPort);
+  private final Variables vars;
 
   // TODO: Add gyro and odometry here
 
@@ -23,6 +25,8 @@ public class DriveSub extends SubsystemBase {
 
     // change this if needed
     leftMaster.setInverted(true);
+
+    vars = Variables.getInstance();
   }
 
   /**
@@ -32,8 +36,9 @@ public class DriveSub extends SubsystemBase {
    * @param rightSpeed The right speed.
    */
   public void tank(double leftSpeed, double rightSpeed) {
-    leftMaster.set(leftSpeed);
-    rightMaster.set(rightSpeed);
+    int direction = vars.invertDriveDirection ? 1 : -1;
+    leftMaster.set(leftSpeed*direction);
+    rightMaster.set(rightSpeed*direction);
   }
 
   /**
