@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Variables;
+import frc.robot.utils.logger.Logger;
 
 public class DriveReverseDirection extends CommandBase {
   private final Variables vars;
@@ -16,13 +17,13 @@ public class DriveReverseDirection extends CommandBase {
   }
 
   @Override
-  public boolean isFinished(){
+  public boolean isFinished() {
     return true;
   }
 
   @Override
-  public void end(boolean interupted){
-    System.out.println("drive direction reversed : drive forward = "+
+  public void end(boolean interupted) {
+    Logger.info("drive direction reversed : drive forward = " +
         (vars.invertDriveDirection ? "normal" : "reversed"));
   }
 

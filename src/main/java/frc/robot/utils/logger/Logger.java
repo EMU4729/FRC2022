@@ -52,22 +52,30 @@ public class Logger {
 
   public static void header(String content) {
     Logger logger = getInstance();
-    logger.logCache.add(new LogLine(content, LogLevel.HEADER));
+    LogLine logLine = new LogLine(content, LogLevel.HEADER);
+    System.out.println(logLine.toString());
+    logger.logCache.add(logLine);
   }
-  
+
   public static void info(String content) {
     Logger logger = getInstance();
-    logger.logCache.add(new LogLine(content, LogLevel.INFO));
+    LogLine logLine = new LogLine(content, LogLevel.INFO);
+    System.out.println(logLine.toString());
+    logger.logCache.add(logLine);
   }
 
   public static void warn(String content) {
     Logger logger = getInstance();
-    logger.logCache.add(new LogLine(content, LogLevel.WARN));
+    LogLine logLine = new LogLine(content, LogLevel.WARN);
+    System.out.println(logLine.toString());
+    logger.logCache.add(logLine);
   }
 
   public static void error(String content) {
     Logger logger = getInstance();
-    logger.logCache.add(new LogLine(content, LogLevel.ERROR));
+    LogLine logLine = new LogLine(content, LogLevel.ERROR);
+    System.out.println(logLine.toString());
+    logger.logCache.add(logLine);
   }
 
   public void save() {
