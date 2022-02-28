@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallStopSub;
 import frc.robot.subsystems.StorageSub;
+import frc.robot.utils.AsyncTimer;
 
 public class StorageRun extends CommandBase {
   private final StorageSub storage;
@@ -20,7 +21,7 @@ public class StorageRun extends CommandBase {
   private final Color oppColor;
   private boolean vibrate;
   private boolean isFinished;
-  private Instant vibrateTimer;
+  private AsyncTimer vibrateTimer;
 
   public StorageRun(StorageSub storage, BallStopSub ballStop, XboxController controller) {
     this.storage = storage;
@@ -39,26 +40,22 @@ public class StorageRun extends CommandBase {
     addRequirements(storage);
   }
 
-  private long getVibrateTimerDuration() {
-    return Duration.between(vibrateTimer, Instant.now()).toMillis();
-  }
-
   private void startVibrate() {
     vibrate = true;
-    vibrateTimer = Instant.now();
+    vibrateTimer = new AsyncTimer(200);
     controller.setRumble(RumbleType.kLeftRumble, 1);
   }
 
   @Override
   public void initialize() {
-    vibrateTimer = Instant.now();
+    vibrateTimer = new AsyncTimer(200);
     vibrate = false;
     isFinished = false;
   }
 
   @Override
   public void execute() {
-    if (vibrate && getVibrateTimerDuration() >= 200) {
+    if (vibrate && vibrateTimer.isFinished()) {
       vibrate = false;
       isFinished = true;
       // Stopping vibration not required - handled in end()
