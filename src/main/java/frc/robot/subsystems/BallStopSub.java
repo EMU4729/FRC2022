@@ -1,19 +1,17 @@
 package frc.robot.subsystems;
 
-import java.time.Duration;
-import java.time.Instant;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class BallStopSub extends SubsystemBase {
-  private static final Constants constants = Constants.getInstance();
+  private final Constants constants = Constants.getInstance();
   private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.ballStopMotorPort);
   public boolean isOpen = false;
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+  }
 
   /**
    * Sets the speed of the ball stop motor

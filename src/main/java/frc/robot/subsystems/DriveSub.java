@@ -10,7 +10,7 @@ import frc.robot.Variables;
  * Handles all drive functionality.
  */
 public class DriveSub extends SubsystemBase {
-  private static final Constants constants = Constants.getInstance();
+  private final Constants constants = Constants.getInstance();
   private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(constants.leftFrontMotorPort);
   private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(constants.leftBackMotorPort);
   private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(constants.rightFrontMotorPort);
@@ -37,8 +37,8 @@ public class DriveSub extends SubsystemBase {
    */
   public void tank(double leftSpeed, double rightSpeed) {
     int direction = vars.invertDriveDirection ? 1 : -1;
-    leftMaster.set(leftSpeed*direction);
-    rightMaster.set(rightSpeed*direction);
+    leftMaster.set(leftSpeed * direction);
+    rightMaster.set(rightSpeed * direction);
   }
 
   /**

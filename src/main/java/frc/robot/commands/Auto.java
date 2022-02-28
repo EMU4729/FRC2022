@@ -16,7 +16,7 @@ import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.NavigationSub;
 
 public class Auto extends CommandBase {
-  private static final Constants constants = Constants.getInstance();
+  private final Constants constants = Constants.getInstance();
   private final DriveSub drive;
   private final BallStopSub ballStop;
   private final IntakeSub intake;

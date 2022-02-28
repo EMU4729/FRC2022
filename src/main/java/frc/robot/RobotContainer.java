@@ -8,9 +8,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.commands.Auto;
-import frc.robot.commands.BallStopToggle;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
+import frc.robot.commands.BallStopOpen;
+import frc.robot.commands.BallStopClose;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveReverseDirection;
 import frc.robot.commands.IntakeRun;
@@ -37,7 +38,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  private static final Constants constants = Constants.getInstance();
+  private final Constants constants = Constants.getInstance();
 
   private final XboxController controller = new XboxController(constants.controllerPort);
 
@@ -49,11 +50,12 @@ public class RobotContainer {
   private final BallStopSub ballStopSub = new BallStopSub();
 
   private final Auto autoCommand = new Auto(driveSub, ballStopSub, intakeSub, navigationSub);
-  private final BallStopToggle ballStopToggleCommand = new BallStopToggle(ballStopSub);
   private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
+  private final BallStopOpen ballStopOpenCommand = new BallStopOpen(ballStopSub);
+  private final BallStopClose ballStopCloseCommand = new BallStopClose(ballStopSub);
   private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
-  private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection(driveSub);
+  private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
   private final StorageRun storageRunCommand = new StorageRun(storageSub, ballStopSub, controller);
@@ -75,9 +77,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    // TODO: Migrate this to new BallStopOpen and BallStopClose commands
     // Toggle Ball Stop
-    new JoystickButton(controller, XboxController.Button.kX.value)
-        .whenPressed(ballStopToggleCommand);
+    // new JoystickButton(controller, XboxController.Button.kX.value)
+    // .whenPressed(ballStopToggleCommand);
 
     // Run Intake
     new JoystickButton(controller, XboxController.Button.kLeftBumper.value)

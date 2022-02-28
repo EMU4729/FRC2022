@@ -9,7 +9,7 @@ import frc.robot.Constants;
  * Handles all intake functionality.
  */
 public class IntakeSub extends SubsystemBase {
-  private static final Constants constants = Constants.getInstance();
+  private final Constants constants = Constants.getInstance();
   private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.intakeMotorPort);
 
   @Override
