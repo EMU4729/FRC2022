@@ -56,7 +56,7 @@ public class RobotContainer {
   private final BallStopClose ballStopCloseCommand = new BallStopClose(ballStopSub);
   private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
-  private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
+  private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub, storageSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
   private final StorageRun storageRunCommand = new StorageRun(storageSub, ballStopSub, controller);
 
