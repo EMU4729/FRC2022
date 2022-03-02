@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallStopSub;
 import frc.robot.subsystems.StorageSub;
 import frc.robot.utils.AsyncTimer;
+import frc.robot.utils.BallType;
+import frc.robot.utils.StorageColorSensor;
 
 public class StorageRun extends CommandBase {
   private final StorageSub storage;
@@ -47,13 +49,13 @@ public class StorageRun extends CommandBase {
       return;
     }
 
-    if (storage.getTopColor() == storage.oppColor) {
+    if (storage.getBall(StorageColorSensor.TOP) == BallType.OPP) {
       startVibrate();
       return;
     }
     // TODO: Open ball stop here
     storage.setConveyorSpeed(0.5);
-    if (storage.getTopColor() != storage.teamColor) {
+    if (storage.getBall(StorageColorSensor.TOP) != BallType.TEAM) {
       // nvm
       storage.setConveyorSpeed(0);
       // TODO: Close ball stop here

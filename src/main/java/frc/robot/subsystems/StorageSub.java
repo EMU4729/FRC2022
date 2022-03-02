@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.utils.BallType;
+import frc.robot.utils.StorageColorSensor;
 
 /**
  * Storage Subsystem.
@@ -41,6 +42,23 @@ public class StorageSub extends SubsystemBase {
   }
 
   /**
+   * Converts from {@link StorageColorSensor} to {@link ColorSensorV3}.
+   * 
+   * @param location The StorageColorSensor.
+   * @return The ColorSensorV3 instance.
+   */
+  private ColorSensorV3 getColorSensor(StorageColorSensor location) {
+    switch (location) {
+      case TOP:
+        return topColorSensor;
+      case BOTTOM:
+        return bottomColorSensor;
+      default:
+        throw new Error("Impossible scenario - this will never happen");
+    }
+  }
+
+  /**
    * Sets the conveyor speed.
    * 
    * @param speed Speed between -1 and 1
@@ -50,46 +68,23 @@ public class StorageSub extends SubsystemBase {
   }
 
   /**
-   * Gets the current color detected by the top color sensor.
+   * Gets the current color detected by the given color sensor.
    * 
+   * @param location The color sensor to use.
    * @return The color detected by the color sensor.
    */
-  public Color getTopColor() {
-    return topColorSensor.getColor();
+  public Color getColor(StorageColorSensor location) {
+    return getColorSensor(location).getColor();
   }
 
   /**
-   * Gets the current color detected by the bottom color sensor.
+   * Gets the current ball type detected by the given color sensor.
    * 
-   * @return The color detected by the color sensor.
-   */
-  public Color getBottomColor() {
-    return bottomColorSensor.getColor();
-  }
-
-  /**
-   * Gets the current ball type detected by the top color sensor.
-   * 
+   * @param location
    * @return The ball type detected by the color sensor as a {@link BallType}.
    */
-  public BallType getTopBall() {
-    Color ballColor = getTopColor();
-    if (ballColor == teamColor) {
-      return BallType.TEAM;
-    }
-    if (ballColor == oppColor) {
-      return BallType.OPP;
-    }
-    return BallType.NONE;
-  }
-
-  /**
-   * Gets the current ball type detected by the bottom color sensor.
-   * 
-   * @return The ball type detected by the color sensor as a {@link BallType}.
-   */
-  public BallType getBottomBall() {
-    Color ballColor = getBottomColor();
+  public BallType getBall(StorageColorSensor location) {
+    Color ballColor = getColor(location);
     if (ballColor == teamColor) {
       return BallType.TEAM;
     }
