@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -11,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.StorageSub;
+import frc.robot.utils.BallType;
+import frc.robot.utils.StorageColorSensor;
 
 public class IntakeRun extends CommandBase {
   private final IntakeSub intake;
@@ -41,29 +45,43 @@ public class IntakeRun extends CommandBase {
   public void execute(){
     new ConditionalCommand(
       new ConditionalCommand(
+        null,
         new StartEndCommand(
           () -> storage.setConveyorSpeed(0.5), 
           () -> storage.setConveyorSpeed(0), 
-          storage)
-            .withTimeout(5)
-            .until(storage.getTopColor() == DriverStation.getAlliance()), 
-        storage.getTopColor() == DriverStation.getAlliance()),
+          storage
+        )
+          .withTimeout(10)
+          .withInterrupt(ballIsTeam(StorageColorSensor.TOP)),
+          ballIsTeam(StorageColorSensor.TOP)),
       new ConditionalCommand(
         new ParallelCommandGroup(
-          new storage.setConveyorSpeed(10),
+          new InstantCommand(storage.setConveyorSpeed(10), storage),
           new SequentialCommandGroup(
             new WaitUntilCommand(storage.limitSwitch),
             ConditionalCommand(
-              //while top sensor not triggered
-              //while bottom sensor not triggered
-              ballCount == 0),
+              new WaitUntilCommand(ballIsThere(StorageColorSensor.TOP)).withTimeout(10),
+              new WaitUntilCommand(ballIsThere(StorageColorSensor.BOTTOM)).withTimeout(10),
+              () -> ballCount == 0),
             new InstantCommand(storage.setConveyorSpeed(0), storage),
             ballCount++
           )),
         new InstantCommand(intake.setSpinSpeed(0), intake),
-        ballCount >= 2), 
-      ballCount >= 1);
+        () -> ballCount >= 2), 
+      () -> ballCount >= 1);
+
+      new ConditionalCommand(
+        null,
+        new StartEndCommand(
+          () -> storage.setConveyorSpeed(0.5), 
+          () -> storage.setConveyorSpeed(0), 
+          storage
+        )
+          .withTimeout(10)
+          .withInterrupt(ballIsTeam(StorageColorSensor.TOP)),
+          ballIsTeam(StorageColorSensor.TOP));
   }
+
 
   @Override
   public boolean isFinished() {
@@ -73,5 +91,13 @@ public class IntakeRun extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.setSpinSpeed(0);
+  }
+
+  private BooleanSupplier ballIsTeam(StorageColorSensor sens){
+    return () -> storage.getBall(sens).equals(BallType.TEAM);
+  }
+
+  private BooleanSupplier ballIsThere(StorageColorSensor sens){
+    return () -> storage.getBall(sens).equals(BallType.NONE);
   }
 }
