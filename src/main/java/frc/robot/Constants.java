@@ -51,4 +51,7 @@ public final class Constants {
   // Auto Commands Text File Path
   public final String FilePath = "u//";
   public final String autoCommandsPath = FilePath + "autoCommands.txt"; // TODO: Update this?
+
+  // Storage Limit Switch
+  public final int limitSwitchChannel = 69420; // TODO: Update this
 }
