@@ -32,8 +32,8 @@ public class IntakeRun extends CommandBase {
 
   @Override
   public void initialize() {
-    if(storage.getTopColor() == Color.kBlue || storage.getTopColor() == Color.kRed){
-      if(storage.getTopColor() == Color.kBlue || storage.getTopColor() == Color.kRed){
+    if(ballIsThere(StorageColorSensor.TOP).getAsBoolean()){
+      if(ballIsThere(StorageColorSensor.BOTTOM).getAsBoolean()){
         ballCount = 2;
       } else{
         ballCount = 1;
@@ -56,17 +56,17 @@ public class IntakeRun extends CommandBase {
           ballIsTeam(StorageColorSensor.TOP)),
       new ConditionalCommand(
         new ParallelCommandGroup(
-          new InstantCommand(storage.setConveyorSpeed(10), storage),
+          new InstantCommand(storage::setSpeedIntake, storage),
           new SequentialCommandGroup(
-            new WaitUntilCommand(storage.limitSwitch),
-            ConditionalCommand(
-              new WaitUntilCommand(ballIsThere(StorageColorSensor.TOP)).withTimeout(10),
-              new WaitUntilCommand(ballIsThere(StorageColorSensor.BOTTOM)).withTimeout(10),
-              () -> ballCount == 0),
-            new InstantCommand(storage.setConveyorSpeed(0), storage),
-            ballCount++
+            new WaitUntilCommand(storage.limitSwitch()),
+            new ConditionalCommand(
+              new WaitUntilCommand(ballIsThere(StorageColorSensor.TOP)),
+              new WaitUntilCommand(ballIsThere(StorageColorSensor.BOTTOM)),
+              () -> ballCount == 0).withTimeout(10),
+            new InstantCommand(storage::stopConveyor, storage),
+            new InstantCommand(() -> ballCount++, null)
           )),
-        new InstantCommand(intake.setSpinSpeed(0), intake),
+        new InstantCommand(intake::stopIntake, intake),
         () -> ballCount >= 2), 
       () -> ballCount >= 1);
 
@@ -98,6 +98,6 @@ public class IntakeRun extends CommandBase {
   }
 
   private BooleanSupplier ballIsThere(StorageColorSensor sens){
-    return () -> storage.getBall(sens).equals(BallType.NONE);
+    return () -> !storage.getBall(sens).equals(BallType.NONE);
   }
 }
