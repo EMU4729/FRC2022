@@ -42,7 +42,7 @@ public class RobotContainer {
   private final IntakeSub intakeSub = new IntakeSub();
   private final StorageSub storageSub = new StorageSub();
 
-  private final Auto autoCommand = new Auto(driveSub, intakeSub);
+  private final Auto autoCommand = new Auto(driveSub, intakeSub, storageSub);
   private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
   private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
