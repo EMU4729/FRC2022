@@ -9,7 +9,6 @@ import java.util.List;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.BallStopSub;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.NavigationSub;
@@ -18,18 +17,16 @@ import frc.robot.utils.AutoCommand;
 public class Auto extends CommandBase {
   private final Constants constants = Constants.getInstance();
   private final DriveSub drive;
-  private final BallStopSub ballStop;
   private final IntakeSub intake;
   private final NavigationSub navigation;
 
   private List<AutoCommand> commands = new ArrayList<>();
 
-  public Auto(DriveSub drive, BallStopSub ballStop, IntakeSub intake, NavigationSub navigation) {
+  public Auto(DriveSub drive, IntakeSub intake, NavigationSub navigation) {
     this.drive = drive;
-    this.ballStop = ballStop;
     this.intake = intake;
     this.navigation = navigation;
-    addRequirements(drive, ballStop, intake, navigation);
+    addRequirements(drive, intake, navigation);
   }
 
   @Override

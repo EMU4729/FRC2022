@@ -10,15 +10,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Auto;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
-import frc.robot.commands.BallStopOpen;
-import frc.robot.commands.BallStopClose;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveReverseDirection;
 import frc.robot.commands.IntakeRun;
 import frc.robot.commands.NavigationUpdate;
 import frc.robot.commands.StorageRun;
 
-import frc.robot.subsystems.BallStopSub;
 import frc.robot.subsystems.ClimberSub;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
@@ -47,18 +44,15 @@ public class RobotContainer {
   private final IntakeSub intakeSub = new IntakeSub();
   private final NavigationSub navigationSub = new NavigationSub();
   private final StorageSub storageSub = new StorageSub();
-  private final BallStopSub ballStopSub = new BallStopSub();
 
-  private final Auto autoCommand = new Auto(driveSub, ballStopSub, intakeSub, navigationSub);
+  private final Auto autoCommand = new Auto(driveSub, intakeSub, navigationSub);
   private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
-  private final BallStopOpen ballStopOpenCommand = new BallStopOpen(ballStopSub);
-  private final BallStopClose ballStopCloseCommand = new BallStopClose(ballStopSub);
   private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub, storageSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
-  private final StorageRun storageRunCommand = new StorageRun(storageSub, ballStopSub, controller);
+  private final StorageRun storageRunCommand = new StorageRun(storageSub, controller);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.

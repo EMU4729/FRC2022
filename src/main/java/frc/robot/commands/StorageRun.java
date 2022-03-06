@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallStopSub;
 import frc.robot.subsystems.StorageSub;
 import frc.robot.utils.AsyncTimer;
 import frc.robot.utils.BallType;
@@ -11,15 +10,13 @@ import frc.robot.utils.StorageColorSensor;
 
 public class StorageRun extends CommandBase {
   private final StorageSub storage;
-  private final BallStopSub ballStop;
   private final XboxController controller;
   private boolean vibrate;
   private boolean isFinished;
   private AsyncTimer vibrateTimer;
 
-  public StorageRun(StorageSub storage, BallStopSub ballStop, XboxController controller) {
+  public StorageRun(StorageSub storage, XboxController controller) {
     this.storage = storage;
-    this.ballStop = ballStop;
     this.controller = controller;
 
     addRequirements(storage);
@@ -53,18 +50,15 @@ public class StorageRun extends CommandBase {
       startVibrate();
       return;
     }
-    // TODO: Open ball stop here
     storage.setConveyorSpeed(0.5);
     if (storage.getBall(StorageColorSensor.TOP) != BallType.TEAM) {
       // nvm
       storage.setConveyorSpeed(0);
-      // TODO: Close ball stop here
       startVibrate();
       return;
     }
 
     storage.setConveyorSpeed(0);
-    // TODO: close ball stop here
     startVibrate();
 
     // TODO: Finish this later
@@ -79,7 +73,6 @@ public class StorageRun extends CommandBase {
   public void end(boolean interrupted) {
     vibrate = false;
     storage.setConveyorSpeed(0);
-    // TODO: close ball stop
     controller.setRumble(RumbleType.kLeftRumble, 0);
     // idk
   }
