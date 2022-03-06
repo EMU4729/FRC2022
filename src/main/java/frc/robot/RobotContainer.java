@@ -21,7 +21,7 @@ import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.NavigationSub;
 import frc.robot.subsystems.StorageSub;
-
+import frc.robot.utils.DPadButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -71,20 +71,31 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // TODO: Migrate this to new BallStopOpen and BallStopClose commands
-    // Toggle Ball Stop
-    // new JoystickButton(controller, XboxController.Button.kX.value)
-    // .whenPressed(ballStopToggleCommand);
-
     // Run Intake
     new JoystickButton(controller, XboxController.Button.kLeftBumper.value)
-        .whileHeld(intakeRunCommand);
+        .whenHeld(intakeRunCommand);
 
     // Run Storage
-    new JoystickButton(controller, XboxController.Button.kRightBumper.value)
-        .whileHeld(storageRunCommand);
+    new JoystickButton(controller, XboxController.Axis.kRightTrigger.value)
+        .whenHeld(storageRunCommand);
 
-    // TODO: Climber and Movement Controller Bindings
+    // Reverse Drive Direction
+    new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value).whenPressed(driveReverseDirectionCommand);
+
+    // Climber Up/Down
+    new JoystickButton(controller, DPadButton.Direction.UP.value).whenHeld(climberUpCommand);
+    new JoystickButton(controller, DPadButton.Direction.DOWN.value).whenHeld(climberDownCommand);
+
+    // Drive bindings handled in driveCommand.
+  }
+
+  /**
+   * Use this to pass the teleop command to the main {@link Robot} class.
+   *
+   * @return the command to run in teleop
+   */
+  public Command getTeleopCommand() {
+    return driveCommand;
   }
 
   /**

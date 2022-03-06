@@ -20,6 +20,7 @@ import frc.robot.utils.logger.Logger;
  */
 public class Robot extends TimedRobot {
   private Command autoCommand;
+  private Command teleopCommand;
   private RobotContainer robotContainer;
 
   private final Logger logger = Logger.getInstance();
@@ -100,6 +101,11 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (autoCommand != null) {
       autoCommand.cancel();
+    }
+
+    teleopCommand = robotContainer.getTeleopCommand();
+    if (teleopCommand != null) {
+      teleopCommand.schedule();
     }
     Logger.header("Teleop Start ------------------------------------------------------------------------------------");
   }

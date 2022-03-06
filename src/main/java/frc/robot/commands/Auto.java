@@ -13,6 +13,7 @@ import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.NavigationSub;
 import frc.robot.utils.AutoCommand;
+import frc.robot.utils.logger.Logger;
 
 public class Auto extends CommandBase {
   private final Constants constants = Constants.getInstance();
@@ -54,9 +55,9 @@ public class Auto extends CommandBase {
       });
 
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      Logger.error("Auto : " + e.toString());
     } catch (IOException e) {
-      e.printStackTrace();
+      Logger.error("Auto : " + e.toString());
     }
   }
 
