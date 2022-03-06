@@ -48,7 +48,7 @@ public class DriveSub extends SubsystemBase {
    * @param steering The steering
    */
   public void arcade(double speed, double steering) {
-    // TODO: Improve values
+    // TODO: Tune values
     double leftSpeed = (speed + steering) / 2;
     double rightSpeed = (speed - steering) / 2;
     tank(leftSpeed, rightSpeed);

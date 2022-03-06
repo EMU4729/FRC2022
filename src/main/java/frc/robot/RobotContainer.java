@@ -50,9 +50,9 @@ public class RobotContainer {
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
   private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
-  private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub, storageSub);
+  private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
-  private final StorageRun storageRunCommand = new StorageRun(storageSub, controller);
+  private final StorageRun storageRunCommand = new StorageRun(storageSub);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.

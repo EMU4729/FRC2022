@@ -26,5 +26,4 @@ public class DriveReverseDirection extends CommandBase {
     Logger.info("drive direction reversed : drive forward = " +
         (vars.invertDriveDirection ? "normal" : "reversed"));
   }
-
 }

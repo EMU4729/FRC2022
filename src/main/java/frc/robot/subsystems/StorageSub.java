@@ -1,16 +1,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.ColorSensorV3;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.utils.BallType;
-import frc.robot.utils.StorageColorSensor;
 
 /**
  * Storage Subsystem.
@@ -19,43 +12,9 @@ import frc.robot.utils.StorageColorSensor;
 public class StorageSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
   private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.conveyorMotorPort);
-  private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(constants.bottomColorSensorPort); // TODO: Do stuff
-  private final ColorSensorV3 topColorSensor = new ColorSensorV3(constants.topColorSensorPort);
-  private final DigitalInput limitSwitch = new DigitalInput(constants.limitSwitchChannel);
-
-  public final Color teamColor;
-  public final Color oppColor;
-
-  public StorageSub() {
-    Alliance alliance = DriverStation.getAlliance();
-    if (alliance == Alliance.Red) {
-      teamColor = Color.kRed;
-      oppColor = Color.kBlue;
-    } else {
-      teamColor = Color.kBlue;
-      oppColor = Color.kRed;
-    }
-  }
 
   @Override
   public void periodic() {
-  }
-
-  /**
-   * Converts from {@link StorageColorSensor} to {@link ColorSensorV3}.
-   * 
-   * @param location The StorageColorSensor.
-   * @return The ColorSensorV3 instance.
-   */
-  private ColorSensorV3 getColorSensor(StorageColorSensor location) {
-    switch (location) {
-      case TOP:
-        return topColorSensor;
-      case BOTTOM:
-        return bottomColorSensor;
-      default:
-        throw new Error("Impossible scenario - this will never happen");
-    }
   }
 
   /**
@@ -65,32 +24,5 @@ public class StorageSub extends SubsystemBase {
    */
   public void setConveyorSpeed(double speed) {
     motor.set(speed);
-  }
-
-  /**
-   * Gets the current color detected by the given color sensor.
-   * 
-   * @param location The color sensor to use.
-   * @return The color detected by the color sensor.
-   */
-  public Color getColor(StorageColorSensor location) {
-    return getColorSensor(location).getColor();
-  }
-
-  /**
-   * Gets the current ball type detected by the given color sensor.
-   * 
-   * @param location
-   * @return The ball type detected by the color sensor as a {@link BallType}.
-   */
-  public BallType getBall(StorageColorSensor location) {
-    Color ballColor = getColor(location);
-    if (ballColor == teamColor) {
-      return BallType.TEAM;
-    }
-    if (ballColor == oppColor) {
-      return BallType.OPP;
-    }
-    return BallType.NONE;
   }
 }
