@@ -46,6 +46,10 @@ public class Auto extends CommandBase {
       }
 
       commandIterator = commands.iterator();
+      if (!commandIterator.hasNext()) {
+        Logger.error("Auto : No commands found in command file!");
+        return;
+      }
       currentCommand = commandIterator.next();
     } catch (FileNotFoundException e) {
       Logger.error("Auto : " + e.toString());
