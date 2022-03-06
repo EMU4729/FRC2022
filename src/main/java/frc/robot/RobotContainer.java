@@ -13,13 +13,11 @@ import frc.robot.commands.ClimberUp;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveReverseDirection;
 import frc.robot.commands.IntakeRun;
-import frc.robot.commands.NavigationUpdate;
 import frc.robot.commands.StorageRun;
 
 import frc.robot.subsystems.ClimberSub;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
-import frc.robot.subsystems.NavigationSub;
 import frc.robot.subsystems.StorageSub;
 import frc.robot.utils.DPadButton;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,16 +40,14 @@ public class RobotContainer {
   private final DriveSub driveSub = new DriveSub();
   private final ClimberSub climberSub = new ClimberSub();
   private final IntakeSub intakeSub = new IntakeSub();
-  private final NavigationSub navigationSub = new NavigationSub();
   private final StorageSub storageSub = new StorageSub();
 
-  private final Auto autoCommand = new Auto(driveSub, intakeSub, navigationSub);
+  private final Auto autoCommand = new Auto(driveSub, intakeSub);
   private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
   private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
-  private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
   private final StorageRun storageRunCommand = new StorageRun(storageSub);
 
   /**

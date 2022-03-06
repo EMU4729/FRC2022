@@ -23,21 +23,23 @@ public class Logger {
     Date date = Calendar.getInstance().getTime();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
     String strDate = dateFormat.format(date);
-    String tempLogFileName = consts.FilePath + strDate + ".txt";
+    String tempLogFileName = consts.driveLetter + strDate + ".txt";
     File logFile = new File(tempLogFileName);
 
     try {
       for (int i = 1; !logFile.createNewFile(); i++) {
         if (i > 10) {
           fileCreationFailed = true;
-          System.out.println("error : Log file creation failed : time out");
+          System.out.println(
+              new LogLine("Logfile creation failed - timeout", LogLevel.ERROR).toString());
           break;
         }
-        tempLogFileName = consts.FilePath + strDate + "_(" + i + ")" + ".txt";
+        tempLogFileName = consts.driveLetter + strDate + "_(" + i + ")" + ".txt";
         logFile = new File(tempLogFileName);
       }
     } catch (IOException e) {
-      System.out.println("error : Log file creation failed : " + e.toString());
+      System.out.println(
+          new LogLine("Logfile creation failed: " + e.toString(), LogLevel.ERROR).toString());
     }
 
     logFileName = tempLogFileName;
@@ -91,7 +93,8 @@ public class Logger {
       }
       logWriter.close();
     } catch (IOException e) {
-      System.out.println("error : write to log file failed : " + e.toString());
+      System.out.println(
+          new LogLine("Writing to logfile failed: " + e.toString(), LogLevel.ERROR).toString());
     }
   }
 }

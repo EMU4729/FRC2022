@@ -6,8 +6,6 @@ package frc.robot;
 
 import java.util.Optional;
 
-import edu.wpi.first.wpilibj.I2C;
-
 /**
  * Constants - use this class to store any port ids, file paths, or basically
  * anything that will not change.
@@ -26,32 +24,20 @@ public final class Constants {
   }
 
   // Drive Ports
-  public final int leftFrontMotorPort = 6;
-  public final int rightFrontMotorPort = 11;
-  public final int leftBackMotorPort = 5;
-  public final int rightBackMotorPort = 12;
-  public final int leftEncoderPortA = 69420; // TODO: Update this
-  public final int leftEncoderPortB = 69420; // TODO: Update this
-  public final int rightEncoderPortA = 69420; // TODO: Update this
-  public final int rightEncoderPortB = 69420; // TODO: Update this
+  public final int leftFrontMotorPort = 0;
+  public final int rightFrontMotorPort = 1;
+  public final int leftBackMotorPort = 2;
+  public final int rightBackMotorPort = 3;
 
   // Other Motors
-  public final int intakeMotorPort = 69420; // TODO: Update this
-  public final int conveyorMotorPort = 69420; // TODO: Update this
-  public final int climberMotorPort = 69420; // TODO: Update this
-  public final int ballStopMotorPort = 69420; // TODO: Update this
+  public final int intakeMotorPort = 4;
+  public final int conveyorMotorPort = 5;
+  public final int climberMotorPort = 6;
 
   // Controller
-  public final int controllerPort = 69420; // TODO: Update this
-
-  // Storage Color Sensor
-  public final I2C.Port topColorSensorPort = I2C.Port.kMXP; // TODO: Update this
-  public final I2C.Port bottomColorSensorPort = I2C.Port.kMXP; // TODO: Update this
+  public final int controllerPort = 0;
 
   // Auto Commands Text File Path
-  public final String FilePath = "u//";
-  public final String autoCommandsPath = FilePath + "autoCommands.txt"; // TODO: Update this?
-
-  // Storage Limit Switch
-  public final int limitSwitchChannel = 69420; // TODO: Update this
+  public final String driveLetter = "u//";
+  public final String autoCommandsPath = driveLetter + "autoCommands.txt"; // TODO: Update this?
 }

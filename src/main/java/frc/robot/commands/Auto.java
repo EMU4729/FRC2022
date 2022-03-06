@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
-import frc.robot.subsystems.NavigationSub;
 import frc.robot.utils.AutoCommand;
 import frc.robot.utils.logger.Logger;
 
@@ -19,15 +18,13 @@ public class Auto extends CommandBase {
   private final Constants constants = Constants.getInstance();
   private final DriveSub drive;
   private final IntakeSub intake;
-  private final NavigationSub navigation;
 
   private List<AutoCommand> commands = new ArrayList<>();
 
-  public Auto(DriveSub drive, IntakeSub intake, NavigationSub navigation) {
+  public Auto(DriveSub drive, IntakeSub intake) {
     this.drive = drive;
     this.intake = intake;
-    this.navigation = navigation;
-    addRequirements(drive, intake, navigation);
+    addRequirements(drive, intake);
   }
 
   @Override
@@ -41,9 +38,7 @@ public class Auto extends CommandBase {
 
       commands.forEach(command -> {
         switch (command.name) {
-          case "driveTo":
-            break;
-          case "driveBackTo":
+          case "drive":
             break;
           case "intakeRun":
             break;
