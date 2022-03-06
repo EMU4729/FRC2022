@@ -98,10 +98,6 @@ public class Auto extends CommandBase {
         }
         nextCommand();
         break;
-      case "storageOff":
-        storage.setConveyorSpeed(0);
-        nextCommand();
-        break;
       case "intakeRun":
         try {
           double speed = Double.parseDouble(currentCommand.args.get(0));
@@ -109,10 +105,6 @@ public class Auto extends CommandBase {
         } catch (NumberFormatException e) {
           Logger.warn("Auto : Invalid double command args " + currentCommand.args);
         }
-        nextCommand();
-        break;
-      case "intakeOff":
-        intake.setSpinSpeed(0);
         nextCommand();
         break;
       case "wait":
