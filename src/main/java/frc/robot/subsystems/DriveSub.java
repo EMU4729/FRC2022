@@ -17,8 +17,6 @@ public class DriveSub extends SubsystemBase {
   private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(constants.rightBackMotorPort);
   private final Variables vars;
 
-  // TODO: Add gyro and odometry here
-
   public DriveSub() {
     leftSlave.follow(leftMaster);
     rightSlave.follow(rightMaster);

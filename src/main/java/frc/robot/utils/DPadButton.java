@@ -3,10 +3,16 @@ package frc.robot.utils;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Button;
 
+/**
+ * {@link Button} implementation for D-Pad.
+ */
 public class DPadButton extends Button {
   private Joystick joystick;
   private Direction direction;
 
+  /**
+   * Enum for the D-Pad directions.
+   */
   public static enum Direction {
     UP(0),
     RIGHT(90),
