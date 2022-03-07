@@ -41,6 +41,7 @@ public class Logger {
         logFile = new File(tempLogFileName);
       }
     } catch (IOException e) {
+      fileCreationFailed = true;
       System.out.println(
           new LogLine("Logfile creation failed: " + e.toString(), LogLine.Level.ERROR).toString());
     }
