@@ -19,9 +19,9 @@ import frc.robot.subsystems.ClimberSub;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.StorageSub;
-import frc.robot.utils.DPadButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -42,10 +42,8 @@ public class RobotContainer {
       Button.kStart.value);
   private final JoystickButton rightBumperButton = new JoystickButton(controller,
       Button.kRightBumper.value);
-  // private final JoystickButton dPadUpButton = new JoystickButton(controller,
-  // DPadButton.Direction.UP.value);
-  // private final JoystickButton dPadDownButton = new JoystickButton(controller,
-  // DPadButton.Direction.DOWN.value);
+  private final POVButton dPadUpButton = new POVButton(controller, 0);
+  private final POVButton dPadDownButton = new POVButton(controller, 180);
 
   private final DriveSub driveSub = new DriveSub();
   private final ClimberSub climberSub = new ClimberSub();
@@ -87,9 +85,8 @@ public class RobotContainer {
     startButton.whenPressed(driveReverseDirectionCommand);
 
     // Climber Up/Down
-    // TODO: Make D-Pad code not crash the entire robot
-    // dPadUpButton.whenHeld(climberUpCommand);
-    // dPadDownButton.whenHeld(climberDownCommand);
+    dPadUpButton.whenHeld(climberUpCommand);
+    dPadDownButton.whenHeld(climberDownCommand);
 
     // Drive bindings handled in driveCommand.
   }
