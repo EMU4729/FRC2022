@@ -23,6 +23,6 @@ public class IntakeSub extends SubsystemBase {
    * @param speed Speed between -1 and 1
    */
   public void setSpinSpeed(double speed) {
-    motor.set(speed);
+    motor.set(speed * constants.intakeMotorInversionFactor);
   }
 }

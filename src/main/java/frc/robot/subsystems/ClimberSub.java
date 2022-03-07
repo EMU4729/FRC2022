@@ -23,7 +23,7 @@ public class ClimberSub extends SubsystemBase {
    * @param speed Speed between -1 and 1.
    */
   public void set(double speed) {
-    motor.set(speed);
+    motor.set(speed * constants.climberMotorInversionFactor);
   }
 
 }
