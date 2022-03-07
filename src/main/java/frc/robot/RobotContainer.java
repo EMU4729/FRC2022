@@ -6,7 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.Auto;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
@@ -36,6 +36,16 @@ public class RobotContainer {
   private final Constants constants = Constants.getInstance();
 
   private final XboxController controller = new XboxController(constants.controllerPort);
+  private final JoystickButton leftBumperButton = new JoystickButton(controller,
+      Button.kLeftBumper.value);
+  private final JoystickButton startButton = new JoystickButton(controller,
+      Button.kStart.value);
+  private final JoystickButton rightBumperButton = new JoystickButton(controller,
+      Button.kRightBumper.value);
+  // private final JoystickButton dPadUpButton = new JoystickButton(controller,
+  // DPadButton.Direction.UP.value);
+  // private final JoystickButton dPadDownButton = new JoystickButton(controller,
+  // DPadButton.Direction.DOWN.value);
 
   private final DriveSub driveSub = new DriveSub();
   private final ClimberSub climberSub = new ClimberSub();
@@ -68,19 +78,18 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Run Intake
-    new JoystickButton(controller, XboxController.Button.kLeftBumper.value)
-        .whenHeld(intakeRunCommand);
+    leftBumperButton.whenHeld(intakeRunCommand);
 
     // Run Storage
-    new JoystickButton(controller, XboxController.Axis.kRightTrigger.value)
-        .whenHeld(storageRunCommand);
+    rightBumperButton.whenHeld(storageRunCommand);
 
     // Reverse Drive Direction
-    new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value).whenPressed(driveReverseDirectionCommand);
+    startButton.whenPressed(driveReverseDirectionCommand);
 
     // Climber Up/Down
-    new JoystickButton(controller, DPadButton.Direction.UP.value).whenHeld(climberUpCommand);
-    new JoystickButton(controller, DPadButton.Direction.DOWN.value).whenHeld(climberDownCommand);
+    // TODO: Make D-Pad code not crash the entire robot
+    // dPadUpButton.whenHeld(climberUpCommand);
+    // dPadDownButton.whenHeld(climberDownCommand);
 
     // Drive bindings handled in driveCommand.
   }

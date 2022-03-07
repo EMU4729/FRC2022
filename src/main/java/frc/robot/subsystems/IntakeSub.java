@@ -1,7 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import frc.robot.Constants;
 
 /**
@@ -10,7 +11,7 @@ import frc.robot.Constants;
  */
 public class IntakeSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.intakeMotorPort);
+  private final WPI_VictorSPX motor = new WPI_VictorSPX(constants.intakeMotorPort);
 
   @Override
   public void periodic() {
