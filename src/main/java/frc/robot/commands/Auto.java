@@ -41,7 +41,10 @@ public class Auto extends CommandBase {
     try (BufferedReader br = new BufferedReader(new FileReader(constants.autoCommandsPath))) {
       String line;
 
-      while ((line = br.readLine()) != null) {
+      while ((line = br.readLine().strip()) != null) {
+        if (line.isEmpty() || line.startsWith("#"))
+          continue;
+
         commands.add(new AutoCommand(line));
       }
 

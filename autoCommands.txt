@@ -1,0 +1,13 @@
+driveArcade -0.5 0
+wait 500
+
+intakeRun 0.5
+storageRun 0.5
+wait 500
+
+intakeRun 0
+driveArcade 0.5 0
+wait 1000
+
+driveOff
+storageRun 0
