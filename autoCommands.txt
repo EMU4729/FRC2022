@@ -1,13 +1,22 @@
-driveArcade -0.5 0
-wait 500
-
-intakeRun 0.5
-storageRun 0.5
-wait 500
-
-intakeRun 0
+# move back and pick up ball
 driveArcade 0.5 0
+intakeRun 0.5
 wait 1000
 
+# move ball into storage
+storageRun 0.5
+wait 500
+storageRun 0
+
+# drive foward
+intakeRun 0
+driveArcade -0.5 0
+wait 1500
+
+# vomit ball
+storageRun 1
+wait 1000
+
+# end
 driveOff
 storageRun 0

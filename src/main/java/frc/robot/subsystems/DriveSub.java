@@ -15,7 +15,7 @@ public class DriveSub extends SubsystemBase {
   private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(constants.leftBackMotorPort);
   private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(constants.rightFrontMotorPort);
   private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(constants.rightBackMotorPort);
-  private final Variables vars;
+  private final Variables vars = Variables.getInstance();
 
   public DriveSub() {
     leftSlave.follow(leftMaster);
@@ -23,8 +23,8 @@ public class DriveSub extends SubsystemBase {
 
     // change this if needed
     leftMaster.setInverted(true);
-
-    vars = Variables.getInstance();
+    rightMaster.setInverted(true);
+    rightSlave.setInverted(true);
   }
 
   /**
@@ -46,9 +46,9 @@ public class DriveSub extends SubsystemBase {
    * @param steering The steering
    */
   public void arcade(double speed, double steering) {
-    // TODO: Tune values
-    double leftSpeed = (speed + steering) / 2;
-    double rightSpeed = (speed - steering) / 2;
+    int direction = vars.invertDriveDirection ? 1 : -1;
+    double leftSpeed = (speed + steering * direction) / 2;
+    double rightSpeed = (speed - steering * direction) / 2;
     tank(leftSpeed, rightSpeed);
   }
 

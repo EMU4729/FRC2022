@@ -24,10 +24,10 @@ public final class Constants {
   }
 
   // Drive Ports
-  public final int leftFrontMotorPort = 2;
-  public final int leftBackMotorPort = 1;
-  public final int rightFrontMotorPort = 5;
-  public final int rightBackMotorPort = 4;
+  public final int leftFrontMotorPort = 4;
+  public final int leftBackMotorPort = 5;
+  public final int rightFrontMotorPort = 1;
+  public final int rightBackMotorPort = 2;
 
   // Other Motors
   public final int intakeMotorPort = 6;
@@ -35,8 +35,8 @@ public final class Constants {
   public final int climberMotorPort = 8;
 
   // Motor Inversion Options
-  public final int climberMotorInversionFactor = 1;
-  public final int conveyorMotorInversionFactor = -1;
+  public final int climberMotorInversionFactor = -1;
+  public final int conveyorMotorInversionFactor = 1;
   public final int intakeMotorInversionFactor = -1;
 
   // Controller

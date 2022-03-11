@@ -14,7 +14,7 @@ public class StorageRun extends CommandBase {
 
   @Override
   public void initialize() {
-    storage.setConveyorSpeed(0.1);
+    storage.setConveyorSpeed(0.2);
   }
 
   @Override
