@@ -15,6 +15,7 @@ import frc.robot.commands.DriveReverseDirection;
 import frc.robot.commands.IntakeRun;
 import frc.robot.commands.StorageRun;
 import frc.robot.commands.StorageRunFast;
+import frc.robot.commands.StorageRunReverse;
 import frc.robot.subsystems.ClimberSub;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
@@ -43,6 +44,7 @@ public class RobotContainer {
   private final JoystickButton rightBumperButton = new JoystickButton(controller,
       Button.kRightBumper.value);
   private final JoystickButton bButton = new JoystickButton(controller, Button.kB.value);
+  private final JoystickButton xButton = new JoystickButton(controller, Button.kX.value);
   private final POVButton dPadUpButton = new POVButton(controller, 0);
   private final POVButton dPadDownButton = new POVButton(controller, 180);
 
@@ -58,6 +60,7 @@ public class RobotContainer {
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final StorageRun storageRunCommand = new StorageRun(storageSub);
+  private final StorageRunReverse storageRunReverseCommand = new StorageRunReverse(storageSub);
   private final StorageRunFast storageRunFastCommand = new StorageRunFast(storageSub);
 
   /**
@@ -80,11 +83,14 @@ public class RobotContainer {
     // Run Intake
     leftBumperButton.whenHeld(intakeRunCommand);
 
-    // Run Storage
-    rightBumperButton.whenHeld(storageRunCommand);
-
     // Run Storage Fast
-    bButton.whenHeld(storageRunFastCommand);
+    rightBumperButton.whenHeld(storageRunFastCommand);
+
+    // Run Storage
+    xButton.whenHeld(storageRunCommand);
+
+    // Run Storage Reverse
+    bButton.whenHeld(storageRunReverseCommand);
 
     // Reverse Drive Direction
     startButton.whenPressed(driveReverseDirectionCommand);
