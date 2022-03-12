@@ -22,6 +22,7 @@ public class Robot extends TimedRobot {
   private Command autoCommand;
   private Command teleopCommand;
   private RobotContainer robotContainer;
+  private boolean pauseLog = false; 
 
   private final Logger logger = Logger.getInstance();
 
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    pauseLog = false;
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -59,7 +61,7 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    logger.save();
+    /*if(!pauseLog) {*/logger.save();/*}*/
 
   }
 
@@ -67,6 +69,8 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     Logger.header("Disabled ----------------------------------------------------------------------------------------");
+    logger.save();
+    pauseLog = true;
   }
 
   @Override
@@ -79,13 +83,17 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    pauseLog = false;
+    Logger.header("Auto Start --------------------------------------------------------------------------------------");
     autoCommand = robotContainer.getAutonomousCommand();
-
+    
     // schedule the autonomous command (example)
     if (autoCommand != null) {
+      Logger.info("auto found");
       autoCommand.schedule();
+    } else {
+      Logger.error("No auto command found : Command = Null");
     }
-    Logger.header("Auto Start --------------------------------------------------------------------------------------");
   }
 
   /** This function is called periodically during autonomous. */
@@ -95,6 +103,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    pauseLog = false;
+    Logger.header("Teleop Start ------------------------------------------------------------------------------------");
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -107,16 +117,18 @@ public class Robot extends TimedRobot {
     if (teleopCommand != null) {
       teleopCommand.schedule();
     }
-    Logger.header("Teleop Start ------------------------------------------------------------------------------------");
-  }
+    }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    //Logger.info("Battery + "DriverStation.getInstance().getBatteryVoltage());
+    logger.save();
   }
 
   @Override
   public void testInit() {
+    pauseLog = false;
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
     Logger.header("Test Start --------------------------------------------------------------------------------------");

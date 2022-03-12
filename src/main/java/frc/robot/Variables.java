@@ -26,4 +26,5 @@ public final class Variables {
   // Motor Options
   public boolean invertSteering = false;
   public boolean invertDriveDirection = false;
+
 }

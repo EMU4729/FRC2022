@@ -1,9 +1,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Variables;
+import frc.robot.utils.logger.Logger;
 
 /**
  * Drive Subsystem.
@@ -35,8 +37,12 @@ public class DriveSub extends SubsystemBase {
    */
   public void tank(double leftSpeed, double rightSpeed) {
     int direction = vars.invertDriveDirection ? 1 : -1;
-    leftMaster.set(leftSpeed * direction);
-    rightMaster.set(rightSpeed * direction);
+    Logger.info("Drive : Run : Speed Left=" + (leftSpeed * direction)+", Speed Right="+
+        (rightSpeed * direction));
+    leftSpeed = ratSpeed(leftSpeed);
+    rightSpeed = ratSpeed(rightSpeed);
+    leftMaster.set(leftSpeed * direction*0.7);
+    rightMaster.set(rightSpeed * direction*0.7);
   }
 
   /**
@@ -47,8 +53,8 @@ public class DriveSub extends SubsystemBase {
    */
   public void arcade(double speed, double steering) {
     int direction = vars.invertDriveDirection ? 1 : -1;
-    double leftSpeed = (speed + steering * direction) / 2;
-    double rightSpeed = (speed - steering * direction) / 2;
+    double leftSpeed = (speed + steering * direction);
+    double rightSpeed = (speed - steering * direction);
     tank(leftSpeed, rightSpeed);
   }
 
@@ -57,6 +63,15 @@ public class DriveSub extends SubsystemBase {
    */
   public void off() {
     tank(0, 0);
+  }
+
+  private double ratSpeed(double s){
+    if(s > 1.0){
+      s = 1.0;
+    } else if(s < -1.0){
+      s = -1.0;
+    }
+    return s;
   }
 
 }

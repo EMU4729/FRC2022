@@ -1,6 +1,6 @@
 package frc.robot.utils.logger;
 
-import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Represents a line in the logger.
@@ -38,7 +38,7 @@ public class LogLine {
    */
   public String toString() {
     String levelString = "[" + level.toString() + "]";
-    String timeString = String.valueOf((int) (RobotController.getFPGATime()));
+    String timeString = String.valueOf((int) (Timer.getFPGATimestamp()));
 
     return String.format("%s %s %s", levelString, timeString, content);
   }

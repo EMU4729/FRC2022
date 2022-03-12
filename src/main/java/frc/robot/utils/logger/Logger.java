@@ -114,6 +114,11 @@ public class Logger {
    */
   public void save() {
     if (logCache.isEmpty() || fileCreationFailed) {
+      if(!logCache.isEmpty() && fileCreationFailed){
+        while (!logCache.isEmpty()) {
+          System.out.println(logCache.remove(0).toString());
+        }
+      }
       return;
     }
     try {
