@@ -12,7 +12,7 @@ import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
 import frc.robot.commands.BallStopOpen;
 import frc.robot.commands.BallStopClose;
-import frc.robot.commands.Drive;
+import frc.robot.commands.TeleopDrive;
 import frc.robot.commands.DriveReverseDirection;
 import frc.robot.commands.IntakeRun;
 import frc.robot.commands.NavigationUpdate;
@@ -49,12 +49,12 @@ public class RobotContainer {
   private final StorageSub storageSub = new StorageSub();
   private final BallStopSub ballStopSub = new BallStopSub();
 
-  private final Auto autoCommand = new Auto(driveSub, ballStopSub, intakeSub, navigationSub);
+  private final Auto autoCommand = new Auto(driveSub, intakeSub, storageSub);
   private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
   private final BallStopOpen ballStopOpenCommand = new BallStopOpen(ballStopSub);
   private final BallStopClose ballStopCloseCommand = new BallStopClose(ballStopSub);
-  private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
+  private final TeleopDrive driveCommand = new TeleopDrive(driveSub, controller); // TODO: Fix this
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub, storageSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);

@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
+    logger.initializeSaveThread();
   }
 
   /**
@@ -58,8 +59,6 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    logger.save();
-
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

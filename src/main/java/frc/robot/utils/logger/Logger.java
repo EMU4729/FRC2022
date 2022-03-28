@@ -2,6 +2,7 @@ package frc.robot.utils.logger;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.Date;
 import java.util.Calendar;
 import java.io.File;
@@ -15,6 +16,7 @@ import frc.robot.Constants;
 public class Logger {
   private static Optional<Logger> instance = Optional.empty();
   private ArrayList<LogLine> logCache = new ArrayList<LogLine>();
+  private final ReentrantLock saveLock = new ReentrantLock();
   private final String logFileName;
   private final Constants consts = Constants.getInstance();
   private boolean fileCreationFailed = false;
@@ -23,7 +25,7 @@ public class Logger {
     Date date = Calendar.getInstance().getTime();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
     String strDate = dateFormat.format(date);
-    String tempLogFileName = consts.FilePath + strDate + ".txt";
+    String tempLogFileName = consts.autoUsbPaths + strDate + ".txt";
     File logFile = new File(tempLogFileName);
 
     try {
@@ -33,11 +35,12 @@ public class Logger {
           System.out.println("error : Log file creation failed : time out");
           break;
         }
-        tempLogFileName = consts.FilePath + strDate + "_(" + i + ")" + ".txt";
+        tempLogFileName = consts.autoUsbPaths + strDate + "_(" + i + ")" + ".txt";
         logFile = new File(tempLogFileName);
       }
     } catch (IOException e) {
-      System.out.println("error : Log file creation failed : " + e.toString());
+      System.out.println(new LogLine("error : Log file creation failed : " + e.toString(), LogLevel.WARN).toString());
+      fileCreationFailed = true;
     }
 
     logFileName = tempLogFileName;
@@ -51,35 +54,57 @@ public class Logger {
   }
 
   public static void header(String content) {
-    Logger logger = getInstance();
     LogLine logLine = new LogLine(content, LogLevel.HEADER);
     System.out.println(logLine.toString());
-    logger.logCache.add(logLine);
+    addLine(logLine);
   }
 
   public static void info(String content) {
-    Logger logger = getInstance();
     LogLine logLine = new LogLine(content, LogLevel.INFO);
-    System.out.println(logLine.toString());
-    logger.logCache.add(logLine);
+    addLine(logLine);
   }
 
   public static void warn(String content) {
-    Logger logger = getInstance();
     LogLine logLine = new LogLine(content, LogLevel.WARN);
-    System.out.println(logLine.toString());
-    logger.logCache.add(logLine);
+    addLine(logLine);
   }
 
   public static void error(String content) {
-    Logger logger = getInstance();
     LogLine logLine = new LogLine(content, LogLevel.ERROR);
     System.out.println(logLine.toString());
-    logger.logCache.add(logLine);
+    addLine(logLine);
+  }
+
+  private static void addLine(LogLine line) {
+    Logger logger = getInstance();
+    logger.saveLock.lock();
+    logger.logCache.add(line);
+    logger.saveLock.unlock();
+
+  }
+
+  public void initializeSaveThread() {
+    new Thread(() -> {
+      try {
+        // TODO: Implement interrupting the thread
+        while (true) {
+          save();
+          Thread.sleep(5);
+        }
+      } catch (InterruptedException e) {
+        Logger.error("Logger : Save thread interrupted : " + e);
+      }
+    }).start();
   }
 
   public void save() {
+    saveLock.lock();
     if (logCache.isEmpty() || fileCreationFailed) {
+      if (!logCache.isEmpty() && fileCreationFailed) {
+        while (!logCache.isEmpty()) {
+          System.out.println(logCache.remove(0).toString());
+        }
+      }
       return;
     }
     try {
@@ -92,6 +117,8 @@ public class Logger {
       logWriter.close();
     } catch (IOException e) {
       System.out.println("error : write to log file failed : " + e.toString());
+    } finally {
+      saveLock.unlock();
     }
   }
 }

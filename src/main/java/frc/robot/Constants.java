@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import java.util.Map;
 import java.util.Optional;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -25,6 +26,9 @@ public final class Constants {
     return instance.get();
   }
 
+  // Envars
+  public final Map<String, String> env = System.getenv();
+
   // Drive Ports
   public final int leftFrontMotorPort = 6;
   public final int rightFrontMotorPort = 11;
@@ -41,6 +45,10 @@ public final class Constants {
   public final int climberMotorPort = 69420; // TODO: Update this
   public final int ballStopMotorPort = 69420; // TODO: Update this
 
+  // Drive Speed Multipliers
+  public final double teleopSpeedMultiplier = 1;
+  public final double autoSpeedMultiplier = 1;
+
   // Controller
   public final int controllerPort = 69420; // TODO: Update this
 
@@ -49,8 +57,8 @@ public final class Constants {
   public final I2C.Port bottomColorSensorPort = I2C.Port.kMXP; // TODO: Update this
 
   // Auto Commands Text File Path
-  public final String FilePath = "u//";
-  public final String autoCommandsPath = FilePath + "autoCommands.txt"; // TODO: Update this?
+  public final String[] autoUsbPaths = { "u//autoCommands.txt", "v//autoCommands.txt" };
+  public final String autoInternalPath = env.get("HOME") + "autoCommands.txt";
 
   // Storage Limit Switch
   public final int limitSwitchChannel = 69420; // TODO: Update this
