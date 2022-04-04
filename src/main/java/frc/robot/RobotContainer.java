@@ -17,6 +17,8 @@ import frc.robot.commands.DriveReverseDirection;
 import frc.robot.commands.IntakeRun;
 import frc.robot.commands.NavigationUpdate;
 import frc.robot.commands.StorageRun;
+import frc.robot.commands.StorageRunFast;
+import frc.robot.commands.StorageRunReverse;
 
 import frc.robot.subsystems.BallStopSub;
 import frc.robot.subsystems.ClimberSub;
@@ -55,19 +57,21 @@ public class RobotContainer {
   private final BallStopClose ballStopCloseCommand = new BallStopClose(ballStopSub);
   private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
-  private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub, storageSub);
+  private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
-  private final StorageRun storageRunCommand = new StorageRun(storageSub, ballStopSub, controller);
+  private final StorageRun storageRunCommand = new StorageRun(storageSub);
+  private final StorageRunFast storageRunFastCommand = new StorageRunFast(storageSub);
+  private final StorageRunReverse storageRunReverseCommand = new StorageRunReverse(storageSub);
 
   private final Auto autoCommand = new Auto(
-      climberDownCommand, 
-      climberUpCommand,
       ballStopOpenCommand,
       ballStopCloseCommand,
       driveCommand,
       intakeRunCommand,
       navigationUpdateCommand,
-      storageRunCommand
+      storageRunCommand,
+      storageRunFastCommand,
+      storageRunReverseCommand
     );
 
   /**

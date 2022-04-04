@@ -18,9 +18,14 @@ import frc.robot.utils.logger.Logger;
 public class Auto extends CommandBase {
   private final Constants constants = Constants.getInstance();
   private final Variables variables = Variables.getInstance();
-  private final DriveSub drive;
-  private final IntakeSub intake;
-  private final StorageSub storage;
+  private final AutoFacade autoFac = new AutoFacade();
+
+  private final Drive driveCommand;
+  private final IntakeRun intakeRunCommand;
+  private final NavigationUpdate navigationUpdateCommand;
+  private final StorageRun storageRunCommand;
+  private final StorageRunFast storageRunFastCommand;
+  private final StorageRunReverse storageRunReverseCommand;
 
   CommandScheduler scheduler = CommandScheduler.getInstance();
   private ArrayList<AutoCommand> commands = new ArrayList<>();
@@ -29,12 +34,16 @@ public class Auto extends CommandBase {
   private boolean isFinished = false;
   private AsyncTimer waitTimer;
 
-  public Auto(ClimberDown climberDownCommand, ClimberUp climberUpCommand, Drive driveCommand,
-      IntakeRun intakeRunCommand, NavigationUpdate navigationUpdateCommand, StorageRun storageRunCommand) {
-    this.drive = drive;
-    this.intake = intake;
-    this.storage = storage;
-    addRequirements(drive, intake, storage);
+  public Auto(Drive driveCommand, IntakeRun intakeRunCommand, NavigationUpdate navigationUpdateCommand,
+      StorageRun storageRunCommand, StorageRunFast storageRunFastCommand, 
+      StorageRunReverse storageRunReverseCommand) {
+    this.driveCommand = driveCommand;
+    this.intakeRunCommand = intakeRunCommand;
+    this.navigationUpdateCommand = navigationUpdateCommand;
+    this.storageRunCommand = storageRunCommand;
+    this.storageRunFastCommand = storageRunFastCommand;
+    this.storageRunReverseCommand = storageRunReverseCommand;
+      
   }
 
   @Override
@@ -62,70 +71,45 @@ public class Auto extends CommandBase {
     }
     switch (currentCommand.name) {
       case "driveTank":
-        try {
-          double leftSpeed = Double.parseDouble(currentCommand.args.get(0));
-          double rightSpeed = Double.parseDouble(currentCommand.args.get(1));
-          Logger.info("Auto : DriveTank : Left Speed=" + leftSpeed + ", Right Speed=" + rightSpeed);
-          drive.tank(leftSpeed * variables.AutoSpeedMultiplier, rightSpeed * constants.AutoSpeedMultiplier);
-        } catch (NumberFormatException e) {
-          Logger.warn("Auto : Invalid double command args " + currentCommand.args);
-        }
+        autoFac.driveTank(currentCommand);
         nextCommand();
         break;
-      case "driveArcade":
-        try {
-          double speed = Double.parseDouble(currentCommand.args.get(0));
-          double steering = Double.parseDouble(currentCommand.args.get(1));
-          Logger.info("Auto : DriveArcade : Speed=" + speed + ", steer=" + steering);
-
-          // If needed, make auto speed multiplier also affects steering
-          drive.arcade(speed * variables.AutoSpeedMultiplier, steering);
-        } catch (NumberFormatException e) {
-          Logger.warn("Auto : Invalid double command args " + currentCommand.args);
-        }
+      case "driveArcade":                         //drive robot arcade
+        autoFac.driveArcade(currentCommand);
         nextCommand();
         break;
-      case "driveOff":
-        drive.off();
+      case "driveOff":                            //stop robot
+        autoFac.driveOff();
         Logger.info("Auto : Drive Stop");
         nextCommand();
         break;
-      case "storageRun":
-        try {
-          double speed = Double.parseDouble(currentCommand.args.get(0));
-          Logger.info("Auto : Storage Run : Speed=" + speed);
-          storage.setConveyorSpeed(speed);
-        } catch (NumberFormatException e) {
-          Logger.warn("Auto : Invalid double command args " + currentCommand.args);
-        }
+      case "storageRunSlow":                      //run storage slow
+        autoFac.storageRunSlow();
         nextCommand();
         break;
-      case "intakeRun":
-        try {
-          double speed = Double.parseDouble(currentCommand.args.get(0));
-          Logger.info("Auto : Intake Run : Speed=" + speed);
-          intake.setSpinSpeed(speed);
-        } catch (NumberFormatException e) {
-          Logger.warn("Auto : Invalid double command args " + currentCommand.args);
-        }
+      case "storageRunFast":                      //run storage fast
+        autoFac.storageRunFast();
         nextCommand();
         break;
-      case "wait":
-        if (waitTimer == null) {
-          try {
-            int duration = Integer.parseInt(currentCommand.args.get(0));
-            Logger.info("Auto : Wait For : Time=" + duration);
-            waitTimer = new AsyncTimer(duration);
-          } catch (NumberFormatException e) {
-            Logger.warn("Auto : Invalid double command args " + currentCommand.args);
-          }
-          break;
-        }
-        if (waitTimer.isFinished()) {
-          Logger.info("Auto : Wait For : Finished");
-          waitTimer = null;
+      case "storageRunReverse":                   //run storage in reverse
+        autoFac.storageRunReverse();
+        nextCommand();
+        break;
+      case "storageStop":                         //stop storage
+        autoFac.storageStop();
+        nextCommand();
+        break;
+      case "intakeRun":                           //run intake
+        autoFac.intakeRun();
+        nextCommand();
+        break;
+      case "intakeStop":                          //stop intake
+        autoFac.intakeStop();
+        nextCommand();
+        break;
+      case "wait":                                //wait for time
+        if(autoFac.waitFor(currentCommand)){
           nextCommand();
-          break;
         }
         break;
       default:
@@ -143,8 +127,8 @@ public class Auto extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Logger.info("Auto code : End");
-    drive.off();
-    intake.setSpinSpeed(0);
-    storage.setConveyorSpeed(0);
+    autoFac.storageStop();
+    autoFac.intakeStop();
+    autoFac.driveOff();
   }
 }
