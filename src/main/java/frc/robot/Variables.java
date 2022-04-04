@@ -30,4 +30,7 @@ public final class Variables {
   // Drive Speed Multipliers
   public double teleopSpeedMultiplier = 1;
   public double autoSpeedMultiplier = 1;
+
+  // Drive Input Curve Exponent
+  public double inputCurveExponent = 3;
 }

@@ -26,19 +26,26 @@ public class Drive extends CommandBase {
 
   @Override
   public void initialize() {
-    if(DriverStation.isAutonomous()){speedMultiplier = variables.teleopSpeedMultiplier;}
-    else{speedMultiplier = variables.autoSpeedMultiplier;}
+    if (DriverStation.isAutonomous()) {
+      speedMultiplier = variables.teleopSpeedMultiplier;
+    } else {
+      speedMultiplier = variables.autoSpeedMultiplier;
+    }
 
   }
 
   @Override
   public void execute() {
+    // Speed Input Curve: s = c^x
+    // Where s is output speed, c is joystick value and x is a input curve exponent
+    // constant.
+
     if (useTank) {
-      double leftSpeed = controller.getLeftY();
-      double rightSpeed = controller.getRightY();
+      double leftSpeed = Math.pow(controller.getLeftY(), variables.inputCurveExponent);
+      double rightSpeed = Math.pow(controller.getRightY(), variables.inputCurveExponent);
       drive.tank(leftSpeed * speedMultiplier, rightSpeed * speedMultiplier);
     } else {
-      double speed = controller.getLeftY();
+      double speed = Math.pow(controller.getLeftY(), variables.inputCurveExponent);
       double steering = controller.getRightX();
 
       // If needed, make the teleop speed multiplier affect steering, too
