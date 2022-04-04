@@ -10,7 +10,7 @@ import frc.robot.Constants;
  */
 public class IntakeSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.IntakeMotorPort);
+  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.INTAKE_MOTOR_PORT);
 
   @Override
   public void periodic() {

@@ -6,7 +6,7 @@ import frc.robot.Constants;
 
 public class BallStopSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.BallStopMotorPort);
+  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.STORAGE_BALLSTOP_MOTOR_PORT);
   public boolean isOpen = false;
 
   @Override

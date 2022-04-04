@@ -12,7 +12,7 @@ import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
 import frc.robot.commands.BallStopOpen;
 import frc.robot.commands.BallStopClose;
-import frc.robot.commands.TeleopDrive;
+import frc.robot.commands.Drive;
 import frc.robot.commands.DriveReverseDirection;
 import frc.robot.commands.IntakeRun;
 import frc.robot.commands.NavigationUpdate;
@@ -40,7 +40,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   private final Constants constants = Constants.getInstance();
 
-  private final XboxController controller = new XboxController(constants.ControllerPort);
+  private final XboxController controller = new XboxController(constants.DEVICE_PORT_XBOX_CONTROLLER);
 
   private final DriveSub driveSub = new DriveSub();
   private final ClimberSub climberSub = new ClimberSub();
@@ -49,16 +49,26 @@ public class RobotContainer {
   private final StorageSub storageSub = new StorageSub();
   private final BallStopSub ballStopSub = new BallStopSub();
 
-  private final Auto autoCommand = new Auto(driveSub, intakeSub, storageSub);
   private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
   private final BallStopOpen ballStopOpenCommand = new BallStopOpen(ballStopSub);
   private final BallStopClose ballStopCloseCommand = new BallStopClose(ballStopSub);
-  private final TeleopDrive driveCommand = new TeleopDrive(driveSub, controller); // TODO: Fix this
+  private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub, storageSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
   private final StorageRun storageRunCommand = new StorageRun(storageSub, ballStopSub, controller);
+
+  private final Auto autoCommand = new Auto(
+      climberDownCommand, 
+      climberUpCommand,
+      ballStopOpenCommand,
+      ballStopCloseCommand,
+      driveCommand,
+      intakeRunCommand,
+      navigationUpdateCommand,
+      storageRunCommand
+    );
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.

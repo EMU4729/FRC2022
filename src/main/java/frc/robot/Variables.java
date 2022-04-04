@@ -26,4 +26,8 @@ public final class Variables {
   // Motor Options
   public boolean invertSteering = false;
   public boolean invertDriveDirection = false;
+
+  // Drive Speed Multipliers
+  public double teleopSpeedMultiplier = 1;
+  public double autoSpeedMultiplier = 1;
 }

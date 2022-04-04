@@ -30,41 +30,58 @@ public final class Constants {
   public final Map<String, String> env = System.getenv();
 
   // Drive Ports
-  public final int LeftFrontMotorPort = 6;
-  public final int RightFrontMotorPort = 11;
-  public final int LeftBackMotorPort = 5;
-  public final int RightBackMotorPort = 12;
-  public final int LeftEncoderPortA = 69420; // TODO: Update this
-  public final int LeftEncoderPortB = 69420; // TODO: Update this
-  public final int RightEncoderPortA = 69420; // TODO: Update this
-  public final int RightEncoderPortB = 69420; // TODO: Update this
+  /** Port for left master drive */ 
+  public final int DRIVE_MOTOR_PORT_LM = 6; 
+  /** Port for right master drive */ 
+  public final int DRIVE_MOTOR_PORT_RM = 11;
+  /** Port for left slave drive */ 
+  public final int DRIVE_MOTOR_PORT_LS = 5;
+  /** Port for right slave drive */ 
+  public final int DRIVE_MOTOR_PORT_RS = 12;
+  /** Port for left drive encoder A channel*/ 
+  public final int DRIVE_ENCODER_PORT_LA = 69420; // TODO: Update this
+  /** Port for left drive encoder B channel */ 
+  public final int DRIVE_ENCODER_PORT_LB = 69420; // TODO: Update this
+  /** Port for right drive encoder A channel */ 
+  public final int DRIVE_ENCODER_PORT_RA = 69420; // TODO: Update this
+  /** Port for right drive encoder B channel*/ 
+  public final int DRIVE_ENCODER_PORT_RB = 69420; // TODO: Update this
 
   // Other Motors
-  public final int IntakeMotorPort = 69420; // TODO: Update this
-  public final int ConveyorMotorPort = 69420; // TODO: Update this
-  public final int ClimberMotorPort = 69420; // TODO: Update this
-  public final int BallStopMotorPort = 69420; // TODO: Update this
-
-  // Drive Speed Multipliers
-  public final double TeleopSpeedMultiplier = 1;
-  public final double AutoSpeedMultiplier = 1;
+  /** Port for intake motor */ 
+  public final int INTAKE_MOTOR_PORT = 69420; // TODO: Update this
+  /** Port for storage conveyer motor */ 
+  public final int STORAGE_CONVEYER_MOTOR_PORT = 69420; // TODO: Update this
+  /** Port for storage ballstop motor */ 
+  public final int STORAGE_BALLSTOP_MOTOR_PORT = 69420; // TODO: Update this
+  /** Port for climber motor */ 
+  public final int CLIMBER_MOTOR_PORT = 69420; // TODO: Update this
 
   // Controller
-  public final int ControllerPort = 69420; // TODO: Update this
+  /** Port for xbox controller input device */ 
+  public final int DEVICE_PORT_XBOX_CONTROLLER = 69420; // TODO: Update this
 
-  // Storage Color Sensor
-  public final I2C.Port TopColorSensorPort = I2C.Port.kMXP; // TODO: Update this
+  // Storage Sensors
+  /** Port for upper color sensor in storage */ 
+  public final I2C.Port STORAGE_SENSOR_COLOR_TOP = I2C.Port.kMXP; // TODO: Update this
+  /** Port for lower color sensor in storage */ 
   public final I2C.Port BottomColorSensorPort = I2C.Port.kMXP; // TODO: Update this
+  /** Port for ball entry sensor in storage */ 
+  public final int LimitSwitchChannel = 69420; // TODO: Update this
 
-  // Auto Commands Text File Path
-  public final String[] UsbPaths = { "u//", "v//" };
-  public final String InternalPath = env.get("HOME");
-  public final String AutoFileName = "autoCommands.txt";
+  // File Paths
+  /** file path header for files on usb storage */
+  public final String[] PATH_USB = { "u//", "v//" };
+  /** file path header for files on internal storage */
+  public final String PATH_INTERNAL = env.get("HOME");
+  /** file name for default auto */
+  public final String PATH_AUTO_FILE_NAME = "autoCommands.txt";
 
   // Error Retry Limit
-  public final int LoggerFileCreateLim = 10;
-  public final int AutoReadLim = 10;
+  /** limit for repeated attempts to create log file on USB storage */
+  public final int REPEAT_LIMIT_LOGGER_CREATION = 10;
+  /** limit for repeated attempts to read auto from internal storage */
+  public final int REPEAT_LIMIT_AUTO_READ = 10;
 
-  // Storage Limit Switch
-  public final int LimitSwitchChannel = 69420; // TODO: Update this
+  
 }

@@ -61,7 +61,7 @@ public class AutoFiles {
    * 
    * @return The parsed auto command data.
    */
-  public static ArrayList<AutoCommand> readInternalAuto() {return readInternalAuto(constants.AutoReadLim);}
+  public static ArrayList<AutoCommand> readInternalAuto() {return readInternalAuto(constants.REPEAT_LIMIT_AUTO_READ);}
   public static ArrayList<AutoCommand> readInternalAuto(int retries) {
     try {
       String[] pathInternalT = getAutoFilePaths("Internal");
@@ -86,7 +86,7 @@ public class AutoFiles {
     } catch (FileNotFoundException e) {
       if(retries > 0){
         Logger.error("AutoFiles : Internal Storage Auto File Not Found : " + e + 
-            "reattemping : Try-" + (retries-constants.AutoReadLim) + " Of-" + constants.AutoReadLim);
+            "reattemping : Try-" + (retries-constants.REPEAT_LIMIT_AUTO_READ) + " Of-" + constants.REPEAT_LIMIT_AUTO_READ);
         return readInternalAuto(retries-1);
       } else {
         Logger.error("AutoFiles : Internal Storage Auto File Not Found : " + e + "Terminating : use Backup Auto");
@@ -95,7 +95,7 @@ public class AutoFiles {
     } catch (IOException e) {
       if(retries > 0){ 
         Logger.error("AutoFiles : Internal Storage Auto Read Error : " + e+ 
-        "reattemping : Try-" + (retries-constants.AutoReadLim) + " Of-" + constants.AutoReadLim);
+        "reattemping : Try-" + (retries-constants.REPEAT_LIMIT_AUTO_READ) + " Of-" + constants.REPEAT_LIMIT_AUTO_READ);
         return readInternalAuto(retries-1);
       } else {
         Logger.error("AutoFiles : Internal Storage Auto Read Error : " + e + "Terminating : use Backup Auto");
@@ -139,16 +139,16 @@ public class AutoFiles {
    */
   private static String[] getAutoFilePaths(String filePathLocation){
     String[] AutoUsbPaths;
-    String fileName = constants.AutoFileName;
+    String fileName = constants.PATH_AUTO_FILE_NAME;
 
     if(filePathLocation == "USB"){
-      AutoUsbPaths = new String[constants.UsbPaths.length];
-      for(int i = 0; i < AutoUsbPaths.length && i < constants.UsbPaths.length; i++){
-        AutoUsbPaths[i] = constants.UsbPaths[i] + fileName;
+      AutoUsbPaths = new String[constants.PATH_USB.length];
+      for(int i = 0; i < AutoUsbPaths.length && i < constants.PATH_USB.length; i++){
+        AutoUsbPaths[i] = constants.PATH_USB[i] + fileName;
       }
     } else if (filePathLocation == "Internal"){
       AutoUsbPaths = new String[1];
-      AutoUsbPaths[0] = constants.InternalPath + fileName;
+      AutoUsbPaths[0] = constants.PATH_INTERNAL + fileName;
     } else {
       Logger.error("Auto Command FilePath : FilePath does not exist : "+ filePathLocation);
       return null;

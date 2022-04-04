@@ -25,17 +25,17 @@ public class Logger {
     Date date = Calendar.getInstance().getTime();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
     String strDate = dateFormat.format(date);
-    String tempLogFileName = constants.UsbPaths + strDate + ".txt";
+    String tempLogFileName = constants.PATH_USB + strDate + ".txt";
     File logFile = new File(tempLogFileName);
 
     try {
       for (int i = 1; !logFile.createNewFile(); i++) {
-        if (i > constants.LoggerFileCreateLim) {
+        if (i > constants.REPEAT_LIMIT_LOGGER_CREATION) {
           fileCreationFailed = true;
           System.out.println("error : Log file creation failed : time out");
           break;
         }
-        tempLogFileName = constants.UsbPaths + strDate + "_(" + i + ")" + ".txt";
+        tempLogFileName = constants.PATH_USB + strDate + "_(" + i + ")" + ".txt";
         logFile = new File(tempLogFileName);
       }
     } catch (IOException e) {

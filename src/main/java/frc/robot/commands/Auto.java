@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants;
+import frc.robot.Variables;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.StorageSub;
@@ -15,17 +17,20 @@ import frc.robot.utils.logger.Logger;
 
 public class Auto extends CommandBase {
   private final Constants constants = Constants.getInstance();
+  private final Variables variables = Variables.getInstance();
   private final DriveSub drive;
   private final IntakeSub intake;
   private final StorageSub storage;
 
+  CommandScheduler scheduler = CommandScheduler.getInstance();
   private ArrayList<AutoCommand> commands = new ArrayList<>();
   private Iterator<AutoCommand> commandIterator;
   private AutoCommand currentCommand;
   private boolean isFinished = false;
   private AsyncTimer waitTimer;
 
-  public Auto(DriveSub drive, IntakeSub intake, StorageSub storage) {
+  public Auto(ClimberDown climberDownCommand, ClimberUp climberUpCommand, Drive driveCommand,
+      IntakeRun intakeRunCommand, NavigationUpdate navigationUpdateCommand, StorageRun storageRunCommand) {
     this.drive = drive;
     this.intake = intake;
     this.storage = storage;
@@ -61,7 +66,7 @@ public class Auto extends CommandBase {
           double leftSpeed = Double.parseDouble(currentCommand.args.get(0));
           double rightSpeed = Double.parseDouble(currentCommand.args.get(1));
           Logger.info("Auto : DriveTank : Left Speed=" + leftSpeed + ", Right Speed=" + rightSpeed);
-          drive.tank(leftSpeed * constants.AutoSpeedMultiplier, rightSpeed * constants.AutoSpeedMultiplier);
+          drive.tank(leftSpeed * variables.AutoSpeedMultiplier, rightSpeed * constants.AutoSpeedMultiplier);
         } catch (NumberFormatException e) {
           Logger.warn("Auto : Invalid double command args " + currentCommand.args);
         }
@@ -74,7 +79,7 @@ public class Auto extends CommandBase {
           Logger.info("Auto : DriveArcade : Speed=" + speed + ", steer=" + steering);
 
           // If needed, make auto speed multiplier also affects steering
-          drive.arcade(speed * constants.AutoSpeedMultiplier, steering);
+          drive.arcade(speed * variables.AutoSpeedMultiplier, steering);
         } catch (NumberFormatException e) {
           Logger.warn("Auto : Invalid double command args " + currentCommand.args);
         }
