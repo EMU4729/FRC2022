@@ -40,7 +40,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   private final Constants constants = Constants.getInstance();
 
-  private final XboxController controller = new XboxController(constants.controllerPort);
+  private final XboxController controller = new XboxController(constants.ControllerPort);
 
   private final DriveSub driveSub = new DriveSub();
   private final ClimberSub climberSub = new ClimberSub();

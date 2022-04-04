@@ -61,7 +61,7 @@ public class Auto extends CommandBase {
           double leftSpeed = Double.parseDouble(currentCommand.args.get(0));
           double rightSpeed = Double.parseDouble(currentCommand.args.get(1));
           Logger.info("Auto : DriveTank : Left Speed=" + leftSpeed + ", Right Speed=" + rightSpeed);
-          drive.tank(leftSpeed * constants.autoSpeedMultiplier, rightSpeed * constants.autoSpeedMultiplier);
+          drive.tank(leftSpeed * constants.AutoSpeedMultiplier, rightSpeed * constants.AutoSpeedMultiplier);
         } catch (NumberFormatException e) {
           Logger.warn("Auto : Invalid double command args " + currentCommand.args);
         }
@@ -74,7 +74,7 @@ public class Auto extends CommandBase {
           Logger.info("Auto : DriveArcade : Speed=" + speed + ", steer=" + steering);
 
           // If needed, make auto speed multiplier also affects steering
-          drive.arcade(speed * constants.autoSpeedMultiplier, steering);
+          drive.arcade(speed * constants.AutoSpeedMultiplier, steering);
         } catch (NumberFormatException e) {
           Logger.warn("Auto : Invalid double command args " + currentCommand.args);
         }

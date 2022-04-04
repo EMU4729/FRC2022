@@ -13,10 +13,10 @@ import frc.robot.utils.Clamper;
 public class DriveSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
   private static final Clamper speedClamp = new Clamper(0, 1);
-  private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(constants.leftFrontMotorPort);
-  private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(constants.leftBackMotorPort);
-  private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(constants.rightFrontMotorPort);
-  private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(constants.rightBackMotorPort);
+  private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(constants.LeftFrontMotorPort);
+  private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(constants.LeftBackMotorPort);
+  private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(constants.RightFrontMotorPort);
+  private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(constants.RightBackMotorPort);
   private final Variables vars;
 
   // TODO: Add gyro and odometry here

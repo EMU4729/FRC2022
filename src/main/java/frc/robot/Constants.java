@@ -30,36 +30,41 @@ public final class Constants {
   public final Map<String, String> env = System.getenv();
 
   // Drive Ports
-  public final int leftFrontMotorPort = 6;
-  public final int rightFrontMotorPort = 11;
-  public final int leftBackMotorPort = 5;
-  public final int rightBackMotorPort = 12;
-  public final int leftEncoderPortA = 69420; // TODO: Update this
-  public final int leftEncoderPortB = 69420; // TODO: Update this
-  public final int rightEncoderPortA = 69420; // TODO: Update this
-  public final int rightEncoderPortB = 69420; // TODO: Update this
+  public final int LeftFrontMotorPort = 6;
+  public final int RightFrontMotorPort = 11;
+  public final int LeftBackMotorPort = 5;
+  public final int RightBackMotorPort = 12;
+  public final int LeftEncoderPortA = 69420; // TODO: Update this
+  public final int LeftEncoderPortB = 69420; // TODO: Update this
+  public final int RightEncoderPortA = 69420; // TODO: Update this
+  public final int RightEncoderPortB = 69420; // TODO: Update this
 
   // Other Motors
-  public final int intakeMotorPort = 69420; // TODO: Update this
-  public final int conveyorMotorPort = 69420; // TODO: Update this
-  public final int climberMotorPort = 69420; // TODO: Update this
-  public final int ballStopMotorPort = 69420; // TODO: Update this
+  public final int IntakeMotorPort = 69420; // TODO: Update this
+  public final int ConveyorMotorPort = 69420; // TODO: Update this
+  public final int ClimberMotorPort = 69420; // TODO: Update this
+  public final int BallStopMotorPort = 69420; // TODO: Update this
 
   // Drive Speed Multipliers
-  public final double teleopSpeedMultiplier = 1;
-  public final double autoSpeedMultiplier = 1;
+  public final double TeleopSpeedMultiplier = 1;
+  public final double AutoSpeedMultiplier = 1;
 
   // Controller
-  public final int controllerPort = 69420; // TODO: Update this
+  public final int ControllerPort = 69420; // TODO: Update this
 
   // Storage Color Sensor
-  public final I2C.Port topColorSensorPort = I2C.Port.kMXP; // TODO: Update this
-  public final I2C.Port bottomColorSensorPort = I2C.Port.kMXP; // TODO: Update this
+  public final I2C.Port TopColorSensorPort = I2C.Port.kMXP; // TODO: Update this
+  public final I2C.Port BottomColorSensorPort = I2C.Port.kMXP; // TODO: Update this
 
   // Auto Commands Text File Path
-  public final String[] autoUsbPaths = { "u//autoCommands.txt", "v//autoCommands.txt" };
-  public final String autoInternalPath = env.get("HOME") + "autoCommands.txt";
+  public final String[] UsbPaths = { "u//", "v//" };
+  public final String InternalPath = env.get("HOME");
+  public final String AutoFileName = "autoCommands.txt";
+
+  // Error Retry Limit
+  public final int LoggerFileCreateLim = 10;
+  public final int AutoReadLim = 10;
 
   // Storage Limit Switch
-  public final int limitSwitchChannel = 69420; // TODO: Update this
+  public final int LimitSwitchChannel = 69420; // TODO: Update this
 }

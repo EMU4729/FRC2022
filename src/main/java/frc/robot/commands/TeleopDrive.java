@@ -29,13 +29,13 @@ public class TeleopDrive extends CommandBase {
     if (useTank) {
       double leftSpeed = controller.getLeftY();
       double rightSpeed = controller.getRightY();
-      drive.tank(leftSpeed * constants.teleopSpeedMultiplier, rightSpeed * constants.teleopSpeedMultiplier);
+      drive.tank(leftSpeed * constants.TeleopSpeedMultiplier, rightSpeed * constants.TeleopSpeedMultiplier);
     } else {
       double speed = controller.getLeftY();
       double steering = controller.getRightX();
 
       // If needed, make the teleop speed multiplier affect steering, too
-      drive.arcade(speed * constants.teleopSpeedMultiplier, steering);
+      drive.arcade(speed * constants.TeleopSpeedMultiplier, steering);
     }
   }
 

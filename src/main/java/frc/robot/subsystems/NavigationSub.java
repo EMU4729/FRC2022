@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class NavigationSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
   private final ADIS16470_IMU imu = new ADIS16470_IMU();
-  private final Encoder leftEncoder = new Encoder(constants.leftEncoderPortA, constants.leftEncoderPortB);
-  private final Encoder rightEncoder = new Encoder(constants.rightEncoderPortA, constants.rightEncoderPortB);
+  private final Encoder leftEncoder = new Encoder(constants.LeftEncoderPortA, constants.LeftEncoderPortB);
+  private final Encoder rightEncoder = new Encoder(constants.RightEncoderPortA, constants.RightEncoderPortB);
   private final DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(
       Rotation2d.fromDegrees(imu.getAngle()));
 

@@ -18,24 +18,24 @@ public class Logger {
   private ArrayList<LogLine> logCache = new ArrayList<LogLine>();
   private final ReentrantLock saveLock = new ReentrantLock();
   private final String logFileName;
-  private final Constants consts = Constants.getInstance();
+  private final Constants constants = Constants.getInstance();
   private boolean fileCreationFailed = false;
 
   private Logger() {
     Date date = Calendar.getInstance().getTime();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
     String strDate = dateFormat.format(date);
-    String tempLogFileName = consts.autoUsbPaths + strDate + ".txt";
+    String tempLogFileName = constants.UsbPaths + strDate + ".txt";
     File logFile = new File(tempLogFileName);
 
     try {
       for (int i = 1; !logFile.createNewFile(); i++) {
-        if (i > 10) {
+        if (i > constants.LoggerFileCreateLim) {
           fileCreationFailed = true;
           System.out.println("error : Log file creation failed : time out");
           break;
         }
-        tempLogFileName = consts.autoUsbPaths + strDate + "_(" + i + ")" + ".txt";
+        tempLogFileName = constants.UsbPaths + strDate + "_(" + i + ")" + ".txt";
         logFile = new File(tempLogFileName);
       }
     } catch (IOException e) {

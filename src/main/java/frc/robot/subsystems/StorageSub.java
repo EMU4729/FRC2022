@@ -18,10 +18,10 @@ import frc.robot.utils.StorageColorSensor;
  */
 public class StorageSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.conveyorMotorPort);
-  private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(constants.bottomColorSensorPort); // TODO: Do stuff
-  private final ColorSensorV3 topColorSensor = new ColorSensorV3(constants.topColorSensorPort);
-  private final DigitalInput limitSwitch = new DigitalInput(constants.limitSwitchChannel);
+  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.ConveyorMotorPort);
+  private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(constants.BottomColorSensorPort); // TODO: Do stuff
+  private final ColorSensorV3 topColorSensor = new ColorSensorV3(constants.TopColorSensorPort);
+  private final DigitalInput limitSwitch = new DigitalInput(constants.LimitSwitchChannel);
 
   public final Color teamColor;
   public final Color oppColor;

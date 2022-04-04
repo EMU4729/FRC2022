@@ -11,7 +11,7 @@ import frc.robot.Constants;
  */
 public class ClimberSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.climberMotorPort);
+  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.ClimberMotorPort);
   public boolean isUp = false;
 
   @Override
