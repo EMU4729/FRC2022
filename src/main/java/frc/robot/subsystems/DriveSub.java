@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Variables;
-import frc.robot.utils.Clamper;
+import frc.robot.utils.NumberTools;
 
 /**
  * Drive Subsystem.
@@ -12,7 +12,6 @@ import frc.robot.utils.Clamper;
  */
 public class DriveSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
-  private static final Clamper speedClamp = new Clamper(0, 1);
   private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(constants.DRIVE_MOTOR_PORT_LM);
   private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(constants.DRIVE_MOTOR_PORT_LS);
   private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(constants.DRIVE_MOTOR_PORT_RM);
@@ -40,8 +39,8 @@ public class DriveSub extends SubsystemBase {
   public void tank(double leftSpeed, double rightSpeed) {
     int direction = vars.invertDriveDirection ? 1 : -1;
 
-    leftSpeed = speedClamp.clamp(leftSpeed);
-    rightSpeed = speedClamp.clamp(rightSpeed);
+    leftSpeed = NumberTools.limitRangeAbsUnit(leftSpeed);
+    rightSpeed = NumberTools.limitRangeAbsUnit(rightSpeed);
 
     leftMaster.set(leftSpeed * direction);
     rightMaster.set(rightSpeed * direction);

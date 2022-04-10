@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     Logger.header("Disabled ----------------------------------------------------------------------------------------");
+    logger.pause();
   }
 
   @Override
@@ -84,6 +85,7 @@ public class Robot extends TimedRobot {
       autoCommand.schedule();
     }
     Logger.header("Auto Start --------------------------------------------------------------------------------------");
+    logger.unPause();
   }
 
   /** This function is called periodically during autonomous. */
@@ -101,6 +103,7 @@ public class Robot extends TimedRobot {
       autoCommand.cancel();
     }
     Logger.header("Teleop Start ------------------------------------------------------------------------------------");
+    logger.unPause();
   }
 
   /** This function is called periodically during operator control. */
@@ -113,6 +116,7 @@ public class Robot extends TimedRobot {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
     Logger.header("Test Start --------------------------------------------------------------------------------------");
+    logger.unPause();
   }
 
   /** This function is called periodically during test mode. */

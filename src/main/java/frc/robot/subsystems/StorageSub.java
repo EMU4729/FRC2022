@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.utils.BallType;
+import frc.robot.utils.NumberTools;
 import frc.robot.utils.StorageColorSensor;
 
 /**
@@ -64,6 +65,7 @@ public class StorageSub extends SubsystemBase {
    * @param speed Speed between -1 and 1
    */
   public void setConveyorSpeed(double speed) {
+    speed = NumberTools.limitRangeAbsUnit(speed);
     motor.set(speed);
   }
 

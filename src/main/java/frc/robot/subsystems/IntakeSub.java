@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
+import frc.robot.utils.NumberTools;
 
 /**
  * Intake Subsystem.
@@ -22,6 +23,7 @@ public class IntakeSub extends SubsystemBase {
    * @param speed Speed between -1 and 1
    */
   public void setSpinSpeed(double speed) {
+    speed = NumberTools.limitRangeAbsUnit(speed);
     motor.set(speed);
   }
 }

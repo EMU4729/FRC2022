@@ -20,6 +20,7 @@ public class Logger {
   private final String logFileName;
   private final Constants constants = Constants.getInstance();
   private boolean fileCreationFailed = false;
+  private boolean logPause = false;
 
   private Logger() {
     Date date = Calendar.getInstance().getTime();
@@ -88,13 +89,28 @@ public class Logger {
       try {
         // TODO: Implement interrupting the thread
         while (true) {
-          save();
+          if(!logPause)
+            save();
           Thread.sleep(5);
         }
       } catch (InterruptedException e) {
         Logger.error("Logger : Save thread interrupted : " + e);
       }
     }).start();
+  }
+
+  /**
+   * pause the logger temporarily
+   */
+  public void pause() {
+    logPause = true;
+    save();
+  }
+  /**
+   * restart the logger
+   */
+  public void unPause() {
+    logPause = false;
   }
 
   public void save() {
