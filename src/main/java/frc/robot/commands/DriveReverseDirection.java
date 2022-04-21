@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Variables;
-import frc.robot.utils.logger.Logger;
+import frc.robot.logger.Logger;
 
 public class DriveReverseDirection extends CommandBase {
   private final Variables vars;

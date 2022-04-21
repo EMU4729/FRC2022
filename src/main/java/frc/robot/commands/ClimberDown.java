@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.logger.Logger;
 import frc.robot.subsystems.ClimberSub;
 import frc.robot.utils.AsyncTimer;
-import frc.robot.utils.logger.Logger;
 
 public class ClimberDown extends CommandBase {
   private final ClimberSub climber;

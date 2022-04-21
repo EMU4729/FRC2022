@@ -1,4 +1,4 @@
-package frc.robot.utils.logger;
+package frc.robot.logger;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -89,7 +89,7 @@ public class Logger {
       try {
         // TODO: Implement interrupting the thread
         while (true) {
-          if(!logPause)
+          if (!logPause)
             save();
           Thread.sleep(5);
         }
@@ -106,6 +106,7 @@ public class Logger {
     logPause = true;
     save();
   }
+
   /**
    * restart the logger
    */

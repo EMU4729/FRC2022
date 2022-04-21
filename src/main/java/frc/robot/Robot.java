@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.utils.logger.Logger;
+import frc.robot.logger.Logger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,6 +20,7 @@ import frc.robot.utils.logger.Logger;
  */
 public class Robot extends TimedRobot {
   private Command autoCommand;
+  private Command teleopCommmand;
   private RobotContainer robotContainer;
 
   private final Logger logger = Logger.getInstance();
@@ -102,6 +103,12 @@ public class Robot extends TimedRobot {
     if (autoCommand != null) {
       autoCommand.cancel();
     }
+
+    teleopCommmand = robotContainer.getTeleopCommand();
+    if (teleopCommmand != null) {
+      teleopCommmand.schedule();
+    }
+
     Logger.header("Teleop Start ------------------------------------------------------------------------------------");
     logger.unPause();
   }

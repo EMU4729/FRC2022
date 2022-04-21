@@ -1,4 +1,4 @@
-package frc.robot.utils.logger;
+package frc.robot.logger;
 
 import edu.wpi.first.wpilibj.RobotController;
 

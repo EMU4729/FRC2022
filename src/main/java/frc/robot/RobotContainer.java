@@ -6,8 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.Auto;
+import frc.robot.commands.AutoFacade;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
 import frc.robot.commands.BallStopOpen;
@@ -29,6 +30,7 @@ import frc.robot.subsystems.StorageSub;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -43,6 +45,16 @@ public class RobotContainer {
   private final Constants constants = Constants.getInstance();
 
   private final XboxController controller = new XboxController(constants.DEVICE_PORT_XBOX_CONTROLLER);
+  private final JoystickButton leftBumperButton = new JoystickButton(controller,
+      Button.kLeftBumper.value);
+  private final JoystickButton startButton = new JoystickButton(controller,
+      Button.kStart.value);
+  private final JoystickButton rightBumperButton = new JoystickButton(controller,
+      Button.kRightBumper.value);
+  private final JoystickButton bButton = new JoystickButton(controller, Button.kB.value);
+  private final JoystickButton xButton = new JoystickButton(controller, Button.kX.value);
+  private final POVButton dPadUpButton = new POVButton(controller, 0);
+  private final POVButton dPadDownButton = new POVButton(controller, 180);
 
   private final DriveSub driveSub = new DriveSub();
   private final ClimberSub climberSub = new ClimberSub();
@@ -63,16 +75,9 @@ public class RobotContainer {
   private final StorageRunFast storageRunFastCommand = new StorageRunFast(storageSub);
   private final StorageRunReverse storageRunReverseCommand = new StorageRunReverse(storageSub);
 
-  private final Auto autoCommand = new Auto(
-      ballStopOpenCommand,
-      ballStopCloseCommand,
-      driveCommand,
-      intakeRunCommand,
-      navigationUpdateCommand,
-      storageRunCommand,
-      storageRunFastCommand,
-      storageRunReverseCommand
-    );
+  private final AutoFacade autoFacade = new AutoFacade(driveSub, intakeRunCommand, navigationUpdateCommand,
+      storageRunCommand, storageRunFastCommand, storageRunReverseCommand);
+  private final Auto autoCommand = new Auto(autoFacade);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -91,20 +96,35 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // TODO: Migrate this to new BallStopOpen and BallStopClose commands
-    // Toggle Ball Stop
-    // new JoystickButton(controller, XboxController.Button.kX.value)
-    // .whenPressed(ballStopToggleCommand);
-
     // Run Intake
-    new JoystickButton(controller, XboxController.Button.kLeftBumper.value)
-        .whileHeld(intakeRunCommand);
+    leftBumperButton.whenHeld(intakeRunCommand);
+
+    // Run Storage Fast
+    rightBumperButton.whenHeld(storageRunFastCommand);
 
     // Run Storage
-    new JoystickButton(controller, XboxController.Button.kRightBumper.value)
-        .whileHeld(storageRunCommand);
+    xButton.whenHeld(storageRunCommand);
 
-    // TODO: Climber and Movement Controller Bindings
+    // Run Storage Reverse
+    bButton.whenHeld(storageRunReverseCommand);
+
+    // Reverse Drive Direction
+    startButton.whenPressed(driveReverseDirectionCommand);
+
+    // Climber Up/Down
+    dPadUpButton.whenHeld(climberUpCommand);
+    dPadDownButton.whenHeld(climberDownCommand);
+
+    // Drive bindings handled in driveCommand
+  }
+
+  /**
+   * Use this to pass the teleop command to the main {@link Robot} class.
+   *
+   * @return the command to run in teleop
+   */
+  public Command getTeleopCommand() {
+    return driveCommand;
   }
 
   /**
@@ -113,7 +133,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
     return autoCommand;
   }
 }
