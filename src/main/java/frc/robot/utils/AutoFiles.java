@@ -36,8 +36,8 @@ public class AutoFiles {
    */
   public static void updateInternalAuto() {
     // fetches correct paths for the specific auto to be run
-    String[] pathUSB = getAutoFilePaths("USB");
-    String[] pathInternalT = getAutoFilePaths("Internal");
+    String[] pathUSB = getAutoFilePaths(AutoFilePathLocation.USB);
+    String[] pathInternalT = getAutoFilePaths(AutoFilePathLocation.Internal);
     String pathInternal;
     if (pathUSB != null && pathInternalT != null && pathInternalT.length >= 1) {
       pathInternal = pathInternalT[0];
@@ -69,7 +69,7 @@ public class AutoFiles {
 
   public static ArrayList<AutoCommand> readInternalAuto(int retries) {
     try {
-      String[] pathInternalT = getAutoFilePaths("Internal");
+      String[] pathInternalT = getAutoFilePaths(AutoFilePathLocation.Internal);
       String pathInternal;
       if (pathInternalT != null && pathInternalT.length >= 1) {
         pathInternal = pathInternalT[0];
@@ -144,27 +144,38 @@ public class AutoFiles {
    * gets current use auto and adds appropriate filepath.
    * Todo : add systems for multiple auto
    * 
-   * @param filePathLocation : which file path location to use, currently supports
-   *                         "USB", "Internal"
+   * @param filePathLocation which file path location to use, see
+   *                         {@link AutoFilePathLocation} for possible options
    * @return array of filepaths appended with autofile name
    */
-  private static String[] getAutoFilePaths(String filePathLocation) {
-    String[] AutoUsbPaths;
+  private static String[] getAutoFilePaths(AutoFilePathLocation filePathLocation) {
+    String[] autoPaths;
     String fileName = constants.PATH_AUTO_FILE_NAME;
 
-    if (filePathLocation == "USB") {
-      AutoUsbPaths = new String[constants.PATH_USB.length];
-      for (int i = 0; i < AutoUsbPaths.length && i < constants.PATH_USB.length; i++) {
-        AutoUsbPaths[i] = constants.PATH_USB[i] + fileName;
-      }
-    } else if (filePathLocation == "Internal") {
-      AutoUsbPaths = new String[1];
-      AutoUsbPaths[0] = constants.PATH_INTERNAL + fileName;
-    } else {
-      Logger.error("Auto Command FilePath : FilePath does not exist : " + filePathLocation);
-      return null;
+    switch (filePathLocation) {
+      case USB:
+        autoPaths = new String[constants.PATH_USB.length];
+        for (int i = 0; i < autoPaths.length && i < constants.PATH_USB.length; i++) {
+          autoPaths[i] = constants.PATH_USB[i] + fileName;
+        }
+        break;
+      case Internal:
+        autoPaths = new String[1];
+        autoPaths[0] = constants.PATH_INTERNAL + fileName;
+        break;
+      default:
+        Logger.error("Auto Command FilePath : FilePath does not exist : " + filePathLocation);
+        return null;
     }
-    return AutoUsbPaths;
+    return autoPaths;
+  }
+
+  /**
+   * Represents all possible locations for the auto files
+   */
+  private static enum AutoFilePathLocation {
+    USB,
+    Internal
   }
 
 }
