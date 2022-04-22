@@ -5,12 +5,7 @@ import java.util.Iterator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants;
-import frc.robot.Variables;
 import frc.robot.logger.Logger;
-import frc.robot.subsystems.DriveSub;
-import frc.robot.subsystems.IntakeSub;
-import frc.robot.subsystems.StorageSub;
 import frc.robot.utils.AsyncTimer;
 import frc.robot.utils.AutoCommand;
 import frc.robot.utils.AutoFiles;

@@ -18,8 +18,6 @@ public class DriveSub extends SubsystemBase {
   private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(constants.DRIVE_MOTOR_PORT_RS);
   private final Variables vars;
 
-  // TODO: Add gyro and odometry here
-
   public DriveSub() {
     leftSlave.follow(leftMaster);
     rightSlave.follow(rightMaster);
@@ -53,7 +51,6 @@ public class DriveSub extends SubsystemBase {
    * @param steering The steering
    */
   public void arcade(double speed, double steering) {
-    // TODO: Improve values
     double leftSpeed = speed + steering;
     double rightSpeed = speed - steering;
     tank(leftSpeed, rightSpeed);
