@@ -30,43 +30,45 @@ public final class Constants {
   public final Map<String, String> env = System.getenv();
 
   // Drive Ports
-  /** Port Number for left master drive */ 
-  public final int DRIVE_MOTOR_PORT_LM = 6; 
-  /** Port Number for right master drive */ 
+  /** Port Number for left master drive */
+  public final int DRIVE_MOTOR_PORT_LM = 6;
+  /** Port Number for right master drive */
   public final int DRIVE_MOTOR_PORT_RM = 11;
-  /** Port Number for left slave drive */ 
+  /** Port Number for left slave drive */
   public final int DRIVE_MOTOR_PORT_LS = 5;
-  /** Port Number for right slave drive */ 
+  /** Port Number for right slave drive */
   public final int DRIVE_MOTOR_PORT_RS = 12;
-  /** Port Number for left drive encoder A channel*/ 
+  /** Port Number for left drive encoder A channel */
   public final int DRIVE_ENCODER_PORT_LA = 69420; // TODO: Update this
-  /** Port Number for left drive encoder B channel */ 
+  /** Port Number for left drive encoder B channel */
   public final int DRIVE_ENCODER_PORT_LB = 69420; // TODO: Update this
-  /** Port Number for right drive encoder A channel */ 
+  /** Port Number for right drive encoder A channel */
   public final int DRIVE_ENCODER_PORT_RA = 69420; // TODO: Update this
-  /** Port Number for right drive encoder B channel*/ 
+  /** Port Number for right drive encoder B channel */
   public final int DRIVE_ENCODER_PORT_RB = 69420; // TODO: Update this
 
   // Other Motors
-  /** Port Number for intake motor */ 
+  /** Port Number for intake motor */
   public final int INTAKE_MOTOR_PORT = 69420; // TODO: Update this
-  /** Port Number for storage conveyer motor */ 
+  /** Port Number for storage conveyer motor */
   public final int STORAGE_CONVEYER_MOTOR_PORT = 69420; // TODO: Update this
-  /** Port Number for storage ballstop motor */ 
+  /** Port Number for storage ballstop motor */
   public final int STORAGE_BALLSTOP_MOTOR_PORT = 69420; // TODO: Update this
-  /** Port Number for climber motor */ 
+  /** Port Number for storage shooter motor */
+  public final int STORAGE_SHOOTER_MOTOR_PORT = 69420; // TODO: Update this
+  /** Port Number for climber motor */
   public final int CLIMBER_MOTOR_PORT = 69420; // TODO: Update this
 
   // Controller
-  /** Port Number for xbox controller input device */ 
+  /** Port Number for xbox controller input device */
   public final int DEVICE_PORT_XBOX_CONTROLLER = 69420; // TODO: Update this
 
   // Storage Sensors
-  /** Port Number for upper color sensor in storage */ 
+  /** Port Number for upper color sensor in storage */
   public final I2C.Port STORAGE_SENSOR_COLOR_TOP = I2C.Port.kMXP; // TODO: Update this
-  /** Port Number for lower color sensor in storage */ 
+  /** Port Number for lower color sensor in storage */
   public final I2C.Port BottomColorSensorPort = I2C.Port.kMXP; // TODO: Update this
-  /** Port Number for ball entry sensor in storage */ 
+  /** Port Number for ball entry sensor in storage */
   public final int LimitSwitchChannel = 69420; // TODO: Update this
 
   // File Paths
@@ -83,5 +85,4 @@ public final class Constants {
   /** limit for repeated attempts to read auto from internal storage */
   public final int REPEAT_LIMIT_AUTO_READ = 10;
 
-  
 }

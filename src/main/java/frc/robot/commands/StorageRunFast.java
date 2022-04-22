@@ -17,6 +17,7 @@ public class StorageRunFast extends CommandBase {
   public void initialize() {
     Logger.info("StorageRun : Start : Fast, Forward");
     storage.setConveyorSpeed(1);
+    storage.setShooterSpeed(1);
   }
 
   @Override
@@ -28,5 +29,6 @@ public class StorageRunFast extends CommandBase {
   public void end(boolean interrupted) {
     Logger.info("StorageRun : End");
     storage.setConveyorSpeed(0);
+    storage.setShooterSpeed(0);
   }
 }
