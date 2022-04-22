@@ -15,7 +15,7 @@ public class StorageReverse extends CommandBase {
 
   @Override
   public void initialize() {
-    Logger.info("StorageRun : Start : Slow, Reversed");
+    Logger.info("StorageReverse : Start");
     storage.setConveyorSpeed(-0.2);
   }
 
@@ -26,7 +26,7 @@ public class StorageReverse extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    Logger.info("StorageRun : End");
+    Logger.info("StorageReverse : End");
     storage.setConveyorSpeed(0);
   }
 }

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.utils.NumberTools;
+import frc.robot.utils.Clamper;
 
 /**
  * Storage Subsystem.
@@ -64,7 +64,7 @@ public class StorageSub extends SubsystemBase {
    * @param speed Speed between -1 and 1
    */
   public void setConveyorSpeed(double speed) {
-    speed = NumberTools.limitRangeAbsUnit(speed);
+    speed = Clamper.absUnit(speed);
     conveyorMotor.set(speed);
   }
 
@@ -74,7 +74,7 @@ public class StorageSub extends SubsystemBase {
    * @param speed Speed between -1 and 1
    */
   public void setShooterSpeed(double speed) {
-    speed = NumberTools.limitRangeAbsUnit(speed);
+    speed = Clamper.absUnit(speed);
     shooterMotor.set(speed);
   }
 

@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.utils.NumberTools;
+import frc.robot.utils.Clamper;
 
 public class BallStopSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
@@ -20,7 +20,7 @@ public class BallStopSub extends SubsystemBase {
    * @param speed Speed between -1 and 1
    */
   public void set(double speed) {
-    speed = NumberTools.limitRangeAbsUnit(speed);
+    speed = Clamper.absUnit(speed);
     motor.set(speed);
   }
 }

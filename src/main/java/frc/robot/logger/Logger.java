@@ -110,7 +110,7 @@ public class Logger {
   /**
    * restart the logger
    */
-  public void unPause() {
+  public void unpause() {
     logPause = false;
   }
 

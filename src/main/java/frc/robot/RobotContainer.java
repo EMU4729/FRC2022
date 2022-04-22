@@ -69,16 +69,17 @@ public class RobotContainer {
   // BallStopOpen(ballStopSub);
   // private final BallStopClose ballStopCloseCommand = new
   // BallStopClose(ballStopSub);
-  private final Teleop driveCommand = new Teleop(driveSub, controller);
-  private final DriveInvert driveReverseDirectionCommand = new DriveInvert();
+  private final Teleop teleopCommand = new Teleop(driveSub, controller);
+  private final DriveInvert driveInvertCommand = new DriveInvert();
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
   private final StorageRun storageRunCommand = new StorageRun(storageSub);
-  private final StorageShoot storageRunFastCommand = new StorageShoot(storageSub);
-  private final StorageReverse storageRunReverseCommand = new StorageReverse(storageSub);
+  private final StorageShoot storageShootCommand = new StorageShoot(storageSub);
+  private final StorageReverse storageReverseCommand = new StorageReverse(storageSub);
 
-  private final AutoFacade autoFacade = new AutoFacade(driveSub, intakeRunCommand, navigationUpdateCommand,
-      storageRunCommand, storageRunFastCommand, storageRunReverseCommand);
+  private final AutoFacade autoFacade = new AutoFacade(
+      driveSub, intakeRunCommand, navigationUpdateCommand,
+      storageRunCommand, storageShootCommand, storageReverseCommand);
   private final Auto autoCommand = new Auto(autoFacade);
 
   /**
@@ -101,17 +102,17 @@ public class RobotContainer {
     // Run Intake
     leftBumperButton.whenHeld(intakeRunCommand);
 
-    // Run Storage Fast
-    rightBumperButton.whenHeld(storageRunFastCommand);
+    // Shoot Storage
+    rightBumperButton.whenHeld(storageShootCommand);
 
     // Run Storage
     xButton.whenHeld(storageRunCommand);
 
-    // Run Storage Reverse
-    bButton.whenHeld(storageRunReverseCommand);
+    // Reverse Storage
+    bButton.whenHeld(storageReverseCommand);
 
-    // Reverse Drive Direction
-    startButton.whenPressed(driveReverseDirectionCommand);
+    // Invert Drive
+    startButton.whenPressed(driveInvertCommand);
 
     // Climber Up/Down
     dPadUpButton.whenHeld(climberUpCommand);
@@ -126,7 +127,7 @@ public class RobotContainer {
    * @return the command to run in teleop
    */
   public Command getTeleopCommand() {
-    return driveCommand;
+    return teleopCommand;
   }
 
   /**

@@ -4,7 +4,7 @@ package frc.robot.utils;
  * Utility class to clamp values. Useful for making sure you don't accidentally
  * overwork a motor.
  */
-public class NumberTools {
+public class Clamper {
 
   /**
    * Limits the max and min value of the input num
@@ -14,7 +14,7 @@ public class NumberTools {
    * @param max maximum allowed value for num
    * @return the rationalised number
    */
-  public static double limitRange(double num, double min, double max) {
+  public static double clamp(double num, double min, double max) {
     if (num > max) {
       return max;
     } else if (num < min) {
@@ -29,8 +29,8 @@ public class NumberTools {
    * @param num number to be rationalised
    * @return the rationalised number
    */
-  public static double limitRangeUnit(double num) {
-    return limitRange(num, 0, 1);
+  public static double unit(double num) {
+    return clamp(num, 0, 1);
   }
 
   /**
@@ -40,8 +40,8 @@ public class NumberTools {
    * @param num number to be rationalised
    * @return the rationalised number
    */
-  public static double limitRangeAbsUnit(double num) {
-    return limitRange(num, -1, 1);
+  public static double absUnit(double num) {
+    return clamp(num, -1, 1);
   }
 
 }

@@ -15,7 +15,7 @@ public class StorageRun extends CommandBase {
 
   @Override
   public void initialize() {
-    Logger.info("StorageRun : Start : Slow, Forward");
+    Logger.info("StorageRun : Start");
     storage.setConveyorSpeed(0.2);
   }
 

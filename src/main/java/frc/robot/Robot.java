@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
       autoCommand.schedule();
     }
     Logger.header("Auto Start --------------------------------------------------------------------------------------");
-    logger.unPause();
+    logger.unpause();
   }
 
   /** This function is called periodically during autonomous. */
@@ -110,7 +110,7 @@ public class Robot extends TimedRobot {
     }
 
     Logger.header("Teleop Start ------------------------------------------------------------------------------------");
-    logger.unPause();
+    logger.unpause();
   }
 
   /** This function is called periodically during operator control. */
@@ -123,7 +123,7 @@ public class Robot extends TimedRobot {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
     Logger.header("Test Start --------------------------------------------------------------------------------------");
-    logger.unPause();
+    logger.unpause();
   }
 
   /** This function is called periodically during test mode. */

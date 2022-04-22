@@ -63,15 +63,15 @@ public class Auto extends CommandBase {
         nextCommand();
         break;
       case "storageRunSlow": // run storage slow
-        autoFacade.storageRunSlow();
+        autoFacade.storageRun();
         nextCommand();
         break;
       case "storageRunFast": // run storage fast
-        autoFacade.storageRunFast();
+        autoFacade.storageShoot();
         nextCommand();
         break;
       case "storageRunReverse": // run storage in reverse
-        autoFacade.storageRunReverse();
+        autoFacade.storageReverse();
         nextCommand();
         break;
       case "storageStop": // stop storage

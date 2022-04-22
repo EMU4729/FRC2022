@@ -17,8 +17,8 @@ public class AutoFacade {
   private final DriveSub driveSub;
   private final IntakeRun intakeRunCommand;
   private final StorageRun storageRunCommand;
-  private final StorageShoot storageRunFastCommand;
-  private final StorageReverse storageRunReverseCommand;
+  private final StorageShoot storageShootCommand;
+  private final StorageReverse storageReverseCommand;
 
   CommandScheduler scheduler = CommandScheduler.getInstance();
   private AsyncTimer waitTimer;
@@ -29,8 +29,8 @@ public class AutoFacade {
     this.driveSub = driveSub;
     this.intakeRunCommand = intakeRunCommand;
     this.storageRunCommand = storageRunCommand;
-    this.storageRunFastCommand = storageRunFastCommand;
-    this.storageRunReverseCommand = storageRunReverseCommand;
+    this.storageShootCommand = storageRunFastCommand;
+    this.storageReverseCommand = storageRunReverseCommand;
   }
 
   public void driveTank(AutoCommand currentCommand) {
@@ -61,19 +61,19 @@ public class AutoFacade {
 
   }
 
-  public void storageRunSlow() {
+  public void storageRun() {
     storageStop();
     scheduler.schedule(true, storageRunCommand);
   }
 
-  public void storageRunFast() {
+  public void storageShoot() {
     storageStop();
-    scheduler.schedule(true, storageRunFastCommand);
+    scheduler.schedule(true, storageShootCommand);
   }
 
-  public void storageRunReverse() {
+  public void storageReverse() {
     storageStop();
-    scheduler.schedule(true, storageRunReverseCommand);
+    scheduler.schedule(true, storageReverseCommand);
   }
 
   public void storageStop() {
@@ -81,11 +81,11 @@ public class AutoFacade {
     if (storageRunCommand.isScheduled()) {
       storageRunCommand.end(true);
       stopped = "Slow";
-    } else if (storageRunFastCommand.isScheduled()) {
-      storageRunFastCommand.end(true);
+    } else if (storageShootCommand.isScheduled()) {
+      storageShootCommand.end(true);
       stopped = "Fast";
-    } else if (storageRunReverseCommand.isScheduled()) {
-      storageRunReverseCommand.end(true);
+    } else if (storageReverseCommand.isScheduled()) {
+      storageReverseCommand.end(true);
       stopped = "Reverse";
     }
     Logger.info("Auto : Storage Stop : Stopped = " + stopped);

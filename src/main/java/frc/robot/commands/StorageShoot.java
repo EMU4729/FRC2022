@@ -15,7 +15,7 @@ public class StorageShoot extends CommandBase {
 
   @Override
   public void initialize() {
-    Logger.info("StorageRun : Start : Fast, Forward");
+    Logger.info("StorageShoot : Start");
     storage.setConveyorSpeed(1);
     storage.setShooterSpeed(1);
   }
@@ -27,7 +27,7 @@ public class StorageShoot extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    Logger.info("StorageRun : End");
+    Logger.info("StorageShoot : End");
     storage.setConveyorSpeed(0);
     storage.setShooterSpeed(0);
   }
