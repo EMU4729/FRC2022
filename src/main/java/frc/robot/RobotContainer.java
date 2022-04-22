@@ -11,8 +11,8 @@ import frc.robot.commands.Auto;
 import frc.robot.commands.AutoFacade;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
-import frc.robot.commands.BallStopOpen;
-import frc.robot.commands.BallStopClose;
+// import frc.robot.commands.BallStopOpen;
+// import frc.robot.commands.BallStopClose;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveReverseDirection;
 import frc.robot.commands.IntakeRun;
@@ -21,7 +21,7 @@ import frc.robot.commands.StorageRun;
 import frc.robot.commands.StorageRunFast;
 import frc.robot.commands.StorageRunReverse;
 
-import frc.robot.subsystems.BallStopSub;
+// import frc.robot.subsystems.BallStopSub;
 import frc.robot.subsystems.ClimberSub;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
@@ -61,13 +61,15 @@ public class RobotContainer {
   private final IntakeSub intakeSub = new IntakeSub();
   private final NavigationSub navigationSub = new NavigationSub();
   private final StorageSub storageSub = new StorageSub();
-  private final BallStopSub ballStopSub = new BallStopSub();
+  // private final BallStopSub ballStopSub = new BallStopSub();
 
   private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
   private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
-  private final BallStopOpen ballStopOpenCommand = new BallStopOpen(ballStopSub);
-  private final BallStopClose ballStopCloseCommand = new BallStopClose(ballStopSub);
-  private final Drive driveCommand = new Drive(driveSub, controller); // TODO: Fix this
+  // private final BallStopOpen ballStopOpenCommand = new
+  // BallStopOpen(ballStopSub);
+  // private final BallStopClose ballStopCloseCommand = new
+  // BallStopClose(ballStopSub);
+  private final Drive driveCommand = new Drive(driveSub, controller);
   private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
