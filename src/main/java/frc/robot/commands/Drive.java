@@ -4,12 +4,10 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Variables;
 import frc.robot.subsystems.DriveSub;
 
 public class Drive extends CommandBase {
-  private final Constants constants = Constants.getInstance();
   private final Variables variables = Variables.getInstance();
   private final DriveSub drive;
   private final XboxController controller;
