@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Variables;
 import frc.robot.logger.Logger;
 
-public class DriveReverseDirection extends CommandBase {
+public class DriveInvert extends CommandBase {
   private final Variables vars;
 
-  public DriveReverseDirection() {
+  public DriveInvert() {
     vars = Variables.getInstance();
   }
 

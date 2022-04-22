@@ -5,10 +5,11 @@ import java.util.Iterator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.auto.AutoCommand;
+import frc.robot.auto.AutoFacade;
+import frc.robot.auto.AutoFiles;
 import frc.robot.logger.Logger;
 import frc.robot.utils.AsyncTimer;
-import frc.robot.utils.AutoCommand;
-import frc.robot.utils.AutoFiles;
 
 public class Auto extends CommandBase {
   private final AutoFacade autoFacade;

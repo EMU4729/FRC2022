@@ -9,9 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.utils.BallType;
 import frc.robot.utils.NumberTools;
-import frc.robot.utils.StorageColorSensor;
 
 /**
  * Storage Subsystem.
@@ -49,7 +47,7 @@ public class StorageSub extends SubsystemBase {
    * @param location The StorageColorSensor.
    * @return The ColorSensorV3 instance.
    */
-  private ColorSensorV3 getColorSensor(StorageColorSensor location) {
+  private ColorSensorV3 getColorSensor(ColorSensor location) {
     switch (location) {
       case TOP:
         return topColorSensor;
@@ -86,7 +84,7 @@ public class StorageSub extends SubsystemBase {
    * @param location The color sensor to use.
    * @return The color detected by the color sensor.
    */
-  public Color getColor(StorageColorSensor location) {
+  public Color getColor(ColorSensor location) {
     return getColorSensor(location).getColor();
   }
 
@@ -96,7 +94,7 @@ public class StorageSub extends SubsystemBase {
    * @param location
    * @return The ball type detected by the color sensor as a {@link BallType}.
    */
-  public BallType getBall(StorageColorSensor location) {
+  public BallType getBall(ColorSensor location) {
     Color ballColor = getColor(location);
     if (ballColor == teamColor) {
       return BallType.TEAM;
@@ -105,5 +103,18 @@ public class StorageSub extends SubsystemBase {
       return BallType.OPP;
     }
     return BallType.NONE;
+  }
+
+  /** Enum representing storage color sensor positions */
+  public enum ColorSensor {
+    TOP,
+    BOTTOM
+  }
+
+  /** Enum representing ball colors */
+  public enum BallType {
+    TEAM,
+    OPP,
+    NONE
   }
 }

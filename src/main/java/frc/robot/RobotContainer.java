@@ -7,19 +7,19 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.auto.AutoFacade;
 import frc.robot.commands.Auto;
-import frc.robot.commands.AutoFacade;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
 // import frc.robot.commands.BallStopOpen;
 // import frc.robot.commands.BallStopClose;
-import frc.robot.commands.Drive;
-import frc.robot.commands.DriveReverseDirection;
+import frc.robot.commands.Teleop;
+import frc.robot.commands.DriveInvert;
 import frc.robot.commands.IntakeRun;
 import frc.robot.commands.NavigationUpdate;
 import frc.robot.commands.StorageRun;
-import frc.robot.commands.StorageRunFast;
-import frc.robot.commands.StorageRunReverse;
+import frc.robot.commands.StorageShoot;
+import frc.robot.commands.StorageReverse;
 
 // import frc.robot.subsystems.BallStopSub;
 import frc.robot.subsystems.ClimberSub;
@@ -69,13 +69,13 @@ public class RobotContainer {
   // BallStopOpen(ballStopSub);
   // private final BallStopClose ballStopCloseCommand = new
   // BallStopClose(ballStopSub);
-  private final Drive driveCommand = new Drive(driveSub, controller);
-  private final DriveReverseDirection driveReverseDirectionCommand = new DriveReverseDirection();
+  private final Teleop driveCommand = new Teleop(driveSub, controller);
+  private final DriveInvert driveReverseDirectionCommand = new DriveInvert();
   private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
   private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
   private final StorageRun storageRunCommand = new StorageRun(storageSub);
-  private final StorageRunFast storageRunFastCommand = new StorageRunFast(storageSub);
-  private final StorageRunReverse storageRunReverseCommand = new StorageRunReverse(storageSub);
+  private final StorageShoot storageRunFastCommand = new StorageShoot(storageSub);
+  private final StorageReverse storageRunReverseCommand = new StorageReverse(storageSub);
 
   private final AutoFacade autoFacade = new AutoFacade(driveSub, intakeRunCommand, navigationUpdateCommand,
       storageRunCommand, storageRunFastCommand, storageRunReverseCommand);

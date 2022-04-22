@@ -1,11 +1,15 @@
-package frc.robot.commands;
+package frc.robot.auto;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Variables;
+import frc.robot.commands.IntakeRun;
+import frc.robot.commands.NavigationUpdate;
+import frc.robot.commands.StorageReverse;
+import frc.robot.commands.StorageRun;
+import frc.robot.commands.StorageShoot;
 import frc.robot.logger.Logger;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.utils.AsyncTimer;
-import frc.robot.utils.AutoCommand;
 
 public class AutoFacade {
   private final Variables variables = Variables.getInstance();
@@ -13,15 +17,15 @@ public class AutoFacade {
   private final DriveSub driveSub;
   private final IntakeRun intakeRunCommand;
   private final StorageRun storageRunCommand;
-  private final StorageRunFast storageRunFastCommand;
-  private final StorageRunReverse storageRunReverseCommand;
+  private final StorageShoot storageRunFastCommand;
+  private final StorageReverse storageRunReverseCommand;
 
   CommandScheduler scheduler = CommandScheduler.getInstance();
   private AsyncTimer waitTimer;
 
   public AutoFacade(DriveSub driveSub, IntakeRun intakeRunCommand, NavigationUpdate navigationUpdateCommand,
-      StorageRun storageRunCommand, StorageRunFast storageRunFastCommand,
-      StorageRunReverse storageRunReverseCommand) {
+      StorageRun storageRunCommand, StorageShoot storageRunFastCommand,
+      StorageReverse storageRunReverseCommand) {
     this.driveSub = driveSub;
     this.intakeRunCommand = intakeRunCommand;
     this.storageRunCommand = storageRunCommand;

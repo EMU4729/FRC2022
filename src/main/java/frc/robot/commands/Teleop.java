@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Variables;
 import frc.robot.subsystems.DriveSub;
 
-public class Drive extends CommandBase {
+public class Teleop extends CommandBase {
   private final Variables variables = Variables.getInstance();
   private final DriveSub drive;
   private final XboxController controller;
@@ -15,7 +15,7 @@ public class Drive extends CommandBase {
 
   private double speedMultiplier;
 
-  public Drive(DriveSub drive, XboxController controller) {
+  public Teleop(DriveSub drive, XboxController controller) {
     this.drive = drive;
     this.controller = controller;
 
