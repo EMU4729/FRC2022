@@ -4,22 +4,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.auto.AutoLine;
 import frc.robot.auto.AutoFacade;
 import frc.robot.auto.AutoFiles;
 import frc.robot.logger.Logger;
-import frc.robot.utils.AsyncTimer;
 
 public class Auto extends CommandBase {
   private final AutoFacade autoFacade = new AutoFacade();
 
-  private final CommandScheduler scheduler = CommandScheduler.getInstance();
   private ArrayList<AutoLine> commands = new ArrayList<>();
   private Iterator<AutoLine> commandIterator;
   private AutoLine currentCommand;
   private boolean isFinished = false;
-  private AsyncTimer waitTimer;
 
   public Auto() {
   }

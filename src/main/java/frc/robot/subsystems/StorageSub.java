@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorSensorV3;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+// import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.util.Color;
@@ -21,7 +21,8 @@ public class StorageSub extends SubsystemBase {
   private final WPI_TalonSRX shooterMotor = new WPI_TalonSRX(constants.STORAGE_SHOOTER_MOTOR_PORT);
   private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(constants.BottomColorSensorPort);
   private final ColorSensorV3 topColorSensor = new ColorSensorV3(constants.STORAGE_SENSOR_COLOR_TOP);
-  private final DigitalInput limitSwitch = new DigitalInput(constants.LimitSwitchChannel);
+  // private final DigitalInput limitSwitch = new
+  // DigitalInput(constants.LimitSwitchChannel);
 
   public final Color teamColor;
   public final Color oppColor;

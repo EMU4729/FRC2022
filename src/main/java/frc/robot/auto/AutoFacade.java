@@ -2,8 +2,6 @@ package frc.robot.auto;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Commands;
-import frc.robot.Subsystems;
-import frc.robot.Variables;
 import frc.robot.logger.Logger;
 import frc.robot.utils.AsyncTimer;
 
