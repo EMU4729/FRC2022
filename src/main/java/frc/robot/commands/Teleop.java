@@ -4,22 +4,21 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.OI;
+import frc.robot.Subsystems;
 import frc.robot.Variables;
 import frc.robot.subsystems.DriveSub;
 
 public class Teleop extends CommandBase {
   private final Variables variables = Variables.getInstance();
-  private final DriveSub drive;
-  private final XboxController controller;
+  private final Subsystems subsystems = Subsystems.getInstance();
+  private final OI oi = OI.getInstance();
   private final boolean useTank = SmartDashboard.getBoolean("useTank", false);
 
   private double speedMultiplier;
 
-  public Teleop(DriveSub drive, XboxController controller) {
-    this.drive = drive;
-    this.controller = controller;
-
-    addRequirements(drive);
+  public Teleop() {
+    addRequirements(subsystems.drive);
   }
 
   @Override
@@ -39,15 +38,15 @@ public class Teleop extends CommandBase {
     // constant.
 
     if (useTank) {
-      double leftSpeed = Math.pow(controller.getLeftY(), variables.inputCurveExponent);
-      double rightSpeed = Math.pow(controller.getRightY(), variables.inputCurveExponent);
-      drive.tank(leftSpeed * speedMultiplier, rightSpeed * speedMultiplier);
+      double leftSpeed = Math.pow(oi.controller.getLeftY(), variables.inputCurveExponent);
+      double rightSpeed = Math.pow(oi.controller.getRightY(), variables.inputCurveExponent);
+      subsystems.drive.tank(leftSpeed * speedMultiplier, rightSpeed * speedMultiplier);
     } else {
-      double speed = Math.pow(controller.getLeftY(), variables.inputCurveExponent);
-      double steering = controller.getRightX();
+      double speed = Math.pow(oi.controller.getLeftY(), variables.inputCurveExponent);
+      double steering = oi.controller.getRightX();
 
       // If needed, make the teleop speed multiplier affect steering, too
-      drive.arcade(speed * speedMultiplier, steering);
+      subsystems.drive.arcade(speed * speedMultiplier, steering);
     }
   }
 

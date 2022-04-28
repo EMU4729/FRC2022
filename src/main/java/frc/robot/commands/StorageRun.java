@@ -1,22 +1,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Subsystems;
 import frc.robot.logger.Logger;
 import frc.robot.subsystems.StorageSub;
 
 public class StorageRun extends CommandBase {
-  private final StorageSub storage;
+  private final Subsystems subsystems = Subsystems.getInstance();
 
-  public StorageRun(StorageSub storage) {
-    this.storage = storage;
-
-    addRequirements(storage);
+  public StorageRun() {
+    addRequirements(subsystems.storage);
   }
 
   @Override
   public void initialize() {
     Logger.info("StorageRun : Start");
-    storage.setConveyorSpeed(0.2);
+    subsystems.storage.setConveyorSpeed(0.2);
   }
 
   @Override
@@ -26,7 +25,7 @@ public class StorageRun extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    storage.setConveyorSpeed(0);
+    subsystems.storage.setConveyorSpeed(0);
     Logger.info("StorageRun : End");
   }
 }

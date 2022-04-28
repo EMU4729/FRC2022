@@ -19,36 +19,25 @@ public class AutoFacade {
   }
 
   public void driveTank(AutoLine currentCommand) {
-    try {
-      double leftSpeed = Double.parseDouble(currentCommand.args.get(0));
-      double rightSpeed = Double.parseDouble(currentCommand.args.get(1));
-      Logger.info("Auto : DriveTank : Left Speed=" + leftSpeed + ", Right Speed=" + rightSpeed);
-      subsystems.drive.tank(leftSpeed * variables.autoSpeedMultiplier, rightSpeed * variables.autoSpeedMultiplier);
-    } catch (NumberFormatException e) {
-      Logger.warn("Auto : Invalid double command args " + currentCommand.args);
-    }
+    double leftSpeed = currentCommand.getDouble(0);
+    double rightSpeed = currentCommand.getDouble(1);
+    Logger.info("Auto : DriveTank : Left Speed=" + leftSpeed + ", Right Speed=" + rightSpeed);
+    subsystems.drive.tank(leftSpeed * variables.autoSpeedMultiplier, rightSpeed * variables.autoSpeedMultiplier);
   }
 
   public void driveArcade(AutoLine currentCommand) {
-    try {
-      double speed = Double.parseDouble(currentCommand.args.get(0));
-      double steering = Double.parseDouble(currentCommand.args.get(1));
-      Logger.info("Auto : DriveArcade : Speed=" + speed + ", steer=" + steering);
+    double speed = currentCommand.getDouble(0);
+    double steering = currentCommand.getDouble(1);
+    Logger.info("Auto : DriveArcade : Speed=" + speed + ", steer=" + steering);
 
-      // If needed, make auto speed multiplier also affects steering
-      subsystems.drive.arcade(speed * variables.autoSpeedMultiplier, steering);
-    } catch (NumberFormatException e) {
-      Logger.warn("Auto : Invalid double command args " + currentCommand.args);
-    }
+    // If needed, make auto speed multiplier also affects steering
+    subsystems.drive.arcade(speed * variables.autoSpeedMultiplier, steering);
   }
 
   public void driveStraight(AutoLine currentCommand) {
-    try {
-      double speed = Double.parseDouble(currentCommand.args.get(0));
-
-    } catch (NumberFormatException e) {
-      Logger.warn("Auto : Invalid double command args " + currentCommand.args);
-    }
+    double speed = currentCommand.getDouble(0);
+    commands.driveStraight.speed = speed;
+    scheduler.schedule(true, commands.driveStraight);
   }
 
   public void driveOff() {
@@ -97,14 +86,9 @@ public class AutoFacade {
 
   public boolean waitFor(AutoLine currentCommand) {
     if (waitTimer == null) {
-      try {
-        int duration = Integer.parseInt(currentCommand.args.get(0));
-        Logger.info("Auto : Wait For : Time=" + duration);
-        waitTimer = new AsyncTimer(duration);
-
-      } catch (NumberFormatException e) {
-        Logger.warn("Auto : Invalid double command args " + currentCommand.args);
-      }
+      int duration = currentCommand.getInt(0);
+      Logger.info("Auto : Wait For : Time=" + duration);
+      waitTimer = new AsyncTimer(duration);
       return false;
     }
     if (waitTimer.isFinished()) {

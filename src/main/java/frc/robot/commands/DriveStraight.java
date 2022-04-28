@@ -2,23 +2,27 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems;
-import frc.robot.logger.Logger;
 
-public class IntakeRun extends CommandBase {
+public class DriveStraight extends CommandBase {
   private final Subsystems subsystems = Subsystems.getInstance();
 
-  public IntakeRun() {
-    addRequirements(subsystems.intake);
+  private double targetAngle;
+
+  public double speed;
+
+  public DriveStraight() {
+    addRequirements(subsystems.drive, subsystems.navigation);
   }
 
   @Override
   public void initialize() {
-    Logger.info("IntakeRun : Start : Forward");
-    subsystems.intake.setSpinSpeed(0.5);
+    targetAngle = subsystems.navigation.getAngle();
   }
 
   @Override
   public void execute() {
+    subsystems.drive.arcade(
+        speed, subsystems.navigation.proportionalStraightAdjustment(targetAngle));
   }
 
   @Override
@@ -28,7 +32,7 @@ public class IntakeRun extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    Logger.info("IntakeRun : End");
-    subsystems.intake.setSpinSpeed(0);
+    subsystems.drive.off();
   }
+
 }

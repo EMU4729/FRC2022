@@ -2,6 +2,7 @@ package frc.robot;
 
 import java.util.Optional;
 
+import frc.robot.subsystems.BallStopSub;
 import frc.robot.subsystems.ClimberSub;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
@@ -29,5 +30,5 @@ public class Subsystems {
   public final IntakeSub intake = new IntakeSub();
   public final NavigationSub navigation = new NavigationSub();
   public final StorageSub storage = new StorageSub();
-  // public final BallStopSub ballStop = new BallStopSub();
+  public final BallStopSub ballStop = new BallStopSub();
 }

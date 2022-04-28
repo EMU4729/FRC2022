@@ -1,30 +1,30 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Subsystems;
 import frc.robot.logger.Logger;
 import frc.robot.subsystems.BallStopSub;
 import frc.robot.utils.AsyncTimer;
 
 public class BallStopClose extends CommandBase {
-  private final BallStopSub ballStop;
+  private final Subsystems subsystems = Subsystems.getInstance();
   private AsyncTimer timer;
 
-  public BallStopClose(BallStopSub ballStop) {
-    this.ballStop = ballStop;
-    addRequirements(ballStop);
+  public BallStopClose() {
+    addRequirements(subsystems.ballStop);
   }
 
   @Override
   public void initialize() {
-    if (ballStop.isOpen) {
+    if (subsystems.ballStop.isOpen) {
       timer = new AsyncTimer(1000);
-      ballStop.set(0.5);
+      subsystems.ballStop.set(0.5);
     }
   }
 
   @Override
   public boolean isFinished() {
-    if (ballStop.isOpen) {
+    if (subsystems.ballStop.isOpen) {
       return timer.isFinished();
     } else {
       return true;
@@ -33,9 +33,9 @@ public class BallStopClose extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    if (ballStop.isOpen) {
-      ballStop.set(0);
-      ballStop.isOpen = false;
+    if (subsystems.ballStop.isOpen) {
+      subsystems.ballStop.set(0);
+      subsystems.ballStop.isOpen = false;
       Logger.info("Ball stop closed");
     }
     Logger.warn("Ball stop close failed : Ball stop already closed");

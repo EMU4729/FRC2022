@@ -3,6 +3,8 @@ package frc.robot.auto;
 import java.util.Arrays;
 import java.util.List;
 
+import frc.robot.logger.Logger;
+
 /**
  * Utility data structure for parsing auto command lines.
  */
@@ -21,4 +23,21 @@ public class AutoLine {
     args = words;
   }
 
+  public double getDouble(int index) {
+    try {
+      return Double.parseDouble(args.get(index));
+    } catch (NumberFormatException e) {
+      Logger.warn("Auto : Invalid double arg : " + args.get(index));
+      return 0;
+    }
+  }
+
+  public int getInt(int index) {
+    try {
+      return Integer.parseInt(args.get(index));
+    } catch (NumberFormatException e) {
+      Logger.warn("Auto : Invalid int arg : " + args.get(index));
+      return 0;
+    }
+  }
 }

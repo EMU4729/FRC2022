@@ -1,14 +1,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.NavigationSub;
+import frc.robot.Subsystems;
 
 public class NavigationUpdate extends CommandBase {
-  private final NavigationSub navigation;
+  private final Subsystems subsystems = Subsystems.getInstance();
 
-  public NavigationUpdate(NavigationSub navigation) {
-    this.navigation = navigation;
-    addRequirements(navigation);
+  public NavigationUpdate() {
+    addRequirements(subsystems.navigation);
   }
 
   @Override
