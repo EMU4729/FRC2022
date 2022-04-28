@@ -29,7 +29,7 @@ public class IntakeRun extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    Logger.info("IntakeRun: End");
+    Logger.info("IntakeRun : End");
     intake.setSpinSpeed(0);
   }
 }

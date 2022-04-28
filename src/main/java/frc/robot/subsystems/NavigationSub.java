@@ -20,17 +20,30 @@ public class NavigationSub extends SubsystemBase {
   private final Encoder rightEncoder = new Encoder(
       constants.DRIVE_ENCODER_PORT_RA, constants.DRIVE_ENCODER_PORT_RB);
   private final DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(
-      Rotation2d.fromDegrees(imu.getAngle()));
+      Rotation2d.fromDegrees(getAngle()));
 
   @Override
   public void periodic() {
     odometry.update(
-        Rotation2d.fromDegrees(imu.getAngle()),
+        Rotation2d.fromDegrees(getAngle()),
         leftEncoder.getDistance(), rightEncoder.getDistance());
   }
 
   public void setOdometry(Pose2d newPose) {
-    odometry.resetPosition(newPose, Rotation2d.fromDegrees(imu.getAngle()));
+    odometry.resetPosition(newPose, Rotation2d.fromDegrees(getAngle()));
+  }
+
+  public double getAngle() {
+    return imu.getAngle();
+  }
+
+  public double proportionalStraightAdjustment(double target) {
+    double current = getAngle();
+    return current * constants.AUTO_STRAIGHT_KP;
+  }
+
+  public Pose2d getOdometry() {
+    return odometry.getPoseMeters();
   }
 
   public void reset() {

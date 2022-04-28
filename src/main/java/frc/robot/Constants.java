@@ -47,6 +47,9 @@ public final class Constants {
   /** Port Number for right drive encoder B channel */
   public final int DRIVE_ENCODER_PORT_RB = 69420; // TODO: Update this
 
+  /** Proportional constant for driving straight durin auto */
+  public double AUTO_STRAIGHT_KP = 0.234;
+
   // Other Motors
   /** Port Number for intake motor */
   public final int INTAKE_MOTOR_PORT = 69420; // TODO: Update this
@@ -84,5 +87,4 @@ public final class Constants {
   public final int REPEAT_LIMIT_LOGGER_CREATION = 10;
   /** limit for repeated attempts to read auto from internal storage */
   public final int REPEAT_LIMIT_AUTO_READ = 10;
-
 }

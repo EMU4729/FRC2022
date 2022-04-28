@@ -12,17 +12,16 @@ import frc.robot.logger.Logger;
 import frc.robot.utils.AsyncTimer;
 
 public class Auto extends CommandBase {
-  private final AutoFacade autoFacade;
+  private final AutoFacade autoFacade = new AutoFacade();
 
-  CommandScheduler scheduler = CommandScheduler.getInstance();
+  private final CommandScheduler scheduler = CommandScheduler.getInstance();
   private ArrayList<AutoLine> commands = new ArrayList<>();
   private Iterator<AutoLine> commandIterator;
   private AutoLine currentCommand;
   private boolean isFinished = false;
   private AsyncTimer waitTimer;
 
-  public Auto(AutoFacade autoFacade) {
-    this.autoFacade = autoFacade;
+  public Auto() {
   }
 
   @Override

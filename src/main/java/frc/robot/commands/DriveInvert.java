@@ -23,7 +23,7 @@ public class DriveInvert extends CommandBase {
 
   @Override
   public void end(boolean interupted) {
-    Logger.info("drive direction reversed : drive forward = " +
+    Logger.info("DriveInvert : drive forward = " +
         (vars.invertDriveDirection ? "normal" : "reversed"));
   }
 

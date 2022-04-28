@@ -6,31 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.auto.AutoFacade;
-import frc.robot.commands.Auto;
-import frc.robot.commands.ClimberDown;
-import frc.robot.commands.ClimberUp;
-// import frc.robot.commands.BallStopOpen;
-// import frc.robot.commands.BallStopClose;
-import frc.robot.commands.Teleop;
-import frc.robot.commands.DriveInvert;
-import frc.robot.commands.IntakeRun;
-import frc.robot.commands.NavigationUpdate;
-import frc.robot.commands.StorageRun;
-import frc.robot.commands.StorageShoot;
-import frc.robot.commands.StorageReverse;
-
-// import frc.robot.subsystems.BallStopSub;
-import frc.robot.subsystems.ClimberSub;
-import frc.robot.subsystems.DriveSub;
-import frc.robot.subsystems.IntakeSub;
-import frc.robot.subsystems.NavigationSub;
-import frc.robot.subsystems.StorageSub;
-
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -42,45 +18,8 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  private final Constants constants = Constants.getInstance();
-
-  private final XboxController controller = new XboxController(constants.DEVICE_PORT_XBOX_CONTROLLER);
-  private final JoystickButton leftBumperButton = new JoystickButton(controller,
-      Button.kLeftBumper.value);
-  private final JoystickButton startButton = new JoystickButton(controller,
-      Button.kStart.value);
-  private final JoystickButton rightBumperButton = new JoystickButton(controller,
-      Button.kRightBumper.value);
-  private final JoystickButton bButton = new JoystickButton(controller, Button.kB.value);
-  private final JoystickButton xButton = new JoystickButton(controller, Button.kX.value);
-  private final POVButton dPadUpButton = new POVButton(controller, 0);
-  private final POVButton dPadDownButton = new POVButton(controller, 180);
-
-  private final DriveSub driveSub = new DriveSub();
-  private final ClimberSub climberSub = new ClimberSub();
-  private final IntakeSub intakeSub = new IntakeSub();
-  private final NavigationSub navigationSub = new NavigationSub();
-  private final StorageSub storageSub = new StorageSub();
-  // private final BallStopSub ballStopSub = new BallStopSub();
-
-  private final ClimberDown climberDownCommand = new ClimberDown(climberSub);
-  private final ClimberUp climberUpCommand = new ClimberUp(climberSub);
-  // private final BallStopOpen ballStopOpenCommand = new
-  // BallStopOpen(ballStopSub);
-  // private final BallStopClose ballStopCloseCommand = new
-  // BallStopClose(ballStopSub);
-  private final Teleop teleopCommand = new Teleop(driveSub, controller);
-  private final DriveInvert driveInvertCommand = new DriveInvert();
-  private final IntakeRun intakeRunCommand = new IntakeRun(intakeSub);
-  private final NavigationUpdate navigationUpdateCommand = new NavigationUpdate(navigationSub);
-  private final StorageRun storageRunCommand = new StorageRun(storageSub);
-  private final StorageShoot storageShootCommand = new StorageShoot(storageSub);
-  private final StorageReverse storageReverseCommand = new StorageReverse(storageSub);
-
-  private final AutoFacade autoFacade = new AutoFacade(
-      driveSub, intakeRunCommand, navigationUpdateCommand,
-      storageRunCommand, storageShootCommand, storageReverseCommand);
-  private final Auto autoCommand = new Auto(autoFacade);
+  private final Commands commands = Commands.getInstance();
+  private final OI oi = OI.getInstance();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -100,23 +39,23 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Run Intake
-    leftBumperButton.whenHeld(intakeRunCommand);
+    oi.leftBumper.whenHeld(commands.intakeRun);
 
     // Shoot Storage
-    rightBumperButton.whenHeld(storageShootCommand);
+    oi.rightBumper.whenHeld(commands.storageShoot);
 
     // Run Storage
-    xButton.whenHeld(storageRunCommand);
+    oi.x.whenHeld(commands.storageRun);
 
     // Reverse Storage
-    bButton.whenHeld(storageReverseCommand);
+    oi.b.whenHeld(commands.storageReverse);
 
     // Invert Drive
-    startButton.whenPressed(driveInvertCommand);
+    oi.start.whenPressed(commands.driveInvert);
 
     // Climber Up/Down
-    dPadUpButton.whenHeld(climberUpCommand);
-    dPadDownButton.whenHeld(climberDownCommand);
+    oi.dPadUp.whenHeld(commands.climberUp);
+    oi.dPadDown.whenHeld(commands.climberDown);
 
     // Drive bindings handled in driveCommand
   }
@@ -127,7 +66,7 @@ public class RobotContainer {
    * @return the command to run in teleop
    */
   public Command getTeleopCommand() {
-    return teleopCommand;
+    return commands.teleop;
   }
 
   /**
@@ -136,6 +75,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return autoCommand;
+    return commands.auto;
   }
 }
