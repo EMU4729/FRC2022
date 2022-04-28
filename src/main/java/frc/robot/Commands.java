@@ -3,10 +3,12 @@ package frc.robot;
 import java.util.Optional;
 
 import frc.robot.commands.Auto;
+import frc.robot.commands.AutoDriveArcade;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
 import frc.robot.commands.DriveInvert;
-import frc.robot.commands.DriveStraight;
+import frc.robot.commands.AutoDriveStraight;
+import frc.robot.commands.AutoDriveTank;
 import frc.robot.commands.IntakeRun;
 import frc.robot.commands.NavigationUpdate;
 import frc.robot.commands.StorageReverse;
@@ -37,9 +39,11 @@ public class Commands {
   // public final BallStopClose ballStopCloseCommand = new
   // BallStopClose(ballStopSub);
   public final Auto auto = new Auto();
+  public final AutoDriveStraight autoDriveStraight = new AutoDriveStraight();
+  public final AutoDriveArcade autoDriveArcade = new AutoDriveArcade();
+  public final AutoDriveTank autoDriveTank = new AutoDriveTank();
   public final Teleop teleop = new Teleop();
   public final DriveInvert driveInvert = new DriveInvert();
-  public final DriveStraight driveStraight = new DriveStraight();
   public final IntakeRun intakeRun = new IntakeRun();
   public final NavigationUpdate navigationUpdate = new NavigationUpdate();
   public final StorageRun storageRun = new StorageRun();

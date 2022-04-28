@@ -3,14 +3,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems;
 
-public class DriveStraight extends CommandBase {
+public class AutoDriveStraight extends CommandBase {
   private final Subsystems subsystems = Subsystems.getInstance();
 
   private double targetAngle;
 
   public double speed;
 
-  public DriveStraight() {
+  public AutoDriveStraight() {
     addRequirements(subsystems.drive, subsystems.navigation);
   }
 

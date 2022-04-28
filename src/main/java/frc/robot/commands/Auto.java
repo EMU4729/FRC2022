@@ -56,6 +56,10 @@ public class Auto extends CommandBase {
         autoFacade.driveArcade(currentCommand);
         nextCommand();
         break;
+      case "driveStraight":
+        autoFacade.driveStraight(currentCommand);
+        nextCommand();
+        break;
       case "driveOff": // stop robot
         autoFacade.driveOff();
         Logger.info("Auto : Drive Stop");

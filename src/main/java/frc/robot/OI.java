@@ -25,11 +25,11 @@ public class OI {
   }
 
   public final XboxController controller = new XboxController(constants.DEVICE_PORT_XBOX_CONTROLLER);
-  public final JoystickButton leftBumper = new JoystickButton(controller,
+  public final JoystickButton lb = new JoystickButton(controller,
       Button.kLeftBumper.value);
   public final JoystickButton start = new JoystickButton(controller,
       Button.kStart.value);
-  public final JoystickButton rightBumper = new JoystickButton(controller,
+  public final JoystickButton rb = new JoystickButton(controller,
       Button.kRightBumper.value);
   public final JoystickButton b = new JoystickButton(controller, Button.kB.value);
   public final JoystickButton x = new JoystickButton(controller, Button.kX.value);

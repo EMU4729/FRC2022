@@ -39,10 +39,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Run Intake
-    oi.leftBumper.whenHeld(commands.intakeRun);
+    oi.lb.whenHeld(commands.intakeRun);
 
     // Shoot Storage
-    oi.rightBumper.whenHeld(commands.storageShoot);
+    oi.rb.whenHeld(commands.storageShoot);
 
     // Run Storage
     oi.x.whenHeld(commands.storageRun);

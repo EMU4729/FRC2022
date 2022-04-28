@@ -8,8 +8,6 @@ import frc.robot.logger.Logger;
 import frc.robot.utils.AsyncTimer;
 
 public class AutoFacade {
-  private final Variables variables = Variables.getInstance();
-  private final Subsystems subsystems = Subsystems.getInstance();
   private final Commands commands = Commands.getInstance();
   private final CommandScheduler scheduler = CommandScheduler.getInstance();
 
@@ -20,28 +18,43 @@ public class AutoFacade {
 
   public void driveTank(AutoLine currentCommand) {
     double leftSpeed = currentCommand.getDouble(0);
-    double rightSpeed = currentCommand.getDouble(1);
+    double rightSpeed = currentCommand.getDouble(0);
+    commands.autoDriveTank.leftSpeed = leftSpeed;
+    commands.autoDriveTank.rightSpeed = rightSpeed;
     Logger.info("Auto : DriveTank : Left Speed=" + leftSpeed + ", Right Speed=" + rightSpeed);
-    subsystems.drive.tank(leftSpeed * variables.autoSpeedMultiplier, rightSpeed * variables.autoSpeedMultiplier);
+    scheduler.schedule(true, commands.autoDriveTank);
   }
 
   public void driveArcade(AutoLine currentCommand) {
     double speed = currentCommand.getDouble(0);
     double steering = currentCommand.getDouble(1);
+    commands.autoDriveArcade.speed = speed;
+    commands.autoDriveArcade.steering = steering;
     Logger.info("Auto : DriveArcade : Speed=" + speed + ", steer=" + steering);
 
     // If needed, make auto speed multiplier also affects steering
-    subsystems.drive.arcade(speed * variables.autoSpeedMultiplier, steering);
+    scheduler.schedule(true, commands.autoDriveArcade);
   }
 
   public void driveStraight(AutoLine currentCommand) {
     double speed = currentCommand.getDouble(0);
-    commands.driveStraight.speed = speed;
-    scheduler.schedule(true, commands.driveStraight);
+    commands.autoDriveStraight.speed = speed;
+    scheduler.schedule(true, commands.autoDriveStraight);
   }
 
   public void driveOff() {
-    subsystems.drive.off();
+    String stopped = "";
+    if (commands.autoDriveArcade.isScheduled()) {
+      commands.autoDriveArcade.end(true);
+      stopped = "Arcade";
+    } else if (commands.autoDriveTank.isScheduled()) {
+      commands.autoDriveTank.end(true);
+      stopped = "Tank";
+    } else if (commands.autoDriveStraight.isScheduled()) {
+      commands.autoDriveStraight.end(true);
+      stopped = "Straight";
+    }
+    Logger.info("Auto : Drive Off : Stopped = " + stopped);
   }
 
   public void storageRun() {
