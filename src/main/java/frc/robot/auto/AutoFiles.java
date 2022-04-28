@@ -26,7 +26,7 @@ public class AutoFiles {
    * 
    * @return The parsed auto command data
    */
-  public static ArrayList<AutoCommand> updateAndGetAuto() {
+  public static ArrayList<AutoLine> updateAndGetAuto() {
     updateInternalAuto();
     return readInternalAuto();
   }
@@ -63,11 +63,11 @@ public class AutoFiles {
    * 
    * @return The parsed auto command data.
    */
-  public static ArrayList<AutoCommand> readInternalAuto() {
+  public static ArrayList<AutoLine> readInternalAuto() {
     return readInternalAuto(constants.REPEAT_LIMIT_AUTO_READ);
   }
 
-  public static ArrayList<AutoCommand> readInternalAuto(int retries) {
+  public static ArrayList<AutoLine> readInternalAuto(int retries) {
     try {
       String[] pathInternalT = getAutoFilePaths(AutoFilePathLocation.Internal);
       String pathInternal;
@@ -79,14 +79,14 @@ public class AutoFiles {
 
       BufferedReader br = new BufferedReader(new FileReader(pathInternal));
       String line;
-      ArrayList<AutoCommand> commands = new ArrayList<>();
+      ArrayList<AutoLine> commands = new ArrayList<>();
 
       while ((line = br.readLine()) != null) {
         line.strip();
         if (line.isEmpty() || line.startsWith("#")) {
           continue;
         }
-        commands.add(new AutoCommand(line));
+        commands.add(new AutoLine(line));
       }
       br.close();
       return commands;
@@ -118,7 +118,7 @@ public class AutoFiles {
    * 
    * @return The hardcoded auto command data.
    */
-  public static ArrayList<AutoCommand> readHardCoded() {
+  public static ArrayList<AutoLine> readHardCoded() {
     return new ArrayList<>(
         Arrays.asList(
             "driveArcade -0.7 0",
@@ -135,7 +135,7 @@ public class AutoFiles {
             "driveOff",
             "storageRun 0")
             .stream()
-            .map(line -> new AutoCommand(line))
+            .map(line -> new AutoLine(line))
             .collect(Collectors.toList()));
 
   }

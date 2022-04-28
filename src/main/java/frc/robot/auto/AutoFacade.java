@@ -33,7 +33,7 @@ public class AutoFacade {
     this.storageReverseCommand = storageRunReverseCommand;
   }
 
-  public void driveTank(AutoCommand currentCommand) {
+  public void driveTank(AutoLine currentCommand) {
     try {
       double leftSpeed = Double.parseDouble(currentCommand.args.get(0));
       double rightSpeed = Double.parseDouble(currentCommand.args.get(1));
@@ -44,7 +44,7 @@ public class AutoFacade {
     }
   }
 
-  public void driveArcade(AutoCommand currentCommand) {
+  public void driveArcade(AutoLine currentCommand) {
     try {
       double speed = Double.parseDouble(currentCommand.args.get(0));
       double steering = Double.parseDouble(currentCommand.args.get(1));
@@ -101,7 +101,7 @@ public class AutoFacade {
       intakeRunCommand.end(true);
   }
 
-  public boolean waitFor(AutoCommand currentCommand) {
+  public boolean waitFor(AutoLine currentCommand) {
     if (waitTimer == null) {
       try {
         int duration = Integer.parseInt(currentCommand.args.get(0));

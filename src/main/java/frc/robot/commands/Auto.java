@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.auto.AutoCommand;
+import frc.robot.auto.AutoLine;
 import frc.robot.auto.AutoFacade;
 import frc.robot.auto.AutoFiles;
 import frc.robot.logger.Logger;
@@ -15,9 +15,9 @@ public class Auto extends CommandBase {
   private final AutoFacade autoFacade;
 
   CommandScheduler scheduler = CommandScheduler.getInstance();
-  private ArrayList<AutoCommand> commands = new ArrayList<>();
-  private Iterator<AutoCommand> commandIterator;
-  private AutoCommand currentCommand;
+  private ArrayList<AutoLine> commands = new ArrayList<>();
+  private Iterator<AutoLine> commandIterator;
+  private AutoLine currentCommand;
   private boolean isFinished = false;
   private AsyncTimer waitTimer;
 
