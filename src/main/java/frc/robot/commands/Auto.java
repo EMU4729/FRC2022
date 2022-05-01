@@ -5,9 +5,9 @@ import java.util.Iterator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.auto.AutoLine;
+import frc.robot.utils.logger.Logger;
 import frc.robot.auto.AutoFacade;
 import frc.robot.auto.AutoFiles;
-import frc.robot.logger.Logger;
 
 public class Auto extends CommandBase {
   private final AutoFacade autoFacade = new AutoFacade();

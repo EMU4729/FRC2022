@@ -7,7 +7,7 @@ import frc.robot.OI;
 import frc.robot.Subsystems;
 import frc.robot.Variables;
 
-public class Teleop extends CommandBase {
+public class TeleopDrive extends CommandBase {
   private final Variables variables = Variables.getInstance();
   private final Subsystems subsystems = Subsystems.getInstance();
   private final OI oi = OI.getInstance();
@@ -15,7 +15,7 @@ public class Teleop extends CommandBase {
 
   private double speedMultiplier;
 
-  public Teleop() {
+  public TeleopDrive() {
     addRequirements(subsystems.drive);
   }
 

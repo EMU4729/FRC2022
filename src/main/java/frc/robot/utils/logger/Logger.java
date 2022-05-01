@@ -1,4 +1,4 @@
-package frc.robot.logger;
+package frc.robot.utils.logger;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -23,28 +23,39 @@ public class Logger {
   private boolean logPause = false;
 
   private Logger() {
+    Optional<String> tmpPath = findUSBPort();
+    if(!tmpPath.isPresent()){
+      System.out.println(new LogLine("Log file creation failed : USB not found", LogLevel.WARN).toString());
+      fileCreationFailed = true;
+      logFileName = "";
+      initializeSaveThread();
+      return;
+    }
+
+    String usbPath = tmpPath.get();
     Date date = Calendar.getInstance().getTime();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
     String strDate = dateFormat.format(date);
-    String tempLogFileName = constants.PATH_USB + strDate + ".txt";
+    String tempLogFileName = usbPath + strDate + ".txt";
     File logFile = new File(tempLogFileName);
 
     try {
       for (int i = 1; !logFile.createNewFile(); i++) {
         if (i > constants.REPEAT_LIMIT_LOGGER_CREATION) {
           fileCreationFailed = true;
-          System.out.println("error : Log file creation failed : time out");
+          System.out.println("Log file creation failed : time out");
           break;
         }
-        tempLogFileName = constants.PATH_USB + strDate + "_(" + i + ")" + ".txt";
+        tempLogFileName = usbPath + strDate + "_(" + i + ")" + ".txt";
         logFile = new File(tempLogFileName);
       }
     } catch (IOException e) {
-      System.out.println(new LogLine("error : Log file creation failed : " + e.toString(), LogLevel.WARN).toString());
+      System.out.println(new LogLine("Log file creation failed : " + e.toString(), LogLevel.WARN).toString());
       fileCreationFailed = true;
     }
 
     logFileName = tempLogFileName;
+    initializeSaveThread();
   }
 
   public static Logger getInstance() {
@@ -97,6 +108,14 @@ public class Logger {
         Logger.error("Logger : Save thread interrupted : " + e);
       }
     }).start();
+  }
+  public Optional<String> findUSBPort(){
+    for(String tmpPath : constants.PATH_USB){
+      if(new File(tmpPath).exists()){
+        return Optional.of(tmpPath);
+      }
+    }
+    return Optional.empty();
   }
 
   /**

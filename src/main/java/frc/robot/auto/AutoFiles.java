@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import frc.robot.Constants;
-import frc.robot.logger.Logger;
+import frc.robot.utils.logger.Logger;
 
 /**
  * Utility class for handling all auto command files.

@@ -1,4 +1,4 @@
-package frc.robot.logger;
+package frc.robot.utils.logger;
 
 public enum LogLevel {
   HEADER,

@@ -2,10 +2,12 @@ package frc.robot.auto;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Commands;
-import frc.robot.logger.Logger;
+import frc.robot.Subsystems;
+import frc.robot.utils.logger.Logger;
 import frc.robot.utils.AsyncTimer;
 
 public class AutoFacade {
+  private final Subsystems subsystems = Subsystems.getInstance();
   private final Commands commands = Commands.getInstance();
   private final CommandScheduler scheduler = CommandScheduler.getInstance();
 
@@ -37,6 +39,7 @@ public class AutoFacade {
   public void driveStraight(AutoLine currentCommand) {
     double speed = currentCommand.getDouble(0);
     commands.autoDriveStraight.speed = speed;
+    commands.autoDriveArcade.steering = subsystems.navigation.getAngle();
     scheduler.schedule(true, commands.autoDriveStraight);
   }
 
@@ -71,7 +74,7 @@ public class AutoFacade {
   }
 
   public void storageStop() {
-    String stopped = "";
+    String stopped = "none";
     if (commands.storageRun.isScheduled()) {
       commands.storageRun.end(true);
       stopped = "Slow";

@@ -3,7 +3,7 @@ package frc.robot.auto;
 import java.util.Arrays;
 import java.util.List;
 
-import frc.robot.logger.Logger;
+import frc.robot.utils.logger.Logger;
 
 /**
  * Utility data structure for parsing auto command lines.

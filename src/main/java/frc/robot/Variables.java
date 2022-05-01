@@ -23,14 +23,16 @@ public final class Variables {
     return instance.get();
   }
 
-  // Motor Options
+  /** Bool to invert robot steering direction */
   public boolean invertSteering = false;
+  /** Bool to invert robot drive direction flipping the apparent front of the robot */
   public boolean invertDriveDirection = false;
 
-  // Drive Speed Multipliers
+  /** Multiplier for robot max speed in teleop */
   public double teleopSpeedMultiplier = 1;
+  /** Multiplier for robot max speed in auto */
   public double autoSpeedMultiplier = 1;
 
-  // Drive Input Curve Exponent
+  /** Drive Input Curve Exponent */
   public double inputCurveExponent = 3;
 }

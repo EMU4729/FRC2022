@@ -6,7 +6,7 @@ import frc.robot.Subsystems;
 public class AutoDriveStraight extends CommandBase {
   private final Subsystems subsystems = Subsystems.getInstance();
 
-  private double targetAngle;
+  public double targetAngle;
 
   public double speed;
 
@@ -16,7 +16,6 @@ public class AutoDriveStraight extends CommandBase {
 
   @Override
   public void initialize() {
-    targetAngle = subsystems.navigation.getAngle();
   }
 
   @Override
