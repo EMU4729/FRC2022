@@ -2,7 +2,6 @@ package frc.robot;
 
 import java.util.Optional;
 
-import frc.robot.commands.Auto;
 import frc.robot.commands.AutoDriveArcade;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
@@ -14,7 +13,6 @@ import frc.robot.commands.IntakeRun;
 import frc.robot.commands.StorageReverse;
 import frc.robot.commands.StorageRun;
 import frc.robot.commands.StorageShoot;
-import frc.robot.commands.TeleopDrive;
 
 /**
  * Commands - Use this class to initialize and access commands globally.
@@ -38,11 +36,9 @@ public class Commands {
   // BallStopOpen(ballStopSub);
   // public final BallStopClose ballStopCloseCommand = new
   // BallStopClose(ballStopSub);
-  public final Auto auto = new Auto();
   public final AutoDriveStraight autoDriveStraight = new AutoDriveStraight();
   public final AutoDriveArcade autoDriveArcade = new AutoDriveArcade();
   public final AutoDriveTank autoDriveTank = new AutoDriveTank();
-  public final TeleopDrive teleop = new TeleopDrive();
   public final DriveInvert driveInvert = new DriveInvert();
   public final IntakeRun intakeRun = new IntakeRun();
   // public final NavigationUpdate navigationUpdate = new NavigationUpdate();

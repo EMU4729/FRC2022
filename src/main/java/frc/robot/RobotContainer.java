@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.Auto;
+import frc.robot.commands.TeleopDrive;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -19,6 +21,8 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   private final Commands commands = Commands.getInstance();
+  private final Auto autoCommand = new Auto();
+  private final TeleopDrive teleopCommand = new TeleopDrive();
   private final OI oi = OI.getInstance();
 
   /**
@@ -66,7 +70,7 @@ public class RobotContainer {
    * @return the command to run in teleop
    */
   public Command getTeleopCommand() {
-    return commands.teleop;
+    return teleopCommand;
   }
 
   /**
@@ -75,6 +79,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return commands.auto;
+    return autoCommand;
   }
 }
