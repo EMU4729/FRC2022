@@ -19,7 +19,7 @@ public class StorageSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
   private final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(constants.STORAGE_CONVEYER_MOTOR_PORT);
   private final WPI_TalonSRX shooterMotor = new WPI_TalonSRX(constants.STORAGE_SHOOTER_MOTOR_PORT);
-  private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(constants.BottomColorSensorPort);
+  private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(constants.BOTTOM_COLOR_SENSOR_PORT);
   private final ColorSensorV3 topColorSensor = new ColorSensorV3(constants.STORAGE_SENSOR_COLOR_TOP);
   // private final DigitalInput limitSwitch = new
   // DigitalInput(constants.LimitSwitchChannel);

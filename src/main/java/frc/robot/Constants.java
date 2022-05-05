@@ -70,9 +70,9 @@ public final class Constants {
   /** Port Number for upper color sensor in storage */
   public final I2C.Port STORAGE_SENSOR_COLOR_TOP = I2C.Port.kMXP; // TODO: Update this
   /** Port Number for lower color sensor in storage */
-  public final I2C.Port BottomColorSensorPort = I2C.Port.kMXP; // TODO: Update this
+  public final I2C.Port BOTTOM_COLOR_SENSOR_PORT = I2C.Port.kMXP; // TODO: Update this
   /** Port Number for ball entry sensor in storage */
-  public final int LimitSwitchChannel = 69420; // TODO: Update this
+  public final int LIMIT_SWITCH_CHANNEL = 69420; // TODO: Update this
 
   // File Paths
   /** file path header for files on usb storage */
