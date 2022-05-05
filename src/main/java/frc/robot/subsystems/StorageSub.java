@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.ColorSensorV3;
+// import com.revrobotics.ColorSensorV3;
 
 // import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -19,8 +19,10 @@ public class StorageSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
   private final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(constants.STORAGE_CONVEYER_MOTOR_PORT);
   private final WPI_TalonSRX shooterMotor = new WPI_TalonSRX(constants.STORAGE_SHOOTER_MOTOR_PORT);
-  private final ColorSensorV3 bottomColorSensor = new ColorSensorV3(constants.BOTTOM_COLOR_SENSOR_PORT);
-  private final ColorSensorV3 topColorSensor = new ColorSensorV3(constants.STORAGE_SENSOR_COLOR_TOP);
+  // private final ColorSensorV3 bottomColorSensor = new
+  // ColorSensorV3(constants.BOTTOM_COLOR_SENSOR_PORT);
+  // private final ColorSensorV3 topColorSensor = new
+  // ColorSensorV3(constants.STORAGE_SENSOR_COLOR_TOP);
   // private final DigitalInput limitSwitch = new
   // DigitalInput(constants.LimitSwitchChannel);
 
@@ -48,16 +50,16 @@ public class StorageSub extends SubsystemBase {
    * @param location The StorageColorSensor.
    * @return The ColorSensorV3 instance.
    */
-  private ColorSensorV3 getColorSensor(ColorSensor location) {
-    switch (location) {
-      case TOP:
-        return topColorSensor;
-      case BOTTOM:
-        return bottomColorSensor;
-      default:
-        throw new Error("Impossible scenario - this will never happen");
-    }
-  }
+  // private ColorSensorV3 getColorSensor(ColorSensor location) {
+  // switch (location) {
+  // case TOP:
+  // return topColorSensor;
+  // case BOTTOM:
+  // return bottomColorSensor;
+  // default:
+  // throw new Error("Impossible scenario - this will never happen");
+  // }
+  // }
 
   /**
    * Sets the conveyor speed.
@@ -85,9 +87,9 @@ public class StorageSub extends SubsystemBase {
    * @param location The color sensor to use.
    * @return The color detected by the color sensor.
    */
-  public Color getColor(ColorSensor location) {
-    return getColorSensor(location).getColor();
-  }
+  // public Color getColor(ColorSensor location) {
+  // return getColorSensor(location).getColor();
+  // }
 
   /**
    * Gets the current ball type detected by the given color sensor.
@@ -95,16 +97,16 @@ public class StorageSub extends SubsystemBase {
    * @param location
    * @return The ball type detected by the color sensor as a {@link BallType}.
    */
-  public BallType getBall(ColorSensor location) {
-    Color ballColor = getColor(location);
-    if (ballColor == teamColor) {
-      return BallType.TEAM;
-    }
-    if (ballColor == oppColor) {
-      return BallType.OPP;
-    }
-    return BallType.NONE;
-  }
+  // public BallType getBall(ColorSensor location) {
+  // Color ballColor = getColor(location);
+  // if (ballColor == teamColor) {
+  // return BallType.TEAM;
+  // }
+  // if (ballColor == oppColor) {
+  // return BallType.OPP;
+  // }
+  // return BallType.NONE;
+  // }
 
   /** Enum representing storage color sensor positions */
   public enum ColorSensor {
