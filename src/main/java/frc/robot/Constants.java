@@ -31,13 +31,13 @@ public final class Constants {
 
   // Drive Ports
   /** Port Number for left master drive */
-  public final int DRIVE_MOTOR_PORT_LM = 6;
+  public final int DRIVE_MOTOR_PORT_LM = 4;
   /** Port Number for right master drive */
-  public final int DRIVE_MOTOR_PORT_RM = 11;
+  public final int DRIVE_MOTOR_PORT_RM = 1;
   /** Port Number for left slave drive */
   public final int DRIVE_MOTOR_PORT_LS = 5;
   /** Port Number for right slave drive */
-  public final int DRIVE_MOTOR_PORT_RS = 12;
+  public final int DRIVE_MOTOR_PORT_RS = 2;
   /** Port Number for left drive encoder A channel */
   public final int DRIVE_ENCODER_PORT_LA = 69420; // UNUSED
   /** Port Number for left drive encoder B channel */
@@ -58,9 +58,9 @@ public final class Constants {
   /** Port Number for storage ballstop motor */
   public final int STORAGE_BALLSTOP_MOTOR_PORT = 69420; // UNUSED
   /** Port Number for storage shooter motor */
-  public final int STORAGE_SHOOTER_MOTOR_PORT = 69420; // UPDATE
+  public final int STORAGE_SHOOTER_MOTOR_PORT = 8; // VALIDATE
   /** Port Number for climber motor */
-  public final int CLIMBER_MOTOR_PORT = 8; // VALIDATE
+  public final int CLIMBER_MOTOR_PORT = 69420; // UPDATE
 
   // Controller
   /** Port Number for xbox controller input device */
