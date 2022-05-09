@@ -13,12 +13,11 @@ import frc.robot.utils.Clamper;
 
 /**
  * Storage Subsystem.
- * Handles the ball conveyor belt and scoring into the low goal.
+ * Handles the ball conveyor belt.
  */
 public class StorageSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
-  private final WPI_VictorSPX conveyorMotor = new WPI_VictorSPX(constants.STORAGE_CONVEYER_MOTOR_PORT);
-  private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(constants.STORAGE_SHOOTER_MOTOR_PORT);
+  private final WPI_VictorSPX motor = new WPI_VictorSPX(constants.STORAGE_CONVEYER_MOTOR_PORT);
   // private final ColorSensorV3 bottomColorSensor = new
   // ColorSensorV3(constants.BOTTOM_COLOR_SENSOR_PORT);
   // private final ColorSensorV3 topColorSensor = new
@@ -68,18 +67,10 @@ public class StorageSub extends SubsystemBase {
    */
   public void setConveyorSpeed(double speed) {
     speed = Clamper.absUnit(speed);
-    conveyorMotor.set(speed);
+    motor.set(speed);
   }
 
-  /**
-   * Sets the shooter speed.
-   * 
-   * @param speed Speed between -1 and 1
-   */
-  public void setShooterSpeed(double speed) {
-    speed = Clamper.absUnit(speed);
-    shooterMotor.set(speed);
-  }
+  
 
   /**
    * Gets the current color detected by the given color sensor.

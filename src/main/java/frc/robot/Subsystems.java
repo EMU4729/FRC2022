@@ -7,6 +7,7 @@ import frc.robot.subsystems.ClimberSub;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.NavigationSub;
+import frc.robot.subsystems.ShooterSub;
 import frc.robot.subsystems.StorageSub;
 
 /**
@@ -31,5 +32,6 @@ public class Subsystems {
   public final IntakeSub intake = new IntakeSub();
   public final NavigationSub navigation = new NavigationSub();
   public final StorageSub storage = new StorageSub();
+  public final ShooterSub shooter = new ShooterSub();
   public final BallStopSub ballStop = new BallStopSub();
 }

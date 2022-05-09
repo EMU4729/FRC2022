@@ -12,7 +12,7 @@ import frc.robot.commands.IntakeRun;
 // import frc.robot.commands.NavigationUpdate;
 import frc.robot.commands.StorageReverse;
 import frc.robot.commands.StorageRun;
-import frc.robot.commands.StorageShoot;
+import frc.robot.commands.ShooterRun;
 
 /**
  * Commands - Use this class to initialize and access commands globally.
@@ -44,6 +44,6 @@ public class Commands {
   public final IntakeRun intakeRun = new IntakeRun();
   // public final NavigationUpdate navigationUpdate = new NavigationUpdate();
   public final StorageRun storageRun = new StorageRun();
-  public final StorageShoot storageShoot = new StorageShoot();
+  public final ShooterRun storageShoot = new ShooterRun();
   public final StorageReverse storageReverse = new StorageReverse();
 }
