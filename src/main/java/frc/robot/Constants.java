@@ -52,19 +52,19 @@ public final class Constants {
 
   // Other Motors
   /** Port Number for intake motor */
-  public final int INTAKE_MOTOR_PORT = 6; // VALIDATE
+  public final int INTAKE_MOTOR_PORT = 6; // WORKING
   /** Port Number for storage conveyer motor */
-  public final int STORAGE_CONVEYER_MOTOR_PORT = 7; // VALIDATE
+  public final int STORAGE_CONVEYER_MOTOR_PORT = 7; // WORKING
   /** Port Number for storage ballstop motor */
   public final int STORAGE_BALLSTOP_MOTOR_PORT = 69420; // UNUSED
   /** Port Number for storage shooter motor */
-  public final int STORAGE_SHOOTER_MOTOR_PORT = 8; // VALIDATE
+  public final int STORAGE_SHOOTER_MOTOR_PORT = 8; // WORKING
   /** Port Number for climber motor */
-  public final int CLIMBER_MOTOR_PORT = 69420; // UPDATE
+  public final int CLIMBER_MOTOR_PORT = 0; // WORKING
 
   // Controller
   /** Port Number for xbox controller input device */
-  public final int DEVICE_PORT_XBOX_CONTROLLER = 0; // VALIDATE
+  public final int DEVICE_PORT_XBOX_CONTROLLER = 0; // WORKING
 
   // Storage Sensors
   /** Port Number for upper color sensor in storage */

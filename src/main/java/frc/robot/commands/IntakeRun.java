@@ -13,8 +13,9 @@ public class IntakeRun extends CommandBase {
 
   @Override
   public void initialize() {
+    System.out.println("intake");
     Logger.info("IntakeRun : Start : Forward");
-    subsystems.intake.setSpinSpeed(0.5);
+    subsystems.intake.setSpinSpeed(-0.5);
   }
 
   @Override

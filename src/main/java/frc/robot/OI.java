@@ -15,6 +15,7 @@ public class OI {
   private final Constants constants = Constants.getInstance();
 
   private OI() {
+    System.out.println("Oi init");
   }
 
   public static OI getInstance() {

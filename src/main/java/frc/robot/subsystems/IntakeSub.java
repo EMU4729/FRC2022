@@ -1,7 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import frc.robot.Constants;
 import frc.robot.utils.Clamper;
 
@@ -11,7 +12,7 @@ import frc.robot.utils.Clamper;
  */
 public class IntakeSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.INTAKE_MOTOR_PORT);
+  private final WPI_VictorSPX motor = new WPI_VictorSPX(constants.INTAKE_MOTOR_PORT);
 
   @Override
   public void periodic() {
@@ -24,6 +25,7 @@ public class IntakeSub extends SubsystemBase {
    */
   public void setSpinSpeed(double speed) {
     speed = Clamper.absUnit(speed);
+    System.out.println("speed : "+speed);
     motor.set(speed);
   }
 }

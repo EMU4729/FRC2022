@@ -96,7 +96,7 @@ public class Logger {
   }
 
   public void initializeSaveThread() {
-    new Thread(() -> {
+    /*new Thread(() -> {
       try {
         // TODO: Implement interrupting the thread
         while (true) {
@@ -107,7 +107,7 @@ public class Logger {
       } catch (InterruptedException e) {
         Logger.error("Logger : Save thread interrupted : " + e);
       }
-    }).start();
+    }).start();*/
   }
   public Optional<String> findUSBPort(){
     for(String tmpPath : constants.PATH_USB){
@@ -122,15 +122,15 @@ public class Logger {
    * pause the logger temporarily
    */
   public void pause() {
-    logPause = true;
-    save();
+    //logPause = true;
+    //save();
   }
 
   /**
    * restart the logger
    */
   public void unpause() {
-    logPause = false;
+    //logPause = false;
   }
 
   public void save() {

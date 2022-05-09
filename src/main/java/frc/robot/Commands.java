@@ -21,6 +21,7 @@ public class Commands {
   private static Optional<Commands> instance = Optional.empty();
 
   private Commands() {
+    System.out.println("commands init");
   }
 
   public static Commands getInstance() {

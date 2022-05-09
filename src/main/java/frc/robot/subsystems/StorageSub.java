@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 // import com.revrobotics.ColorSensorV3;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 // import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -17,8 +17,8 @@ import frc.robot.utils.Clamper;
  */
 public class StorageSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
-  private final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(constants.STORAGE_CONVEYER_MOTOR_PORT);
-  private final WPI_TalonSRX shooterMotor = new WPI_TalonSRX(constants.STORAGE_SHOOTER_MOTOR_PORT);
+  private final WPI_VictorSPX conveyorMotor = new WPI_VictorSPX(constants.STORAGE_CONVEYER_MOTOR_PORT);
+  private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(constants.STORAGE_SHOOTER_MOTOR_PORT);
   // private final ColorSensorV3 bottomColorSensor = new
   // ColorSensorV3(constants.BOTTOM_COLOR_SENSOR_PORT);
   // private final ColorSensorV3 topColorSensor = new
