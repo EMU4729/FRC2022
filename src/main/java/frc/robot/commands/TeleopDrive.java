@@ -41,10 +41,12 @@ public class TeleopDrive extends CommandBase {
       subsystems.drive.tank(leftSpeed * speedMultiplier, rightSpeed * speedMultiplier);
     } else {
       double speed = Math.pow(oi.controller.getLeftY(), variables.inputCurveExponent);
-      double steering = oi.controller.getRightX();
+      // TODO: also make this make sense
+      double steering = -oi.controller.getRightX();
 
       // If needed, make the teleop speed multiplier affect steering, too
-      subsystems.drive.arcade(speed * speedMultiplier, steering);
+      // TODO: Actually find the actual error behind the confusion that is this
+      subsystems.drive.arcade(steering * speedMultiplier, speed);
     }
   }
 
