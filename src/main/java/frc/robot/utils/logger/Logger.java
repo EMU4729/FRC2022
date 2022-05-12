@@ -32,6 +32,7 @@ public class Logger {
   private Logger() {
     findFilePath();
     makeFile();
+    runLoggerThread();
   }
   public static Logger getInstance() {
     if (!instance.isPresent()) {
