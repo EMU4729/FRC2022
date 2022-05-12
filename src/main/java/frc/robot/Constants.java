@@ -87,4 +87,6 @@ public final class Constants {
   public final int REPEAT_LIMIT_LOGGER_CREATION = 10;
   /** limit for repeated attempts to read auto from internal storage */
   public final int REPEAT_LIMIT_AUTO_READ = 10;
+  /** save attempts per second for the logger */
+  public int LOGGER_SAVE_RATE = 10;
 }
