@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems;
 import frc.robot.utils.logger.Logger;
 
+/**
+ * Command to run the storage.
+ */
 public class StorageRun extends CommandBase {
   private final Subsystems subsystems = Subsystems.getInstance();
 

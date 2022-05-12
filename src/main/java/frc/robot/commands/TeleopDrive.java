@@ -7,6 +7,9 @@ import frc.robot.OI;
 import frc.robot.Subsystems;
 import frc.robot.Variables;
 
+/**
+ * The Teleop Command.
+ */
 public class TeleopDrive extends CommandBase {
   private final Variables variables = Variables.getInstance();
   private final Subsystems subsystems = Subsystems.getInstance();

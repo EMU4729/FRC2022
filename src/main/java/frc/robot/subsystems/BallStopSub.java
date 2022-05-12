@@ -5,6 +5,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.utils.Clamper;
 
+/**
+ * Subsystem that handles all ball stop functionality.
+ * 
+ * @apiNote The hardware for this is currently not made, so don't use this.
+ */
 public class BallStopSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
   private final WPI_TalonSRX motor = new WPI_TalonSRX(constants.STORAGE_BALLSTOP_MOTOR_PORT);

@@ -38,6 +38,7 @@ public class AutoFacade {
 
   public void driveStraight(AutoLine currentCommand) {
     double speed = currentCommand.getDouble(0);
+    Logger.info("Auto : Drive Straight : Speed = " + speed);
     commands.autoDriveStraight.speed = speed;
     commands.autoDriveArcade.steering = subsystems.navigation.getAngle();
     scheduler.schedule(true, commands.autoDriveStraight);
@@ -58,29 +59,35 @@ public class AutoFacade {
     Logger.info("Auto : Drive Off : Stopped = " + stopped);
   }
 
+  public void shooterRun() {
+    Logger.info("Auto : Shooter Run");
+    scheduler.schedule(true, commands.shooterRun);
+  }
+
+  public void shooterStop() {
+    Logger.info("Auto : Shooter Stop");
+    if (commands.shooterRun.isScheduled()) {
+      commands.shooterRun.end(true);
+    }
+  }
+
   public void storageRun() {
+    Logger.info("Auto : Storage Run");
     storageStop();
     scheduler.schedule(true, commands.storageRun);
   }
 
-  public void storageShoot() {
-    storageStop();
-    scheduler.schedule(true, commands.storageShoot);
-  }
-
   public void storageReverse() {
+    Logger.info("Auto : Storage Reverse");
     storageStop();
     scheduler.schedule(true, commands.storageReverse);
   }
 
   public void storageStop() {
-    String stopped = "none";
+    String stopped = "None";
     if (commands.storageRun.isScheduled()) {
       commands.storageRun.end(true);
-      stopped = "Slow";
-    } else if (commands.storageShoot.isScheduled()) {
-      commands.storageShoot.end(true);
-      stopped = "Fast";
+      stopped = "Forward";
     } else if (commands.storageReverse.isScheduled()) {
       commands.storageReverse.end(true);
       stopped = "Reverse";
@@ -89,6 +96,7 @@ public class AutoFacade {
   }
 
   public void intakeRun() {
+    Logger.info("Auto : Intake Run");
     scheduler.schedule(true, commands.intakeRun);
   }
 

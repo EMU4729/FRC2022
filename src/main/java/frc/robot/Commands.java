@@ -44,6 +44,6 @@ public class Commands {
   public final IntakeRun intakeRun = new IntakeRun();
   // public final NavigationUpdate navigationUpdate = new NavigationUpdate();
   public final StorageRun storageRun = new StorageRun();
-  public final ShooterRun storageShoot = new ShooterRun();
+  public final ShooterRun shooterRun = new ShooterRun();
   public final StorageReverse storageReverse = new StorageReverse();
 }

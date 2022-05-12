@@ -46,7 +46,7 @@ public class RobotContainer {
     oi.lb.whenHeld(commands.intakeRun);
 
     // Shoot Storage
-    oi.rb.whenHeld(commands.storageShoot);
+    oi.rb.whenHeld(commands.shooterRun);
 
     // Run Storage
     oi.x.whenHeld(commands.storageRun);

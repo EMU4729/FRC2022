@@ -5,6 +5,9 @@ import frc.robot.Subsystems;
 import frc.robot.utils.AsyncTimer;
 import frc.robot.utils.logger.Logger;
 
+/**
+ * Command to raise the climber.
+ */
 public class ClimberUp extends CommandBase {
   private final Subsystems subsystems = Subsystems.getInstance();
   private AsyncTimer timer;
