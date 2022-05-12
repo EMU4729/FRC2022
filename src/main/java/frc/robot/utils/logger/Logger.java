@@ -23,7 +23,7 @@ public class Logger {
   private Thread LogThread;
 
   private boolean logPause = false;
-  private boolean logStop = false;
+  private boolean logStop = true;
 
   private File logFile;
   private String filePath;
@@ -157,6 +157,7 @@ public class Logger {
   }
 
   private void runLoggerThread(){
+    if(logStop){return;}
     LogThread = new Thread(() -> {
       try {
         while(!logStop){
