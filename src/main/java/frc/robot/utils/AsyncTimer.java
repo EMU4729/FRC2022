@@ -21,11 +21,20 @@ public class AsyncTimer {
   }
 
   /**
+   * Returns the number of milliseconds until the timer has finished.
+   * 
+   * @return The number of ms until the timer has finished.
+   */
+  public long timeUntilFinished() {
+    return Duration.between(start, Instant.now()).toMillis();
+  }
+
+  /**
    * Checks if the timer has finished.
    * 
    * @return true if the timer's duration has been elapsed and false if not.
    */
   public boolean isFinished() {
-    return Duration.between(start, Instant.now()).toMillis() >= duration;
+    return timeUntilFinished() >= duration;
   }
 }
