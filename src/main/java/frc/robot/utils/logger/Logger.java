@@ -71,15 +71,15 @@ public class Logger {
       for(String tmpPath : constants.PATH_USB){
         if(new File(tmpPath).exists()){
           filePath = tmpPath;
-          info("Logger : File Path Found : "+filePath);
+          System.out.println("Logger : File Path Found : "+filePath);
           return;
         }
       }
       FileCreationFailed = true;
-      error("Logger : File Path Not Found : Logger printing to consol");
+      System.out.println("Logger : File Path Not Found : Logger printing to consol");
     } catch(SecurityException e) {
       FileCreationFailed = true;
-      error("Logger : File Path Security Exception : Logger printing to consol");
+      System.out.println("Logger : File Path Security Exception : Logger printing to consol");
     }
   }
   private void makeFile(){
@@ -93,17 +93,17 @@ public class Logger {
       for(int i = 0; !logFile.createNewFile(); i++){
         if(i > constants.REPEAT_LIMIT_LOGGER_CREATION){
           FileCreationFailed = true;
-          error("Logger : File Creation Failed : Timed Out : Logger printing to consol");
+          System.out.println("Logger : File Creation Failed : Timed Out : Logger printing to consol");
           return;
         }
         logFile = new File(filePath+dateFormat.format(date)+"_("+i+").txt");
       }
     } catch(IOException e){
       FileCreationFailed = true;
-      error("Logger : File Creation Failed : IOException : "+e+" : Logger printing to consol");
+      System.out.println("Logger : File Creation Failed : IOException : "+e+" : Logger printing to consol");
     } catch(SecurityException e){
       FileCreationFailed = true;
-      error("Logger : File Creation Failed : Security Exception : "+e+" : Logger printing to consol");
+      System.out.println("Logger : File Creation Failed : Security Exception : "+e+" : Logger printing to consol");
     }
   }
   public void save() {
@@ -122,9 +122,9 @@ public class Logger {
       }
       logWriter.close();
     } catch (IOException e){
-      error("Logger : File Save Failed : IOExeption : "+e);
+      System.out.println("Logger : File Save Failed : IOExeption : "+e);
     } catch (SecurityException e){
-      error("Logger : File Save Failed : Security Exeption : "+e);
+      System.out.println("Logger : File Save Failed : Security Exeption : "+e);
     }finally {
       if(!logCache.isEmpty()){System.out.println("Logger : Save Error : Dumping Cache to Consol");}
       while(!logCache.isEmpty()){
@@ -161,7 +161,7 @@ public class Logger {
           Thread.sleep(1000 / constants.LOGGER_SAVE_RATE);
         }
       } catch (InterruptedException e){
-        Logger.error("Logger : Save Thread Interupted : "+e);
+        System.out.println("Logger : Save Thread Interupted : "+e);
       }
     });
     LogThread.start();
