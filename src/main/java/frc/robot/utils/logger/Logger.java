@@ -107,12 +107,14 @@ public class Logger {
     }
   }
   public void save() {
-    cacheLock.lock();
     if(logCache.isEmpty() || logPause){ return; }
+    cacheLock.lock();
     if(FileCreationFailed){
       while(!logCache.isEmpty()){
         System.out.println(logCache.remove(0).toString());
       }
+      cacheLock.unlock();
+      return;
     }
     try {
       FileWriter logWriter = new FileWriter(logFile,true);
@@ -132,6 +134,7 @@ public class Logger {
       }
       cacheLock.unlock();
     }
+    cacheLock.unlock();
   }
   /** reversibly stops operation of the logger */
   public void pause(){
