@@ -48,7 +48,7 @@ public final class Constants {
   public final int DRIVE_ENCODER_PORT_RB = 69420; // UNUSED
 
   /** Proportional constant for driving straight durin auto */
-  public double AUTO_STRAIGHT_KP = 0.234;
+  public double AUTO_STRAIGHT_KP = 0.234; // UPDATE
 
   // Other Motors
   /** Port Number for intake motor */

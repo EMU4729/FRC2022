@@ -16,7 +16,7 @@ public class DriveSub extends SubsystemBase {
   private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(constants.DRIVE_MOTOR_PORT_LS);
   private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(constants.DRIVE_MOTOR_PORT_RM);
   private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(constants.DRIVE_MOTOR_PORT_RS);
-  private final Variables vars;
+  private final Variables vars = Variables.getInstance();
 
   public DriveSub() {
     leftSlave.follow(leftMaster);
@@ -24,8 +24,6 @@ public class DriveSub extends SubsystemBase {
 
     // change this if needed
     leftMaster.setInverted(true);
-
-    vars = Variables.getInstance();
   }
 
   /**
