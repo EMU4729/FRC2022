@@ -61,15 +61,19 @@ public class Auto extends CommandBase {
         Logger.info("Auto : Drive Stop");
         nextCommand();
         break;
-      case "storageRunSlow": // run storage slow
+      case "shooterRun": // run shooter
+        autoFacade.shooterRun();
+        nextCommand();
+        break;
+      case "shooterStop":
+        autoFacade.shooterStop();
+        nextCommand();
+        break;
+      case "storageRun": // run storage
         autoFacade.storageRun();
         nextCommand();
         break;
-      case "storageRunFast": // run storage fast
-        autoFacade.storageShoot();
-        nextCommand();
-        break;
-      case "storageRunReverse": // run storage in reverse
+      case "storageReverse": // run storage in reverse
         autoFacade.storageReverse();
         nextCommand();
         break;
