@@ -25,7 +25,6 @@ public class IntakeSub extends SubsystemBase {
    */
   public void setSpinSpeed(double speed) {
     speed = Clamper.absUnit(speed);
-    System.out.println("speed : "+speed);
     motor.set(speed);
   }
 }
