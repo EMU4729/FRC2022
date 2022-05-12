@@ -16,48 +16,23 @@ import frc.robot.Constants;
 public class Logger {
   private static Optional<Logger> instance = Optional.empty();
   private ArrayList<LogLine> logCache = new ArrayList<LogLine>();
-  private final ReentrantLock saveLock = new ReentrantLock();
-  private final String logFileName;
   private final Constants constants = Constants.getInstance();
-  private boolean fileCreationFailed = false;
+
+  private final ReentrantLock cacheLock = new ReentrantLock();
+
+  private Thread LogThread;
+
   private boolean logPause = false;
+  private boolean logStop = false;
+
+  private File logFile;
+  private String filePath;
+  private boolean FileCreationFailed = false;
 
   private Logger() {
-    Optional<String> tmpPath = findUSBPort();
-    if(!tmpPath.isPresent()){
-      System.out.println(new LogLine("Log file creation failed : USB not found", LogLevel.WARN).toString());
-      fileCreationFailed = true;
-      logFileName = "";
-      initializeSaveThread();
-      return;
-    }
-
-    String usbPath = tmpPath.get();
-    Date date = Calendar.getInstance().getTime();
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
-    String strDate = dateFormat.format(date);
-    String tempLogFileName = usbPath + strDate + ".txt";
-    File logFile = new File(tempLogFileName);
-
-    try {
-      for (int i = 1; !logFile.createNewFile(); i++) {
-        if (i > constants.REPEAT_LIMIT_LOGGER_CREATION) {
-          fileCreationFailed = true;
-          System.out.println("Log file creation failed : time out");
-          break;
-        }
-        tempLogFileName = usbPath + strDate + "_(" + i + ")" + ".txt";
-        logFile = new File(tempLogFileName);
-      }
-    } catch (IOException e) {
-      System.out.println(new LogLine("Log file creation failed : " + e.toString(), LogLevel.WARN).toString());
-      fileCreationFailed = true;
-    }
-
-    logFileName = tempLogFileName;
-    initializeSaveThread();
+    findFilePath();
+    makeFile();
   }
-
   public static Logger getInstance() {
     if (!instance.isPresent()) {
       instance = Optional.of(new Logger());
@@ -67,94 +42,127 @@ public class Logger {
 
   public static void header(String content) {
     LogLine logLine = new LogLine(content, LogLevel.HEADER);
-    System.out.println(logLine.toString());
     addLine(logLine);
   }
-
   public static void info(String content) {
     LogLine logLine = new LogLine(content, LogLevel.INFO);
     addLine(logLine);
   }
-
   public static void warn(String content) {
     LogLine logLine = new LogLine(content, LogLevel.WARN);
     addLine(logLine);
   }
-
   public static void error(String content) {
     LogLine logLine = new LogLine(content, LogLevel.ERROR);
-    System.out.println(logLine.toString());
     addLine(logLine);
   }
 
   private static void addLine(LogLine line) {
     Logger logger = getInstance();
-    logger.saveLock.lock();
+    logger.cacheLock.lock();
     logger.logCache.add(line);
-    logger.saveLock.unlock();
-
+    logger.cacheLock.unlock();
   }
 
-  public void initializeSaveThread() {
-    /*new Thread(() -> {
-      try {
-        // TODO: Implement interrupting the thread
-        while (true) {
-          if (!logPause)
-            save();
-          Thread.sleep(5);
+  private void findFilePath(){
+    if(logPause){ return; }
+    try {
+      for(String tmpPath : constants.PATH_USB){
+        if(new File(tmpPath).exists()){
+          filePath = tmpPath;
+          info("Logger : File Path Found : "+filePath);
+          return;
         }
-      } catch (InterruptedException e) {
-        Logger.error("Logger : Save thread interrupted : " + e);
       }
-    }).start();*/
-  }
-  public Optional<String> findUSBPort(){
-    for(String tmpPath : constants.PATH_USB){
-      if(new File(tmpPath).exists()){
-        return Optional.of(tmpPath);
-      }
+      FileCreationFailed = true;
+      error("Logger : File Path Not Found : Logger printing to consol");
+    } catch(SecurityException e) {
+      FileCreationFailed = true;
+      error("Logger : File Path Security Exception : Logger printing to consol");
     }
-    return Optional.empty();
   }
+  private void makeFile(){
+    if(FileCreationFailed || logPause){return;}
 
-  /**
-   * pause the logger temporarily
-   */
-  public void pause() {
-    //logPause = true;
-    //save();
-  }
-
-  /**
-   * restart the logger
-   */
-  public void unpause() {
-    //logPause = false;
-  }
-
-  public void save() {
-    saveLock.lock();
-    if (logCache.isEmpty() || fileCreationFailed) {
-      if (!logCache.isEmpty() && fileCreationFailed) {
-        while (!logCache.isEmpty()) {
-          System.out.println(logCache.remove(0).toString());
+    Date date = Calendar.getInstance().getTime();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
+    logFile = new File(filePath+dateFormat.format(date)+".txt");
+    
+    try { 
+      for(int i = 0; !logFile.createNewFile(); i++){
+        if(i > constants.REPEAT_LIMIT_LOGGER_CREATION){
+          FileCreationFailed = true;
+          error("Logger : File Creation Failed : Timed Out : Logger printing to consol");
+          return;
         }
+        logFile = new File(filePath+dateFormat.format(date)+"_("+i+").txt");
       }
-      return;
+    } catch(IOException e){
+      FileCreationFailed = true;
+      error("Logger : File Creation Failed : IOException : "+e+" : Logger printing to consol");
+    } catch(SecurityException e){
+      FileCreationFailed = true;
+      error("Logger : File Creation Failed : Security Exception : "+e+" : Logger printing to consol");
+    }
+  }
+  public void save() {
+    cacheLock.lock();
+    if(logCache.isEmpty() || logPause){ return; }
+    if(FileCreationFailed){
+      while(!logCache.isEmpty()){
+        System.out.println(logCache.remove(0).toString());
+      }
     }
     try {
-      FileWriter logWriter = new FileWriter(logFileName, true);
-      while (!logCache.isEmpty()) {
-        logWriter.write(logCache.get(0).toString());
+      FileWriter logWriter = new FileWriter(logFile,true);
+      while(!logCache.isEmpty()){
+        logWriter.write(logCache.remove(0).toString());
         logWriter.write(System.getProperty("line.separator"));
-        logCache.remove(0);
       }
       logWriter.close();
-    } catch (IOException e) {
-      System.out.println("error : write to log file failed : " + e.toString());
-    } finally {
-      saveLock.unlock();
+    } catch (IOException e){
+      error("Logger : File Save Failed : IOExeption : "+e);
+    } catch (SecurityException e){
+      error("Logger : File Save Failed : Security Exeption : "+e);
+    }finally {
+      if(!logCache.isEmpty()){System.out.println("Logger : Save Error : Dumping Cache to Consol");}
+      while(!logCache.isEmpty()){
+        System.out.println(logCache.remove(0).toString());
+      }
+      cacheLock.unlock();
     }
+  }
+  /** reversibly stops operation of the logger */
+  public void pause(){
+    if(!logStop){
+      logPause = true;
+    }
+  }
+  /** restarts the logger when paused */
+  public void unpause(){
+    if(!logStop){
+      logPause = false;
+    }
+  }
+  /** irreversably kills the logger */
+  public void stop(){
+    if(!logStop){
+      pause();
+      logStop = true;
+    }
+  }
+
+  private void runLoggerThread(){
+    LogThread = new Thread(() -> {
+      try {
+        while(!logStop){
+          save();
+          Thread.sleep(1000 / constants.LOGGER_SAVE_RATE);
+        }
+      } catch (InterruptedException e){
+        Logger.error("Logger : Save Thread Interupted : "+e);
+      }
+    });
+    LogThread.start();
   }
 }
