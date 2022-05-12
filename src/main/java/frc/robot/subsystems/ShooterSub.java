@@ -7,7 +7,7 @@ import frc.robot.utils.Clamper;
 
 /**
  * Shooter Subsystem.
- * Handles the shooting of the balls.
+ * Handles all shooter functionality.
  */
 public class ShooterSub extends SubsystemBase {
   private final Constants constants = Constants.getInstance();
@@ -16,14 +16,14 @@ public class ShooterSub extends SubsystemBase {
   public ShooterSub() {
   }
 
-    /**
+  /**
    * Sets the shooter speed.
    * 
    * @param speed Speed between -1 and 1
    */
   public void setShooterSpeed(double speed) {
-      speed = Clamper.absUnit(speed);
-      motor.set(speed);
+    speed = Clamper.absUnit(speed);
+    motor.set(speed);
   }
 
   @Override

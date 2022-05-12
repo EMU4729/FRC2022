@@ -9,6 +9,9 @@ import frc.robot.utils.logger.Logger;
 import frc.robot.auto.AutoFacade;
 import frc.robot.auto.AutoFiles;
 
+/**
+ * Command for Autonomous.
+ */
 public class Auto extends CommandBase {
   private final AutoFacade autoFacade = new AutoFacade();
 

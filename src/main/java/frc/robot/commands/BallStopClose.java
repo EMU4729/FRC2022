@@ -5,6 +5,12 @@ import frc.robot.Subsystems;
 import frc.robot.utils.AsyncTimer;
 import frc.robot.utils.logger.Logger;
 
+/**
+ * Command that closes the ball stop.
+ * 
+ * @apiNote The hardware for this is not currently made and so this should not
+ *          be used.
+ */
 public class BallStopClose extends CommandBase {
   private final Subsystems subsystems = Subsystems.getInstance();
   private AsyncTimer timer;
