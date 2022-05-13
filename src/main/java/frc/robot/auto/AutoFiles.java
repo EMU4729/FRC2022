@@ -125,6 +125,7 @@ public class AutoFiles {
         "wait 1000",
         "storageRun",
         "wait 700",
+        "intakeStop",
         "storageStop",
         "driveArcade 0.7 0",
         "wait 2800",
