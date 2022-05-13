@@ -1,5 +1,6 @@
 package frc.robot.auto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import frc.robot.utils.logger.Logger;
  */
 public class AutoLine {
   public String name;
-  public List<String> args;
+  public ArrayList<String> args;
 
   /**
    * Creates a new AutoCommand.
@@ -18,7 +19,7 @@ public class AutoLine {
    * @param line The auto command line.
    */
   public AutoLine(String line) {
-    List<String> words = Arrays.asList(line.split("\\s*"));
+    ArrayList<String> words = new ArrayList<String>(Arrays.asList(line.split("\\s*")));
     name = words.remove(0);
     args = words;
   }

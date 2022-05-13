@@ -23,7 +23,7 @@ public class Logger {
   private Thread LogThread;
 
   private boolean logPause = false;
-  private boolean logStop = true;
+  private boolean logStop = false;
 
   private File logFile;
   private String filePath;
