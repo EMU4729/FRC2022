@@ -119,25 +119,27 @@ public class AutoFiles {
    * @return The hardcoded auto command data.
    */
   public static ArrayList<AutoLine> readHardCoded() {
-    return new ArrayList<>(
-        Arrays.asList(
-            "driveArcade -0.7 0",
-            "intakeRun 0.5",
-            "wait 1000",
-            "storageRun 0.5",
-            "wait 700",
-            "storageRun 0",
-            "intakeRun 0",
-            "driveArcade 0.7 0",
-            "wait 2800",
-            "storageRun 1",
-            "wait 1000",
-            "driveOff",
-            "storageRun 0")
-            .stream()
-            .map(line -> new AutoLine(line))
-            .collect(Collectors.toList()));
+    ArrayList<String> rawCommands = new ArrayList<>(Arrays.asList(
+        "driveArcade -0.7 0",
+        "intakeRun",
+        "wait 1000",
+        "storageRun",
+        "wait 700",
+        "storageStop",
+        "driveArcade 0.7 0",
+        "wait 2800",
+        "storageRun",
+        "shooterRun",
+        "wait 1000",
+        "driveOff",
+        "storageStop",
+        "shooterStop"));
 
+    ArrayList<AutoLine> parsedCommands = new ArrayList<>(rawCommands.size());
+    for (String line : rawCommands) {
+      parsedCommands.add(new AutoLine(line));
+    }
+    return parsedCommands;
   }
 
   /**

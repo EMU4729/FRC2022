@@ -19,7 +19,7 @@ public class AutoLine {
    * @param line The auto command line.
    */
   public AutoLine(String line) {
-    ArrayList<String> words = new ArrayList<String>(Arrays.asList(line.split("\\s*")));
+    ArrayList<String> words = new ArrayList<>(Arrays.asList(line.split("\\s*")));
     name = words.remove(0);
     args = words;
   }
